@@ -1,0 +1,79 @@
+---
+interface Props {
+  trend: number[];
+  threshold: number;
+  conversations: number;
+  rubric: { label: string; score: number }[];
+}
+
+const { trend, threshold, conversations, rubric } = Astro.props;
+
+const low = Math.min(threshold, ...trend) - 0.5;
+const high = Math.max(...trend) + 0.5;
+const y = (value: number) => ((high - value) / (high - low)) * 100;
+const points = trend.map((value, i) => `${((i / (trend.length - 1)) * 100).toFixed(2)},${y(value).toFixed(2)}`);
+const line = `M${points.join("L")}`;
+const area = `${line}L100,100L0,100Z`;
+const limit = y(threshold);
+const latest = trend.at(-1) ?? 0;
+---
+
+<div class="relative grid w-full min-w-0 max-w-lg grid-cols-1 gap-3">
+  <div class="tour-card bg-page/95 p-4 sm:p-5" style="--i:0">
+    <div class="flex items-center justify-between gap-4 text-sm">
+      <span class="font-medium">Overall score</span>
+      <span class="mono-meta">last {trend.length} days</span>
+    </div>
+    <p class="mt-3 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+      <span class="text-5xl leading-none tracking-tighter">{latest}</span>
+      <span class="text-sm text-accent-ink">
+        +{(latest - trend[0]).toFixed(1)} across {conversations.toLocaleString("en-US")} conversations
+      </span>
+    </p>
+    <div class="relative mt-5 h-32">
+      <svg class="trend absolute inset-0 size-full overflow-visible" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+        <path d={area} class="fill-accent/10" />
+        <line
+          x1="0"
+          x2="100"
+          y1={limit}
+          y2={limit}
+          class="stroke-muted"
+          stroke-dasharray="3 3"
+          vector-effect="non-scaling-stroke"
+        />
+        <path
+          d={line}
+          class="fill-none stroke-accent"
+          stroke-width="2"
+          vector-effect="non-scaling-stroke"
+        />
+      </svg>
+      <span class="mono-meta absolute right-0 pt-1 text-xs!" style={`top:${limit}%`}>alert at {threshold}</span>
+    </div>
+    <dl class="mt-5 grid grid-cols-3 border-t border-line pt-4">
+      {
+        rubric.map((item) => (
+          <div class="flex flex-col">
+            <dt class="order-2 text-sm text-muted">{item.label}</dt>
+            <dd class="order-1 text-xl tracking-tight">{item.score}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </div>
+</div>
+
+<style>
+  .trend {
+    animation: draw 1.6s var(--ease-out-expo) 0.3s both;
+  }
+
+  @keyframes draw {
+    from {
+      clip-path: inset(0 100% 0 0);
+    }
+    to {
+      clip-path: inset(0 -1% 0 0);
+    }
+  }</style>

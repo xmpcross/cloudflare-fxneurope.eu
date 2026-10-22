@@ -1,0 +1,76 @@
+{
+  "en": {
+    "groups": ["Explore our work", "Get to know FXN Europe", "Policies and information"],
+    "descriptions": [
+      "The websites, technology and thinking behind our digital businesses.",
+      "Learn about the company, find answers and get in touch.",
+      "Information about using this website and how we handle privacy."
+    ],
+    "languages": "Choose your language",
+    "languageIntro": "Explore the same website in your preferred language.",
+    "current": "Current language",
+    "xml": "XML sitemap",
+    "xmlNote": "A structured index for search engines and website tools.",
+    "intro": "Find every part of FXN Europe, from our websites and technology to company information and contact details."
+  },
+  "de": {
+    "groups": [
+      "Unsere Arbeit entdecken",
+      "FXN Europe kennenlernen",
+      "Richtlinien und Informationen"
+    ],
+    "descriptions": [
+      "Websites, Technologien und Ideen hinter unseren digitalen Unternehmen.",
+      "Das Unternehmen kennenlernen, Antworten finden und Kontakt aufnehmen.",
+      "Informationen zur Nutzung dieser Website und zum Datenschutz."
+    ],
+    "languages": "Sprache wählen",
+    "languageIntro": "Entdecken Sie dieselbe Website in Ihrer bevorzugten Sprache.",
+    "current": "Aktuelle Sprache",
+    "xml": "XML-Sitemap",
+    "xmlNote": "Ein strukturierter Index für Suchmaschinen und Website-Werkzeuge.",
+    "intro": "Alle Bereiche von FXN Europe: unsere Websites und Technologien, Unternehmensinformationen und Kontaktmöglichkeiten."
+  },
+  "et": {
+    "groups": ["Tutvu meie tööga", "Tutvu FXN Europe’iga", "Eeskirjad ja teave"],
+    "descriptions": [
+      "Meie digitaalsete ettevõtete veebilehed, tehnoloogia ja ideed.",
+      "Tutvu ettevõttega, leia vastused ja võta ühendust.",
+      "Teave veebilehe kasutamise ja privaatsuse kohta."
+    ],
+    "languages": "Vali keel",
+    "languageIntro": "Tutvu sama veebilehega endale sobivas keeles.",
+    "current": "Praegune keel",
+    "xml": "XML-sisukaart",
+    "xmlNote": "Struktureeritud loend otsingumootoritele ja veebitööriistadele.",
+    "intro": "Leia kõik FXN Europe’i lehed: veebilehed ja tehnoloogia, ettevõtte teave ning kontaktandmed."
+  },
+  "es": {
+    "groups": ["Explora nuestro trabajo", "Conoce FXN Europe", "Políticas e información"],
+    "descriptions": [
+      "Los sitios, la tecnología y las ideas detrás de nuestros negocios digitales.",
+      "Conoce la empresa, encuentra respuestas y ponte en contacto.",
+      "Información sobre el uso de este sitio y la privacidad."
+    ],
+    "languages": "Elige tu idioma",
+    "languageIntro": "Explora el mismo sitio en tu idioma preferido.",
+    "current": "Idioma actual",
+    "xml": "Mapa XML",
+    "xmlNote": "Un índice estructurado para buscadores y herramientas web.",
+    "intro": "Encuentra todas las secciones de FXN Europe: nuestros sitios y tecnología, información de empresa y contacto."
+  },
+  "fr": {
+    "groups": ["Explorer notre travail", "Découvrir FXN Europe", "Politiques et informations"],
+    "descriptions": [
+      "Les sites, les technologies et les idées derrière nos activités numériques.",
+      "Découvrez l’entreprise, trouvez des réponses et contactez-nous.",
+      "Informations sur l’utilisation de ce site et la confidentialité."
+    ],
+    "languages": "Choisissez votre langue",
+    "languageIntro": "Explorez le même site dans la langue de votre choix.",
+    "current": "Langue actuelle",
+    "xml": "Plan XML",
+    "xmlNote": "Un index structuré pour les moteurs de recherche et les outils web.",
+    "intro": "Retrouvez toutes les rubriques de FXN Europe : nos sites et technologies, les informations sur l’entreprise et nos coordonnées."
+  }
+}

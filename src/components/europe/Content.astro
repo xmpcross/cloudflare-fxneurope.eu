@@ -1,0 +1,22 @@
+---
+import Portfolio from './Portfolio.astro';
+import HomeMore from './HomeMore.astro';
+import Faq from './Faq.astro';
+import TechnologyStack from './TechnologyStack.astro';
+import Dither from '@/components/ui/Dither.astro';
+import translations from '@/data/portfolio-copy.json';
+interface Props { lang: string; kind: string; }
+const {lang,kind}=Astro.props;
+const c=translations[lang as keyof typeof translations] ?? translations.en;
+---
+{(kind==='home'||kind==='portfolio') && <Portfolio lang={lang} detailed={kind==='portfolio'} />}
+{kind==='home' && <>
+  <section class="portfolio-operate shell"><h2>{c.operationTitle}</h2><div><p>{c.operationBody}</p><a class="text-link" href={`/${lang}/about/`}>{c.nav[4]} ↗</a></div></section>
+  <section class="portfolio-tech-band" data-dither-host><Dither scene="bands" tone="ember" seed={6} speed={0.4} class="portfolio-dither" /><div class="shell"><div class="technology-intro"><h2>{c.technologyTitle}</h2><p>{c.technologyIntro}</p></div><div class="technology-grid">{c.implementation.map(([name,body])=><div><h3>{name}</h3><p>{body}</p></div>)}</div><a class="button" href={`/${lang}/technology/`}>{c.nav[2]} ↗</a></div></section>
+  <section class="shell portfolio-process"><h2>{c.processTitle}</h2><ol>{c.steps.map(([title,body],i)=><li><span>{String(i+1).padStart(2,'0')}</span><h3>{title}</h3><p>{body}</p></li>)}</ol></section>
+  <HomeMore lang={lang} />
+</>}
+{kind==='technology' && <TechnologyStack lang={lang} />}
+{kind==='technology' && <div class="shell technology-page"><section><h2>Fur Fun Shop</h2><p>{c.projectPurpose}</p><div class="technology-grid">{c.implementation.map(([name,body])=><div><h3>{name}</h3><p>{body}</p></div>)}</div><a href={`/${lang}/portfolio/#furfunshop`} class="text-link">{c.caseStudy} ↗</a></section><section><h2>{c.previewHeading}</h2><p>{c.previewBody}</p><ul class="technology-tags">{['Astro','Synth','TypeScript','Tailwind CSS','Geist'].map(t=><li>{t}</li>)}</ul></section><p class="technology-principle">{c.technologyPrinciple}</p></div>}
+{kind==='process' && <section class="shell process-detail"><ol>{c.steps.map(([title,body],i)=><li><span>{String(i+1).padStart(2,'0')}</span><h2>{title}</h2><p>{body}</p></li>)}</ol><a href={`/${lang}/portfolio/`} class="button">{c.more} ↗</a></section>}
+{kind==='faq' && <Faq lang={lang} />}

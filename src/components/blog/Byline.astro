@@ -1,0 +1,48 @@
+---
+import { Image } from "astro:assets";
+import Logomark from "@/components/ui/Logomark.astro";
+import { authorOf, joinNames } from "@/lib/posts";
+
+interface Props {
+  names: string[];
+}
+
+const { names } = Astro.props;
+const role = names.length === 1 ? authorOf(names[0])?.role : undefined;
+---
+
+<p class="flex items-center gap-3 leading-tight">
+  <span class="flex">
+    {
+      names.map((name, i) => {
+        const photo = authorOf(name)?.photo;
+        return (
+          <span
+            class:list={["byline-avatar relative size-10 overflow-hidden rounded-full", i > 0 && "-ml-3"]}
+            style={`z-index:${names.length - i}`}
+          >
+            {photo ? (
+              <Image src={photo} alt="" widths={[80, 120]} sizes="2.5rem" class="size-full object-cover object-top" />
+            ) : (
+              <Logomark class="size-full" />
+            )}
+          </span>
+        );
+      })
+    }
+  </span>
+  <span>
+    <span class="block font-medium">{joinNames(names)}</span>
+    {role && <span class="text-sm text-muted">{role}</span>}
+  </span>
+</p>
+
+<style>
+  .byline-avatar {
+    box-shadow: 0 0 0 2px var(--page);
+  }
+
+  .byline-avatar :global(img) {
+    filter: grayscale(1) contrast(1.08);
+  }
+</style>

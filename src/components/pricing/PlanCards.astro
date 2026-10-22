@@ -1,0 +1,41 @@
+---
+import Icon from "@/components/ui/Icon.astro";
+import { pricing } from "@/config/pricing";
+import Price from "./Price.astro";
+---
+
+<ul class="grid gap-2 lg:grid-cols-3">
+  {
+    pricing.plans.map((plan) => (
+      <li class:list={["reveal flex flex-col p-6 sm:p-8", plan.featured ? "on-night" : "bg-surface"]}>
+        <div class="flex items-center justify-between">
+          <h2 class="text-2xl tracking-tight">{plan.name}</h2>
+          {plan.featured && (
+            <span class="bg-accent px-2 py-1 font-mono text-[0.7rem] text-on-accent">Most chosen</span>
+          )}
+        </div>
+        <p class:list={["mt-3 min-h-12", plan.featured ? "text-night-muted" : "text-muted"]}>{plan.description}</p>
+        <p class="mt-8 flex items-baseline gap-2">
+          <Price plan={plan} class="text-5xl tracking-[-0.05em]" />
+          {plan.monthly !== null && (
+            <span class={plan.featured ? "text-night-muted" : "text-muted"} data-billed>
+              per month
+            </span>
+          )}
+        </p>
+        <a href={plan.cta.href} class:list={["btn mt-8", plan.featured ? "btn-accent" : "btn-primary"]}>
+          <span>{plan.cta.label}</span>
+          <Icon name="arrow-up-right" class="pixel-arrow" />
+        </a>
+        <ul class="mt-8 grid gap-3">
+          {plan.highlights.map((item) => (
+            <li class="flex gap-3">
+              <Icon name="check" class="mt-1 size-4 text-accent" stroke={2} />
+              {item}
+            </li>
+          ))}
+        </ul>
+      </li>
+    ))
+  }
+</ul>

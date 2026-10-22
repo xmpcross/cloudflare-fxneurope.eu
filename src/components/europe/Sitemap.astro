@@ -1,0 +1,29 @@
+---
+import pages from '@/data/pages.json';
+import translations from '@/data/portfolio-copy.json';
+import labels from '@/data/sitemap-copy.json';
+interface Props {lang:string;}
+const {lang}=Astro.props;
+const c=translations[lang as keyof typeof translations]??translations.en;
+const l=labels[lang as keyof typeof labels]??labels.en;
+const route=(slug:string)=>`/${lang}/${slug?slug+'/':''}`;
+const legal=(slug:string)=>pages.find(p=>p.path===`${lang}/${slug}`)?.title??slug;
+const groups=[
+ {icon:'↗',links:[{label:c.nav[1],slug:'portfolio'},{label:c.nav[2],slug:'technology'},{label:c.nav[3],slug:'process'}]},
+ {icon:'⌂',links:[{label:c.nav[0],slug:''},{label:c.nav[4],slug:'about'},{label:'FAQ',slug:'faq'},{label:c.nav[5],slug:'contact'}]},
+ {icon:'≡',links:[{label:legal('privacy'),slug:'privacy'},{label:legal('cookies'),slug:'cookies'},{label:legal('terms'),slug:'terms'}]},
+];
+const languages=[['en','English'],['et','Eesti'],['de','Deutsch'],['es','Español'],['fr','Français']];
+---
+<div class="shell sitemap-design">
+  <div class="sitemap-groups">{groups.map((group,i)=><section class="sitemap-group" aria-labelledby={`sitemap-group-${i}`}><span class="sitemap-symbol" aria-hidden="true">{group.icon}</span><h2 id={`sitemap-group-${i}`}>{l.groups[i]}</h2><p>{l.descriptions[i]}</p><nav aria-label={l.groups[i]}>{group.links.map(link=><a href={route(link.slug)}><span>{link.label}</span><span class="sitemap-arrow" aria-hidden="true">↗</span></a>)}</nav></section>)}</div>
+  <section class="sitemap-languages" aria-labelledby="sitemap-languages-title"><div><h2 id="sitemap-languages-title">{l.languages}</h2><p>{l.languageIntro}</p></div><nav aria-label={l.languages}>{languages.map(([code,label])=><a href={`/${code}/sitemap/`} lang={code} aria-current={code===lang?'page':undefined}><span class="language-code">{code.toUpperCase()}</span><span>{label}</span><span aria-hidden="true">{code===lang?'✓':'↗'}</span>{code===lang&&<span class="sr-only">{l.current}</span>}</a>)}</nav></section>
+  <div class="sitemap-xml"><div><a href="/sitemap-index.xml">{l.xml} ↗</a><p>{l.xmlNote}</p></div><span>fxneurope.eu</span></div>
+</div>
+<style>
+.sitemap-design{padding-bottom:64px}.sitemap-groups{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid var(--line)}.sitemap-group{padding:clamp(24px,3vw,40px);background:var(--surface)}.sitemap-group+.sitemap-group{border-left:1px solid var(--line)}.sitemap-symbol{display:grid;place-items:center;width:44px;height:44px;background:var(--accent);color:var(--ink);font-size:1.5rem;margin-bottom:32px}.sitemap-group h2{font-size:clamp(1.45rem,1.1rem + .7vw,1.8rem);line-height:1.15;letter-spacing:-.035em;min-height:2.3em}.sitemap-group>p{color:var(--muted);font-size:.94rem;min-height:5em;margin-block:18px 30px}.sitemap-group nav{display:grid}.sitemap-group nav a{border-top:1px solid var(--line);padding-block:19px;display:flex;align-items:center;justify-content:space-between;gap:20px;font-size:1rem}.sitemap-group nav a:hover{color:var(--accent-ink)}.sitemap-arrow{color:var(--accent-ink);flex-shrink:0}
+.sitemap-languages{display:grid;grid-template-columns:1fr 1.5fr;gap:10%;padding:48px;background:var(--sunken);margin-top:48px}.sitemap-languages h2{font-size:clamp(1.7rem,1.2rem + 1vw,2.3rem);letter-spacing:-.035em;line-height:1.1}.sitemap-languages p{color:var(--muted);margin-top:18px;max-width:34ch}.sitemap-languages nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.sitemap-languages nav a{display:flex;align-items:center;gap:14px;padding:18px;background:var(--page);border:1px solid transparent;font-size:.95rem}.sitemap-languages nav a>span:nth-child(3){margin-left:auto}.sitemap-languages nav a[aria-current]{border-color:var(--accent);background:var(--surface)}.sitemap-languages nav a:hover{border-color:var(--accent-ink)}.language-code{font-family:var(--font-mono);font-size:.7rem;color:var(--muted)}
+.sitemap-xml{display:flex;align-items:center;justify-content:space-between;gap:24px;border-top:1px solid var(--line);padding-top:32px;margin-top:40px}.sitemap-xml a{font-size:.9rem;text-decoration:underline;text-underline-offset:4px}.sitemap-xml p{font-size:.8rem;color:var(--muted);margin-top:8px}.sitemap-xml>span{font-family:var(--font-mono);font-size:.75rem;color:var(--muted)}
+@media(max-width:900px){.sitemap-groups{grid-template-columns:1fr}.sitemap-group+.sitemap-group{border-left:0;border-top:1px solid var(--line)}.sitemap-group h2,.sitemap-group>p{min-height:0}.sitemap-group>p{max-width:60ch}.sitemap-symbol{margin-bottom:24px}.sitemap-languages{grid-template-columns:1fr;gap:28px;padding:32px}}
+@media(max-width:480px){.sitemap-design{padding-bottom:40px}.sitemap-languages{padding:24px;margin-top:28px}.sitemap-languages nav{grid-template-columns:1fr}.sitemap-xml{align-items:start;flex-direction:column}.sitemap-group nav a{padding-block:16px}}
+</style>

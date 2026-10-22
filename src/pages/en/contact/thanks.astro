@@ -1,0 +1,7 @@
+---
+import EuropeLayout from '@/layouts/EuropeLayout.astro';
+import pages from '@/data/pages.json';
+const source=pages.find(p=>p.path==='en/contact')!;
+const page={...source,path:'en/contact/thanks',kind:'',title:'Thank you for your message.',metaTitle:'Message sent | FXN Europe',intro:'<p class="page-intro">Your enquiry has been sent to FXN Europe. We’ll reply using the email address you provided.</p>',body:'<section class="shell" style="padding-bottom:64px"><a class="button" href="/en/">Return to the homepage</a></section>'};
+---
+<EuropeLayout page={page} />

@@ -1,0 +1,19 @@
+---
+import logos from '@/data/technologies.json';
+import translations from '@/data/technology-copy.json';
+interface Props {lang:string;}
+const {lang}=Astro.props;
+const c=translations[lang as keyof typeof translations]??translations.en;
+const groups=[logos.slice(0,4),logos.slice(4,8),logos.slice(8)];
+---
+<section class="shell stack-section" aria-labelledby="stack-title">
+  <div class="stack-heading"><span>{c.label}</span><h2 id="stack-title">{c.title}</h2><p>{c.intro}</p></div>
+  <div class="stack-groups">{groups.map((group,i)=><article><div class="stack-group-intro"><h3>{c.groups[i][0]}</h3><p>{c.groups[i][1]}</p></div><ul>{group.map(logo=><li><div class="stack-logo"><img src={logo.src} width="36" height="36" alt="" loading="lazy" /></div><span>{logo.name}</span></li>)}</ul></article>)}</div>
+  <p class="stack-note">{c.note}</p>
+</section>
+<div class="shell stack-project-heading"><h2>{c.projects}</h2><p>{c.projectsIntro}</p></div>
+<style>
+.stack-section{padding-bottom:72px}.stack-heading{max-width:800px;margin:0 auto 48px;text-align:center}.stack-heading>span{font-family:var(--font-mono);font-size:.78rem;color:var(--accent-ink)}.stack-heading h2{font-size:clamp(1.8rem,1.25rem + 1.8vw,3rem);line-height:1.1;letter-spacing:-.04em;margin-block:20px 24px}.stack-heading p{color:var(--muted);font-size:1.1rem;max-width:65ch;margin-inline:auto}.stack-groups{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid var(--line);background:var(--surface)}.stack-groups article{padding:32px}.stack-groups article+article{border-left:1px solid var(--line)}.stack-group-intro{min-height:140px}.stack-group-intro h3{font-size:1.3rem;letter-spacing:-.025em}.stack-group-intro p{font-size:.95rem;line-height:1.55;color:var(--muted);margin-block:16px 28px}.stack-groups ul{display:grid;gap:12px;list-style:none;padding:0}.stack-groups li{display:flex;align-items:center;gap:18px;background:var(--page);border:1px solid var(--line);padding:15px;font-size:1.05rem;font-weight:500}.stack-logo{display:grid;place-items:center;background:var(--surface);width:52px;height:52px;flex-shrink:0}.stack-logo img{width:32px;height:32px;object-fit:contain}.stack-note{max-width:78ch;text-align:center;color:var(--muted);margin:32px auto 0;font-size:.95rem}.stack-project-heading{padding-block:32px 40px}.stack-project-heading h2{font-size:clamp(1.8rem,1.25rem + 1.8vw,3rem);line-height:1.1;letter-spacing:-.04em}.stack-project-heading p{color:var(--muted);margin-top:20px}
+@media(max-width:900px){.stack-groups{grid-template-columns:1fr}.stack-groups article+article{border-left:0;border-top:1px solid var(--line)}.stack-group-intro{min-height:0}.stack-groups ul{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:480px){.stack-groups article{padding:24px}.stack-groups ul{grid-template-columns:1fr}.stack-heading{text-align:left;margin-bottom:32px}.stack-note{text-align:left}.stack-section{padding-bottom:40px}}
+</style>

@@ -1,0 +1,34 @@
+---
+import translations from '@/data/portfolio-copy.json';
+import additions from '@/data/home-sections.json';
+import Dither from '@/components/ui/Dither.astro';
+interface Props { lang: string; }
+const {lang}=Astro.props;
+const c=translations[lang as keyof typeof translations] ?? translations.en;
+const h=additions[lang as keyof typeof additions] ?? additions.en;
+const labels={en:['On this page','Still have a question?','Find out more'],de:['Auf dieser Seite','Noch eine Frage?','Mehr erfahren'],et:['Sellel lehel','Kas sul on veel küsimusi?','Loe lähemalt'],es:['En esta página','¿Tienes otra pregunta?','Más información'],fr:['Sur cette page','Une autre question ?','En savoir plus']};
+const l=labels[lang as keyof typeof labels]??labels.en;
+const groups=[
+ {id:'company',title:c.nav[4],intro:c.aboutIntro,questions:[0,4],link:'about/',label:c.nav[4]},
+ {id:'websites',title:c.nav[1],intro:c.portfolioIntro,questions:[1,2],link:'portfolio/',label:c.more},
+ {id:'support',title:c.orders,intro:c.orderNote,questions:[3],link:'contact/',label:c.nav[5]},
+];
+---
+<div class="shell faq-layout">
+  <aside class="faq-directory"><nav aria-label={l[0]}><p>{l[0]}</p>{groups.map(group=><a href={`#${group.id}`}>{group.title}<span aria-hidden="true">↘</span></a>)}</nav><div class="faq-note"><span class="faq-note-symbol" aria-hidden="true">↗</span><h2>{l[1]}</h2><p>{c.general}</p><a href={`/${lang}/contact/`} class="text-link">{c.nav[5]} ↗</a></div></aside>
+  <div class="faq-groups">{groups.map((group,index)=><section class="faq-group" id={group.id} aria-labelledby={`${group.id}-title`}><div class="faq-group-heading"><h2 id={`${group.id}-title`}>{group.title}</h2><p>{group.intro}</p></div><div class="faq-accordions">{group.questions.map((question,i)=><details class="faq-answer" open={index===0&&i===0}><summary><span>{c.faq[question][0]}</span><span class="faq-toggle" aria-hidden="true"></span></summary><div class="faq-answer-body"><p>{c.faq[question][1]}</p><a class="text-link" href={`/${lang}/${question===2?'technology/':group.link}`}>{question===2?c.nav[2]:group.label} ↗</a></div></details>)}</div></section>)}</div>
+</div>
+<section class="faq-contact" aria-labelledby="faq-contact-title" data-dither-host><Dither scene="silk" tone="ember" seed={18} speed={0.4} interactive class="faq-contact-dither"/><div class="shell"><div class="faq-contact-inner"><div><h2 id="faq-contact-title">{h.closing}</h2><p>{h.closingBody}</p></div><a class="button" href={`/${lang}/contact/`}>{h.contact} ↗</a></div></div></section>
+<style>
+.faq-layout{display:grid;grid-template-columns:260px minmax(0,1fr);gap:clamp(40px,7vw,110px);padding-bottom:96px;align-items:start}
+.faq-directory{position:sticky;top:32px}.faq-directory nav>p{font-family:var(--font-mono);font-size:.75rem;color:var(--muted);margin-bottom:20px}
+.faq-directory nav>a{display:flex;align-items:center;justify-content:space-between;gap:18px;border-top:1px solid var(--line);padding:18px 0;font-size:.95rem}.faq-directory nav>a:hover{color:var(--accent-ink)}.faq-directory nav>a span{color:var(--accent-ink)}
+.faq-note{margin-top:36px;background:var(--sunken);padding:28px}.faq-note-symbol{display:grid;place-items:center;width:36px;height:36px;background:var(--accent);font-size:1.3rem;margin-bottom:24px}.faq-note h2{font-size:1.3rem;line-height:1.2;letter-spacing:-.03em}.faq-note p{font-size:.88rem;color:var(--muted);margin-block:16px 24px}.faq-note a{font-size:.9rem}
+.faq-group{scroll-margin-top:36px}.faq-group+.faq-group{margin-top:64px}.faq-group-heading{margin-bottom:28px}.faq-group-heading h2{font-size:clamp(1.6rem,1.2rem + 1vw,2.2rem);line-height:1.15;letter-spacing:-.035em}.faq-group-heading p{max-width:62ch;color:var(--muted);margin-top:16px;font-size:.98rem}
+.faq-accordions{border-bottom:1px solid var(--line)}.faq-answer{border-top:1px solid var(--line)}.faq-answer[open]{background:var(--sunken);border-top-color:var(--accent)}.faq-answer summary{display:flex;justify-content:space-between;align-items:center;gap:24px;cursor:pointer;list-style:none;padding:24px;font-size:1.12rem;line-height:1.4;font-weight:500}.faq-answer summary::-webkit-details-marker{display:none}.faq-answer summary:hover{color:var(--accent-ink)}
+.faq-toggle{width:26px;height:26px;flex:0 0 26px;position:relative;background:var(--page);border:1px solid var(--line)}.faq-toggle::before,.faq-toggle::after{content:'';position:absolute;left:7px;right:7px;top:11px;height:1px;background:var(--ink)}.faq-toggle::after{transform:rotate(90deg)}.faq-answer[open] .faq-toggle{background:var(--accent);border-color:var(--accent)}.faq-answer[open] .faq-toggle::after{transform:rotate(0)}
+.faq-answer-body{padding:0 24px 28px}.faq-answer-body p{max-width:65ch;color:var(--muted);margin-bottom:22px}.faq-answer-body a{font-size:.9rem}
+.faq-contact{position:relative;isolation:isolate;overflow:hidden;padding-block:64px}.faq-contact-dither{position:absolute!important;inset:0;z-index:-1}.faq-contact-inner{display:flex;align-items:center;justify-content:space-between;gap:48px;background:var(--page);padding:clamp(28px,4vw,56px)}.faq-contact-inner>div{max-width:650px}.faq-contact h2{font-size:clamp(1.8rem,1.25rem + 1.8vw,3rem);line-height:1.1;letter-spacing:-.04em}.faq-contact p{color:var(--muted);margin-top:24px}.faq-contact .button{flex-shrink:0}
+@media(max-width:900px){.faq-layout{grid-template-columns:210px minmax(0,1fr);gap:32px}.faq-contact-inner{flex-direction:column;align-items:start;gap:28px}}
+@media(max-width:640px){.faq-layout{grid-template-columns:1fr;gap:40px;padding-bottom:48px}.faq-directory{position:static}.faq-note{display:none}.faq-directory nav>a{padding-block:12px}.faq-group+.faq-group{margin-top:40px}.faq-answer summary{padding:20px 16px;font-size:1.02rem;gap:16px}.faq-answer-body{padding:0 16px 24px}.faq-contact{padding-block:40px}}
+</style>

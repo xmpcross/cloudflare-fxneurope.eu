@@ -1,0 +1,13 @@
+---
+import mark from "@/assets/brand/logomark.svg?raw";
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<span class:list={["grid shrink-0 place-items-center bg-ink text-accent", className]} aria-hidden="true">
+  <span class="h-1/2 [&>svg]:h-full [&>svg]:w-auto" set:html={mark} />
+</span>

@@ -1,0 +1,495 @@
+---
+import { Image } from "astro:assets";
+import CompanyLogo from "@/components/ui/CompanyLogo.astro";
+import Dither from "@/components/ui/Dither.astro";
+import Icon from "@/components/ui/Icon.astro";
+import Wordmark from "@/components/ui/Wordmark.astro";
+import { testimonials } from "@/config/home";
+import { navigation, siteConfig, type MenuFeature } from "@/config/site";
+import { formatDate, getPosts, postHref } from "@/lib/posts";
+
+const latest = (await getPosts())[0];
+const story = testimonials.items[0];
+const { primary, signIn } = siteConfig.actions;
+const path = Astro.url.pathname;
+
+const isCurrent = (href: string) => !href.includes("#") && href !== "/" && path.startsWith(href);
+const menus = navigation.map((item, index) => ({ ...item, id: `menu-${index}` }));
+const featureOf = (item: (typeof menus)[number]): MenuFeature | undefined =>
+  "columns" in item ? item.feature : undefined;
+---
+
+<header class="site-header fixed inset-x-0 top-0 z-50" data-header>
+  <div class="header-bar relative z-20 bg-page">
+    <div class="shell flex h-(--header-h) items-center gap-6 xl:grid xl:grid-cols-[1fr_auto_1fr]">
+      <a href="/" class="flex shrink-0 xl:justify-self-start" aria-label={`${siteConfig.name} home`} data-logo-menu-trigger>
+        <Wordmark />
+      </a>
+
+      <nav class="hidden lg:block" aria-label="Main">
+        <ul class="flex items-center">
+          {
+            menus.map((item) => (
+              <li>
+                {"columns" in item ? (
+                  <button
+                    type="button"
+                    class="nav-trigger"
+                    aria-expanded="false"
+                    aria-controls={item.id}
+                    data-menu-trigger={item.id}
+                  >
+                    {item.label}
+                    <Icon name="chevron-down" class="nav-chevron size-2.5" />
+                  </button>
+                ) : (
+                  <a href={item.href} class="nav-trigger" aria-current={isCurrent(item.href) ? "page" : undefined}>
+                    {item.label}
+                  </a>
+                )}
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <div class="ml-auto flex items-center gap-1.5 sm:gap-2 xl:justify-self-end">
+        <a href={signIn.href} class="hidden px-3 py-2 text-[0.9375rem] whitespace-nowrap hover:text-accent-ink md:inline-block">
+          {signIn.label}
+        </a>
+        <a href={primary.href} class="btn btn-primary btn-sm hidden sm:inline-flex">
+          <span>{primary.label}</span>
+          <Icon name="arrow-up-right" class="pixel-arrow" />
+        </a>
+        <button
+          type="button"
+          class="-mr-3 grid size-10 place-items-center lg:hidden"
+          aria-expanded="false"
+          aria-controls="mobile-nav"
+          aria-label="Open menu"
+          data-mobile-toggle
+        >
+          <span class="grid" data-icon-open><Icon name="menu" class="size-4" /></span>
+          <span class="hidden" data-icon-close><Icon name="x" class="size-4" /></span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  {
+    menus.map(
+      (item) =>
+        "columns" in item && (
+          <div id={item.id} class="mega absolute inset-x-0 top-full z-10 bg-page" data-menu-panel>
+            <div class="shell grid gap-10 py-10 lg:grid-cols-12">
+              <div
+                class:list={[
+                  "grid gap-x-8 gap-y-8 lg:col-span-8",
+                  item.columns.length === 3 ? "grid-cols-3" : "grid-cols-2",
+                ]}
+              >
+                {item.columns.map((column, index) => (
+                  <div class="mega-col" style={`--i:${index}`}>
+                    <p class="mb-4 h-5 text-sm text-muted">{column.title ?? ""}</p>
+                    <ul class="grid gap-1">
+                      {column.links.map((link) => (
+                        <li>
+                          <a href={link.href} class="mega-link group" data-menu-link>
+                            <span class="flex items-center text-[0.9875rem] font-medium">
+                              <span class="mega-dot" aria-hidden="true" />
+                              {link.label}
+                            </span>
+                            {link.description && (
+                              <span class="mt-0.5 block text-sm leading-snug text-muted">{link.description}</span>
+                            )}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+
+              <div class="mega-col lg:col-span-4" style="--i:3">
+                {featureOf(item) === "tour" && (
+                  <a href="/#platform" class="group on-night relative flex h-full min-h-60 flex-col justify-end overflow-hidden p-6">
+                    <Dither scene="smoke" tone="smoke" seed={3} speed={0.8} class="absolute! inset-0" />
+                    <span class="relative max-w-64 text-xl leading-tight tracking-tight">
+                      See one agent built, deployed and graded
+                    </span>
+                    <span class="relative mt-4 inline-flex items-center gap-2 text-sm text-accent">
+                      Take the tour <Icon name="arrow-up-right" class="pixel-arrow" />
+                    </span>
+                  </a>
+                )}
+                {featureOf(item) === "story" && (
+                  <a href="/#customers" class="group flex h-full min-h-60 flex-col bg-sunken p-6">
+                    <CompanyLogo name={story.company} class="text-lg" />
+                    <span class="mt-auto pt-8 font-mono text-4xl tracking-tight text-accent-ink">{story.result.value}</span>
+                    <span class="mt-1 text-sm text-muted">{story.result.label}</span>
+                    <span class="mt-5 inline-flex items-center gap-2 text-sm">
+                      Read customer stories <Icon name="arrow-up-right" class="pixel-arrow" />
+                    </span>
+                  </a>
+                )}
+                {featureOf(item) === "latest" && latest && (
+                  <a href={postHref(latest)} class="group flex flex-col bg-sunken">
+                    <span class="block aspect-[16/9] overflow-hidden">
+                      <Image
+                        src={latest.data.cover}
+                        alt=""
+                        width={640}
+                        height={360}
+                        class="size-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                    </span>
+                    <span class="block p-5">
+                      <span class="mono-meta block">Latest post · {formatDate(latest.data.date)}</span>
+                      <span class="mt-2 line-clamp-2 block text-[1.05rem] leading-snug font-medium group-hover:text-accent-ink">
+                        {latest.data.title}
+                      </span>
+                    </span>
+                  </a>
+                )}
+              </div>
+            </div>
+          </div>
+        ),
+    )
+  }
+
+  <div id="mobile-nav" class="mobile-nav fixed inset-x-0 top-(--header-h) bottom-0 z-10 overflow-y-auto bg-page lg:hidden" data-mobile-nav>
+    <nav class="shell flex min-h-full flex-col pt-4 pb-8" aria-label="Mobile">
+      <ul>
+        {
+          menus.map((item) => (
+            <li>
+              {"columns" in item ? (
+                <details class="mobile-group" name="mobile-menu">
+                  <summary class="flex items-center justify-between py-4 text-2xl tracking-tight">
+                    {item.label}
+                    <Icon name="plus" class="mobile-plus size-4" />
+                  </summary>
+                  <ul class="grid gap-3 pb-6">
+                    {item.columns
+                      .flatMap((column) => column.links)
+                      .map((link) => (
+                        <li>
+                          <a href={link.href} class="block text-lg text-muted hover:text-ink" data-menu-link>
+                            {link.label}
+                          </a>
+                        </li>
+                      ))}
+                  </ul>
+                </details>
+              ) : (
+                <a href={item.href} class="block py-4 text-2xl tracking-tight" data-menu-link>
+                  {item.label}
+                </a>
+              )}
+            </li>
+          ))
+        }
+      </ul>
+      <div class="mt-auto grid gap-3 pt-10">
+        <a href={primary.href} class="btn btn-primary w-full">
+          <span>{primary.label}</span>
+          <Icon name="arrow-up-right" class="pixel-arrow" />
+        </a>
+        <a href={signIn.href} class="btn btn-ghost w-full"><span>{signIn.label}</span></a>
+      </div>
+    </nav>
+  </div>
+
+  <div class="mega-scrim fixed inset-0 top-(--header-h) -z-10 bg-ink/25" data-menu-scrim></div>
+</header>
+
+<style>
+  .header-bar {
+    transition: box-shadow 0.3s;
+  }
+
+  .site-header {
+    transition: transform 0.45s var(--ease-out-expo);
+  }
+
+  .site-header[data-hidden] {
+    transform: translateY(-100%);
+  }
+
+  [data-scrolled]:not([data-menu-open]) .header-bar {
+    box-shadow: 0 1px 0 var(--line);
+  }
+
+  .nav-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.875rem;
+    font-size: 0.9375rem;
+    transition: color 0.2s;
+  }
+
+  .nav-trigger:hover,
+  .nav-trigger[aria-expanded="true"],
+  .nav-trigger[aria-current="page"] {
+    color: var(--accent-ink);
+  }
+
+  .nav-chevron {
+    transition: transform 0.35s var(--ease-out-expo);
+  }
+
+  .nav-trigger[aria-expanded="true"] .nav-chevron {
+    transform: rotate(180deg);
+  }
+
+  .mega {
+    visibility: hidden;
+    clip-path: inset(0 0 100% 0);
+    box-shadow: 0 1px 0 var(--line);
+    transition:
+      clip-path 0.5s var(--ease-out-expo),
+      visibility 0s 0.5s;
+  }
+
+  .mega[data-open] {
+    visibility: visible;
+    clip-path: inset(0 0 -1px 0);
+    transition: clip-path 0.55s var(--ease-out-expo);
+  }
+
+  .mega-col {
+    opacity: 0;
+    transform: translateY(-0.5rem);
+    transition:
+      opacity 0.3s,
+      transform 0.5s var(--ease-out-expo);
+  }
+
+  .mega[data-open] .mega-col {
+    opacity: 1;
+    transform: none;
+    transition-delay: calc(var(--i) * 45ms + 60ms);
+  }
+
+  .mega-link {
+    display: block;
+    padding: 0.625rem 0.75rem 0.625rem 0;
+    transition: transform 0.35s var(--ease-out-expo);
+  }
+
+  .mega-dot {
+    width: 0;
+    height: 0.5rem;
+    margin-right: 0;
+    background: var(--accent);
+    transition:
+      width 0.35s var(--ease-out-expo),
+      margin 0.35s var(--ease-out-expo);
+  }
+
+  .mega-link:hover .mega-dot,
+  .mega-link:focus-visible .mega-dot {
+    width: 0.5rem;
+    margin-right: 0.5rem;
+  }
+
+  .mega-scrim {
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      opacity 0.35s,
+      visibility 0s 0.35s;
+  }
+
+  [data-menu-open] .mega-scrim {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.35s;
+  }
+
+  .mobile-nav {
+    overscroll-behavior: contain;
+    scrollbar-width: none;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-0.75rem);
+    transition:
+      opacity 0.3s,
+      transform 0.45s var(--ease-out-expo),
+      visibility 0s 0.45s;
+  }
+
+  [data-mobile-open] .mobile-nav {
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity 0.3s,
+      transform 0.45s var(--ease-out-expo);
+  }
+
+  .mobile-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .mobile-group summary {
+    list-style: none;
+    cursor: pointer;
+  }
+
+  .mobile-group summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .mobile-plus {
+    transition: transform 0.35s var(--ease-out-expo);
+  }
+
+  .mobile-group[open] .mobile-plus {
+    transform: rotate(45deg);
+  }
+</style>
+
+<script>
+  const header = document.querySelector<HTMLElement>("[data-header]");
+
+  if (header) {
+    const triggers = [...header.querySelectorAll<HTMLButtonElement>("[data-menu-trigger]")];
+    const panels = [...header.querySelectorAll<HTMLElement>("[data-menu-panel]")];
+    const scrim = header.querySelector<HTMLElement>("[data-menu-scrim]");
+    const mobileToggle = header.querySelector<HTMLButtonElement>("[data-mobile-toggle]");
+    const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
+    let current: string | null = null;
+    let hoverTimer = 0;
+
+    const setMenu = (id: string | null, focusFirst = false) => {
+      current = id;
+      triggers.forEach((trigger) => trigger.setAttribute("aria-expanded", String(trigger.dataset.menuTrigger === id)));
+      panels.forEach((panel) => panel.toggleAttribute("data-open", panel.id === id));
+      header.toggleAttribute("data-menu-open", id !== null);
+      if (id && focusFirst) {
+        document.getElementById(id)?.querySelector<HTMLElement>("a")?.focus();
+      }
+    };
+
+    const closeMenu = (returnFocus = false) => {
+      const trigger = triggers.find((item) => item.dataset.menuTrigger === current);
+      setMenu(null);
+      if (returnFocus) trigger?.focus();
+    };
+
+    triggers.forEach((trigger) => {
+      const id = trigger.dataset.menuTrigger ?? null;
+      trigger.addEventListener("click", () => setMenu(current === id ? null : id));
+      trigger.addEventListener("keydown", (event) => {
+        if (event.key === "ArrowDown") {
+          event.preventDefault();
+          setMenu(id, true);
+        }
+      });
+      trigger.addEventListener("pointerenter", () => {
+        if (!finePointer.matches) return;
+        window.clearTimeout(hoverTimer);
+        hoverTimer = window.setTimeout(() => setMenu(id), current ? 0 : 90);
+      });
+    });
+
+    /* The scrim sits inside the header, so leaving the header is not enough:
+       the menu closes once the pointer is off both the bar and the open panel. */
+    const bar = header.querySelector<HTMLElement>(".header-bar");
+    const hoverZones = [bar, ...panels].filter((el): el is HTMLElement => el !== null);
+    /* Checked against the zones' boxes, not `:hover`: while a panel's clip-path reveal runs,
+       the browser hit-tests the unrevealed part as the scrim behind it. */
+    let pointer = { x: 0, y: 0 };
+    document.addEventListener("pointermove", (event) => (pointer = { x: event.clientX, y: event.clientY }), {
+      passive: true,
+    });
+    const scheduleClose = () => {
+      if (!finePointer.matches || !current) return;
+      window.clearTimeout(hoverTimer);
+      hoverTimer = window.setTimeout(() => {
+        const inside = hoverZones.some((zone) => {
+          if (zone !== bar && zone.id !== current) return false;
+          const box = zone.getBoundingClientRect();
+          return pointer.x >= box.left && pointer.x <= box.right && pointer.y >= box.top && pointer.y <= box.bottom;
+        });
+        if (!inside) closeMenu();
+      }, 250);
+    };
+    hoverZones.forEach((zone) => {
+      zone.addEventListener("pointerleave", scheduleClose);
+      zone.addEventListener("pointerenter", () => {
+        if (current) window.clearTimeout(hoverTimer);
+      });
+    });
+
+    /* Plain links share the bar with the triggers, so reaching one never leaves a hover zone. */
+    bar?.querySelectorAll<HTMLAnchorElement>("a").forEach((link) => {
+      link.addEventListener("pointerenter", () => {
+        if (!finePointer.matches || !current) return;
+        window.clearTimeout(hoverTimer);
+        hoverTimer = window.setTimeout(() => closeMenu(), 90);
+      });
+      link.addEventListener("focus", () => {
+        if (current) closeMenu();
+      });
+    });
+
+    scrim?.addEventListener("click", () => closeMenu());
+
+    header.addEventListener("focusout", (event) => {
+      const next = event.relatedTarget as Node | null;
+      if (current && next && !header.contains(next)) closeMenu();
+    });
+
+    const setMobile = (open: boolean) => {
+      header.toggleAttribute("data-mobile-open", open);
+      mobileToggle?.setAttribute("aria-expanded", String(open));
+      mobileToggle?.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+      mobileToggle?.querySelector("[data-icon-open]")?.classList.toggle("hidden", open);
+      mobileToggle?.querySelector("[data-icon-close]")?.classList.toggle("hidden", !open);
+      document.documentElement.style.overflow = open ? "hidden" : "";
+    };
+
+    mobileToggle?.addEventListener("click", () => setMobile(!header.hasAttribute("data-mobile-open")));
+
+    header.querySelectorAll("[data-menu-link]").forEach((link) =>
+      link.addEventListener("click", () => {
+        closeMenu();
+        setMobile(false);
+      }),
+    );
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key !== "Escape") return;
+      if (current) closeMenu(true);
+      if (header.hasAttribute("data-mobile-open")) {
+        setMobile(false);
+        mobileToggle?.focus();
+      }
+    });
+
+    window.matchMedia("(min-width: 64rem)").addEventListener("change", (event) => {
+      if (event.matches) setMobile(false);
+      else closeMenu();
+    });
+
+    /* Hide while scrolling down, return on any scroll up. Never hides near the
+       top, or while a menu or the mobile drawer is open. */
+    let lastY = window.scrollY;
+    const onScroll = () => {
+      const y = window.scrollY;
+      const busy = current !== null || header.hasAttribute("data-mobile-open") || header.contains(document.activeElement);
+      header.toggleAttribute("data-scrolled", y > 8);
+      if (y < 120 || busy) header.removeAttribute("data-hidden");
+      else if (Math.abs(y - lastY) > 6) header.toggleAttribute("data-hidden", y > lastY);
+      lastY = y;
+      document.documentElement.toggleAttribute("data-header-hidden", header.hasAttribute("data-hidden"));
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    header.addEventListener("focusin", () => header.removeAttribute("data-hidden"));
+  }
+</script>

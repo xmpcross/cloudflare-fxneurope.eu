@@ -1,0 +1,68 @@
+---
+import { pricing } from "@/config/pricing";
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<fieldset class:list={["billing flex w-fit bg-sunken p-1", className]}>
+  <legend class="sr-only">Billing period</legend>
+  <label class="billing-option">
+    <input type="radio" name="billing" value="monthly" class="sr-only" checked data-billing />
+    <span>Monthly</span>
+  </label>
+  <label class="billing-option">
+    <input type="radio" name="billing" value="annual" class="sr-only" data-billing />
+    <span>Annual <span class="billing-save">{pricing.annualSaving}</span></span>
+  </label>
+</fieldset>
+
+<style>
+  .billing-option span {
+    display: block;
+    padding: 0.6rem 1rem;
+    font-size: 0.9375rem;
+    cursor: pointer;
+    transition:
+      background-color 0.25s,
+      color 0.25s;
+  }
+
+  .billing-option .billing-save {
+    display: inline;
+    padding: 0;
+    color: var(--accent-ink);
+  }
+
+  .billing-option input:checked + span {
+    background: var(--ink);
+    color: var(--page);
+  }
+
+  .billing-option input:checked + span .billing-save {
+    color: var(--accent);
+  }
+
+  .billing-option input:focus-visible + span {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+</style>
+
+<script>
+  /* Every price on the page carries both amounts; the toggle swaps them. */
+  document.querySelectorAll<HTMLInputElement>("[data-billing]").forEach((input) =>
+    input.addEventListener("change", () => {
+      const period = input.value === "annual" ? "annual" : "monthly";
+      document.querySelectorAll<HTMLElement>("[data-monthly]").forEach((price) => {
+        price.textContent = price.dataset[period] ?? price.textContent;
+      });
+      document.querySelectorAll<HTMLElement>("[data-billed]").forEach((note) => {
+        note.textContent = period === "annual" ? "per month, billed yearly" : "per month";
+      });
+    }),
+  );
+</script>

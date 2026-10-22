@@ -1,0 +1,13 @@
+---
+import translations from '@/data/portfolio-copy.json';
+import additions from '@/data/home-sections.json';
+import Dither from '@/components/ui/Dither.astro';
+interface Props { lang: string; }
+const {lang}=Astro.props;
+const c=translations[lang as keyof typeof translations] ?? translations.en;
+const h=additions[lang as keyof typeof additions] ?? additions.en;
+---
+<section class="home-principles" aria-labelledby="principles-title"><div class="shell"><div class="home-section-intro"><h2 id="principles-title">{h.title}</h2><p>{h.intro}</p></div><div class="principles-list">{h.principles.map(([title,body])=><article><h3>{title}</h3><p>{body}</p></article>)}</div></div></section>
+<section class="home-company shell" aria-labelledby="company-title"><div><span class="intro-eyebrow">FXN Europe OÜ</span><h2 id="company-title">{c.locationTitle}</h2><p>{c.locationBody}</p><a href={`/${lang}/about/`} class="text-link">{h.company} ↗</a></div><dl>{c.facts.map(([value,label])=><div><dt>{label}</dt><dd>{value}</dd></div>)}</dl></section>
+<section class="home-questions shell" aria-labelledby="questions-title"><div><h2 id="questions-title">{h.questions}</h2><a href={`/${lang}/faq/`} class="text-link">{h.allQuestions} ↗</a></div><div>{[c.faq[0],c.faq[2],c.faq[3]].map(([q,a])=><details class="faq-item"><summary>{q}<span aria-hidden="true">+</span></summary><p>{a}</p></details>)}</div></section>
+<section class="home-contact-band" data-dither-host aria-labelledby="home-contact-title"><Dither scene="silk" tone="ember" seed={27} speed={0.4} interactive class="portfolio-dither" /><div class="shell"><div class="home-contact-panel"><div><h2 id="home-contact-title">{h.closing}</h2><p>{h.closingBody}</p></div><a class="button" href={`/${lang}/contact/`}>{h.contact} ↗</a></div></div></section>

@@ -1,0 +1,39 @@
+---
+import Dither from "@/components/ui/Dither.astro";
+import Icon from "@/components/ui/Icon.astro";
+import { closing, hero } from "@/config/home";
+import { siteConfig } from "@/config/site";
+
+const { primary } = siteConfig.actions;
+---
+
+<section class="relative overflow-hidden py-16 sm:py-24 lg:py-32" data-dither-host>
+  <Dither scene="silk" tone="ember" seed={21} speed={0.6} interactive class="absolute! inset-0" />
+  <div class="shell relative">
+    <div class="reveal mx-auto grid max-w-5xl bg-page lg:grid-cols-12">
+      <div class="p-6 sm:p-10 lg:col-span-8 lg:p-14">
+        <h2 class="text-display-lg">{closing.title}</h2>
+        <p class="mt-6 max-w-lg text-lead text-muted">{closing.lead}</p>
+        <div class="mt-10 flex flex-wrap gap-3">
+          <a href={primary.href} class="btn btn-accent">
+            <span>{primary.label}</span>
+            <Icon name="arrow-up-right" class="pixel-arrow" />
+          </a>
+          <a href={hero.secondary.href} class="btn btn-ghost">
+            <span>{hero.secondary.label}</span>
+          </a>
+        </div>
+      </div>
+      <dl class="grid grid-cols-3 gap-px bg-line lg:col-span-4 lg:grid-cols-1">
+        {
+          closing.proof.map((item) => (
+            <div class="flex flex-col justify-center bg-sunken p-5 lg:px-8">
+              <dt class="order-2 text-sm text-muted">{item.label}</dt>
+              <dd class="order-1 text-2xl tracking-[-0.04em] sm:text-3xl">{item.value}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </div>
+</section>

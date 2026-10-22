@@ -1,0 +1,7 @@
+---
+import EuropeLayout from '@/layouts/EuropeLayout.astro';
+import pages from '@/data/pages.json';
+const source=pages.find(p=>p.path==='en')!;
+const page={...source,path:'404',home:false,kind:'',title:'Page not found.',metaTitle:'Page not found | FXN Europe',intro:'<p class="page-intro">The page you’re looking for may have moved. Explore our websites or return to the homepage.</p>',actions:'',body:'<section class="shell" style="padding-bottom:64px"><a class="button" href="/en/">Return to the homepage</a></section>'};
+---
+<EuropeLayout page={page} />

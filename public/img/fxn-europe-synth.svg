@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="168" height="70" viewBox="0 0 168 70" role="img" aria-labelledby="title">
+  <title id="title">FXN Europe</title>
+  <g fill="#111110">
+    <path d="M0 0h46v10H11v10h29v10H11v20H0Z"/>
+    <path d="M116 0h11l30 32V0h11v50h-11l-30-32v32h-11Z"/>
+  </g>
+  <g fill="#ff5f1f">
+    <path d="M54 0h14l40 50H94Z"/>
+    <path d="M94 0h14L88 25l-7-9Z"/>
+    <path d="m74 25 7 9-13 16H54Z"/>
+  </g>
+  <g fill="none" stroke="#111110" stroke-width="1.7" stroke-linejoin="miter" stroke-linecap="square">
+    <path d="M38 59h-8v10h8m-8-5h6"/>
+    <path d="M49 59v7.5q0 2.5 4 2.5t4-2.5V59"/>
+    <path d="M68 69V59h5q3 0 3 2.5T73 64h-5m4 0 5 5"/>
+    <path d="M91 59q-4 0-4 5t4 5 4-5-4-5Z"/>
+    <path d="M106 69V59h5q3 0 3 3t-3 3h-5"/>
+    <path d="M134 59h-8v10h8m-8-5h6"/>
+  </g>
+</svg>

@@ -1,0 +1,53 @@
+---
+import { security } from "@/config/home";
+
+/* A 3x3 pixel glyph per feature, so the grid reads without icons. */
+const glyphs = ["111101111", "010111010", "101010101", "110110001", "111100111", "011011110"];
+---
+
+<section id={security.id} class="on-night py-20 lg:py-32">
+  <div class="shell grid gap-14 lg:grid-cols-12 lg:gap-8">
+    <div class="lg:col-span-5">
+      <h2 class="reveal text-display-lg">{security.title}</h2>
+      <p class="reveal mt-6 max-w-md text-lead text-night-muted">{security.lead}</p>
+    </div>
+
+    <ul class="grid gap-2 sm:grid-cols-2 lg:col-span-7">
+      {
+        security.features.map((feature, i) => (
+          <li class="reveal group bg-night-raised p-6 lg:p-7">
+            <svg viewBox="0 0 3 3" class="size-6" aria-hidden="true">
+              {[...glyphs[i % glyphs.length]].map((bit, p) =>
+                bit === "1" ? (
+                  <rect
+                    x={(p % 3) + 0.1}
+                    y={Math.floor(p / 3) + 0.1}
+                    width="0.8"
+                    height="0.8"
+                    class="sec-pixel"
+                    style={`--p:${p}`}
+                  />
+                ) : null,
+              )}
+            </svg>
+            <h3 class="mt-8 text-lg font-medium">{feature.title}</h3>
+            <p class="mt-2 text-night-muted">{feature.body}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .sec-pixel {
+    fill: var(--night-line);
+    transition: fill 0.3s;
+    transition-delay: calc(var(--p) * 40ms);
+  }
+
+  .sec-pixel:nth-child(odd),
+  .group:hover .sec-pixel {
+    fill: var(--accent);
+  }
+</style>
