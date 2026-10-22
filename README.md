@@ -23,7 +23,7 @@ python3 scripts/check-deployment.py https://fxneurope.eu
 ```
 
 Edit sources, commit and push **`migrate/cloudflare-pages`** to
-https://github.com/xmpcross/fxneurope.eu. Cloudflare automatically builds and deploys
+https://github.com/xmpcross/cloudflare-fxneurope.eu. Cloudflare automatically builds and deploys
 that branch. Project: `fxneurope-eu`; build command: `npm run build`; output: `dist`;
 repository root: `/`. Other branches produce previews. The `main` branch remains
 the historical source. Generated `dist/` and credentials must not be committed.
