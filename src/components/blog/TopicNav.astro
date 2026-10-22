@@ -1,0 +1,85 @@
+---
+import { topics } from "@/config/blog";
+import { topicHref } from "@/lib/posts";
+
+interface Props {
+  current?: string;
+}
+
+const { current } = Astro.props;
+const links = [
+  { label: "All", href: "/blog/", active: !current },
+  ...topics.map((topic) => ({ label: topic, href: topicHref(topic), active: topic === current })),
+];
+---
+
+<nav aria-label="Topics" class="topic-nav w-full min-w-0 sm:w-auto" data-topic-nav>
+  <ul class="topic-track flex w-max gap-1.5">
+    {
+      links.map((link) => (
+        <li class="snap-start">
+          <a
+            href={link.href}
+            aria-current={link.active ? "page" : undefined}
+            class:list={[
+              "block px-4 py-2.5 text-[0.9375rem] whitespace-nowrap transition-colors",
+              link.active ? "bg-ink text-page" : "bg-sunken hover:bg-line",
+            ]}
+          >
+            {link.label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>
+
+<style>
+  .topic-nav {
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    --fade-start: 0px;
+    --fade-end: 0px;
+    mask-image: linear-gradient(
+      90deg,
+      transparent,
+      #000 var(--fade-start),
+      #000 calc(100% - var(--fade-end)),
+      transparent
+    );
+  }
+
+  .topic-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .topic-nav[data-more-start] {
+    --fade-start: 2.5rem;
+  }
+
+  .topic-nav[data-more-end] {
+    --fade-end: 3.5rem;
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>("[data-topic-nav]").forEach((nav) => {
+    const update = () => {
+      const max = nav.scrollWidth - nav.clientWidth;
+      nav.toggleAttribute("data-more-start", nav.scrollLeft > 4);
+      nav.toggleAttribute("data-more-end", max - nav.scrollLeft > 4);
+    };
+
+    const active = nav.querySelector<HTMLElement>('[aria-current="page"]');
+    if (active && active.offsetLeft + active.offsetWidth > nav.clientWidth) {
+      nav.scrollLeft = active.offsetLeft - 16;
+    }
+
+    update();
+    nav.addEventListener("scroll", update, { passive: true });
+    new ResizeObserver(update).observe(nav);
+  });
+</script>

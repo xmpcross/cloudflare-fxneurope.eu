@@ -1,0 +1,21 @@
+---
+import type { Plan } from "@/config/pricing";
+
+interface Props {
+  plan: Plan;
+  class?: string;
+}
+
+const { plan, class: className } = Astro.props;
+const money = (value: number) => `$${value.toLocaleString("en-US")}`;
+---
+
+{
+  plan.monthly === null || plan.annual === null ? (
+    <span class={className}>Custom</span>
+  ) : (
+    <span class={className} data-monthly={money(plan.monthly)} data-annual={money(plan.annual)}>
+      {money(plan.monthly)}
+    </span>
+  )
+}

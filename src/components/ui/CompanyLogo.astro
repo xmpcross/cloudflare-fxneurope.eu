@@ -1,0 +1,81 @@
+---
+import type { CompanyName } from "@/config/home";
+
+interface Props {
+  name: CompanyName;
+  class?: string;
+}
+
+const { name, class: className } = Astro.props;
+
+/* Fictional marks. Each is a 24-unit square glyph plus a styled word. */
+const marks: Record<CompanyName, { svg: string; word: string; style: string }> = {
+  Northwind: {
+    svg: `<path d="M2 16 12 6l10 10h-5l-5-5-5 5z"/><path d="M2 22l10-10 10 10h-5l-5-5-5 5z" opacity=".55"/>`,
+    word: "northwind",
+    style: "font-weight:600;letter-spacing:-0.04em",
+  },
+  Kestrel: {
+    svg: `<path d="M2 20 22 4v6L8 20z"/><path d="M12 20l10-8v8z"/>`,
+    word: "KESTREL",
+    style: "font-weight:500;letter-spacing:0.14em;font-size:0.85em",
+  },
+  Lumen: {
+    svg: `<path d="M2 2h20v20H2zm5 5v10h10V7z"/><path d="M10 10h4v4h-4z"/>`,
+    word: "Lumen",
+    style: "font-weight:400;letter-spacing:-0.02em",
+  },
+  Parcelry: {
+    svg: `<path d="M12 2 22 7v10l-10 5L2 17V7z" fill-opacity=".25"/><path d="M12 2 22 7l-10 5L2 7z"/><path d="M11 12v10L2 17V7z" opacity=".6"/>`,
+    word: "parcelry",
+    style: "font-weight:700;letter-spacing:-0.05em",
+  },
+  Harbor: {
+    svg: `<path d="M2 20h20v2H2zM4 8h3v11H4zm6.5 0h3v11h-3zM17 8h3v11h-3zM2 4l10-3 10 3v2H2z"/>`,
+    word: "Harbor Bank",
+    style: "font-family:var(--font-mono);font-weight:500;letter-spacing:-0.03em;font-size:0.9em",
+  },
+  Orbitra: {
+    svg: `<circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2.5"/><circle cx="18" cy="6" r="3.5"/>`,
+    word: "orbitra",
+    style: "font-weight:500;letter-spacing:0",
+  },
+  Fieldstone: {
+    svg: `<path d="M2 2h9v9H2zM13 2h9v9h-9zM2 13h9v9H2z"/><path d="M13 13h9v9h-9z" opacity=".35"/>`,
+    word: "Fieldstone",
+    style: "font-weight:600;letter-spacing:-0.03em",
+  },
+  Quanta: {
+    svg: `<path d="M3 3h18v14h-4v-4h-4v4H3zm4 4v6h6V7z"/><path d="M17 17h4v4h-4z"/>`,
+    word: "QUANTA",
+    style: "font-family:var(--font-mono);font-weight:600;letter-spacing:0.08em;font-size:0.85em",
+  },
+  Vela: {
+    svg: `<path d="M2 14 22 4l-6 16-4-6z"/>`,
+    word: "vela air",
+    style: "font-weight:300;letter-spacing:0.02em;font-style:italic",
+  },
+  Mosaic: {
+    svg: `<path d="M9 2h6v7h7v6h-7v7H9v-7H2V9h7z"/>`,
+    word: "Mosaic Health",
+    style: "font-weight:500;letter-spacing:-0.035em",
+  },
+  Tessel: {
+    svg: `<path d="M2 22 12 2l10 20z" fill-opacity=".3"/><path d="M7 12h10l-5 10z"/>`,
+    word: "tessel",
+    style: "font-weight:800;letter-spacing:-0.06em",
+  },
+  Brightline: {
+    svg: `<path d="M2 18h20v4H2z"/><path d="M4 12h16v3H4zM7 7h10v2.5H7zM10 2h4v2h-4z" opacity=".6"/>`,
+    word: "Brightline",
+    style: "font-weight:400;letter-spacing:-0.01em;text-transform:lowercase",
+  },
+};
+
+const { svg, word, style } = marks[name];
+---
+
+<span class:list={["inline-flex items-center gap-2 whitespace-nowrap text-[1.3rem] leading-none", className]}>
+  <svg viewBox="0 0 24 24" class="size-[1.05em] shrink-0" fill="currentColor" aria-hidden="true" set:html={svg} />
+  <span style={style}>{word}</span>
+</span>

@@ -1,0 +1,149 @@
+---
+import Dither from "@/components/ui/Dither.astro";
+import Icon from "@/components/ui/Icon.astro";
+import Logomark from "@/components/ui/Logomark.astro";
+import { hero, trace } from "@/config/home";
+import { siteConfig } from "@/config/site";
+
+const question = hero.conversation.find((message) => message.from === "customer");
+const answer = hero.conversation.find((message, i, all) => message.from === "agent" && i > all.indexOf(question!));
+const total = trace.steps.at(-1)?.at ?? 0;
+---
+
+<section id={trace.id} class="bg-sunken py-20 lg:py-32" data-trace>
+  <div class="shell grid gap-12 lg:grid-cols-12 lg:gap-8">
+    <div class="flex flex-col lg:col-span-5 lg:pr-8">
+      <h2 class="reveal text-display-md">{trace.title}</h2>
+      <p class="reveal mt-6 text-lead text-muted">{trace.lead}</p>
+      <dl class="mt-10 grid auto-rows-fr gap-2 lg:mt-auto lg:pt-10">
+        {
+          trace.facts.map((fact) => (
+            <div class="reveal grid grid-cols-[7.5rem_1fr] items-center gap-4 bg-page px-5 py-5 sm:grid-cols-[9rem_1fr]">
+              <dt class="order-2 text-muted">{fact.label}</dt>
+              <dd class="order-1 text-3xl tracking-[-0.045em] sm:text-4xl">{fact.value}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+
+    <div class="reveal relative overflow-hidden p-4 pb-12 sm:p-8 sm:pb-14 lg:col-span-7 lg:p-12">
+      <Dither scene="silk" tone="ember" seed={9} speed={0.5} class="absolute! inset-0" />
+      <div class="relative mx-auto max-w-xl bg-surface" data-trace-panel>
+        <div class="flex items-center gap-3 bg-ink px-4 py-3 text-page">
+          <Logomark class="size-9" />
+          <span class="flex-1 text-[0.95rem] font-medium">{siteConfig.name}</span>
+          <span class="font-mono text-xs text-night-muted">trace · {total} ms</span>
+        </div>
+        <div class="grid gap-2 px-4 pt-4 pb-3">
+          <p class="ml-auto w-fit max-w-[85%] bg-ink px-3.5 py-2.5 text-[0.9rem] leading-snug text-page">
+            {question?.text}
+          </p>
+          <p class="w-fit max-w-[88%] bg-sunken px-3.5 py-2.5 text-[0.9rem] leading-snug">{answer?.text}</p>
+        </div>
+        <div class="px-4 pb-4">
+          <p class="border-t border-line pt-3 text-sm font-medium">How this answer was made</p>
+          <ol class="trace-list relative mt-2 grid">
+            {
+              trace.steps.map((step, i) => (
+                <li
+                  class="trace-step relative grid grid-cols-[0.75rem_minmax(0,1fr)_auto] items-baseline gap-3 py-1.5 text-sm"
+                  style={`--i:${i}`}
+                >
+                  <span class="trace-node relative z-10 size-2 self-center bg-ink" aria-hidden="true" />
+                  <span class="min-w-0 sm:truncate">
+                    <span class="font-medium">{step.label}</span>
+                    <span class="ml-2 text-muted">{step.detail}</span>
+                  </span>
+                  <span class="mono-meta text-xs!">{step.at} ms</span>
+                </li>
+              ))
+            }
+          </ol>
+        </div>
+      </div>
+      <button
+        type="button"
+        class="trace-replay absolute right-2 bottom-2 grid size-10 place-items-center text-ink sm:right-3 sm:bottom-3"
+        aria-label="Replay"
+        title="Replay"
+        data-trace-replay
+        hidden
+      >
+        <Icon name="rotate-ccw" class="size-5" stroke={1.75} />
+      </button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .trace-replay {
+    transition: transform 0.5s var(--ease-out-expo);
+  }
+
+  .trace-replay:hover {
+    transform: rotate(-120deg);
+  }
+
+  .trace-list::before {
+    content: "";
+    position: absolute;
+    left: calc(0.25rem - 0.5px);
+    top: 0.9rem;
+    bottom: 0.9rem;
+    width: 1px;
+    background: var(--line);
+  }
+
+  .trace-step:last-child .trace-node {
+    background: var(--accent);
+  }
+
+  [data-armed] .trace-step {
+    opacity: 0.25;
+  }
+
+  [data-playing] .trace-step {
+    animation: step-in 0.5s var(--ease-out-expo) forwards;
+    animation-delay: calc(var(--i) * 320ms);
+  }
+
+  @keyframes step-in {
+    from {
+      opacity: 0.25;
+      transform: translateX(-0.35rem);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+</style>
+
+<script>
+  const root = document.querySelector<HTMLElement>("[data-trace]");
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (root && !reduce && "IntersectionObserver" in window) {
+    const replay = root.querySelector<HTMLButtonElement>("[data-trace-replay]");
+    root.setAttribute("data-armed", "");
+    const play = () => {
+      root.removeAttribute("data-playing");
+      void root.offsetWidth;
+      root.setAttribute("data-playing", "");
+    };
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        observer.disconnect();
+        play();
+      },
+      { threshold: 0.3 },
+    );
+    observer.observe(root.querySelector("[data-trace-panel]") ?? root);
+    if (replay) {
+      replay.hidden = false;
+      replay.addEventListener("click", play);
+    }
+  }
+</script>

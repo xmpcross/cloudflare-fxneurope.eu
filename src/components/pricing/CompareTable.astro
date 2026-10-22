@@ -1,0 +1,244 @@
+---
+import Icon from "@/components/ui/Icon.astro";
+import { pricing, type Cell } from "@/config/pricing";
+import Price from "./Price.astro";
+
+const { plans, groups } = pricing;
+const featured = plans.find((plan) => plan.featured)?.id ?? plans[0].id;
+const isFeatured = (id: string) => id === featured;
+---
+
+<div class="compare" data-compare>
+  <div
+    class="compare-switch sticky z-20 mb-2 grid gap-1 bg-page py-2 md:hidden"
+    style={`grid-template-columns: repeat(${plans.length}, minmax(0, 1fr))`}
+    role="group"
+    aria-label="Show plan"
+  >
+    {
+      plans.map((plan) => (
+        <button type="button" class="compare-tab" aria-pressed={isFeatured(plan.id) ? "true" : "false"} data-show={plan.id}>
+          {plan.name}
+        </button>
+      ))
+    }
+  </div>
+
+  <table class="w-full table-fixed border-separate border-spacing-0">
+    <caption class="sr-only">{pricing.compareTitle}</caption>
+    <colgroup>
+      <col class="compare-feature-col" />
+      {plans.map((plan) => <col data-col={plan.id} data-off={isFeatured(plan.id) ? undefined : ""} />)}
+    </colgroup>
+    <thead>
+      <tr>
+        <th scope="col" class="compare-head compare-lead align-bottom">
+          <span class="sr-only">Feature</span>
+        </th>
+        {
+          plans.map((plan) => (
+            <th scope="col" class:list={["compare-head text-left align-bottom", isFeatured(plan.id) && "is-featured"]} data-col={plan.id} data-off={isFeatured(plan.id) ? undefined : ""}>
+              <span class="block text-lg font-medium tracking-tight">{plan.name}</span>
+              <span class="mt-1 flex items-baseline gap-1.5 font-normal">
+                <Price plan={plan} class="text-2xl tracking-[-0.04em]" />
+                {plan.monthly !== null && <span class="text-sm text-muted">/ month</span>}
+              </span>
+              <a href={plan.cta.href} class:list={["btn btn-sm mt-4 w-full", isFeatured(plan.id) ? "btn-accent" : "btn-ghost"]}>
+                <span>{plan.cta.label}</span>
+              </a>
+            </th>
+          ))
+        }
+      </tr>
+    </thead>
+    {
+      groups.map((group) => (
+        <tbody>
+          <tr>
+            <th scope="colgroup" class="compare-group text-left">
+              {group.name}
+            </th>
+            {plans.map((plan) => (
+              <td class:list={["compare-group-fill", isFeatured(plan.id) && "is-featured"]} aria-hidden="true" />
+            ))}
+          </tr>
+          {group.rows.map((row) => (
+            <tr class="compare-row">
+              <th scope="row" class="compare-cell text-left font-normal">
+                <span class="block">{row.name}</span>
+                {row.hint && <span class="mt-0.5 block text-sm text-muted">{row.hint}</span>}
+              </th>
+              {row.values.map((value: Cell, i) => (
+                <td class:list={["compare-cell", isFeatured(plans[i].id) && "is-featured"]} data-col={plans[i].id} data-off={isFeatured(plans[i].id) ? undefined : ""}>
+                  {value === true ? (
+                    <>
+                      <Icon name="check" class="size-5 text-accent-ink" stroke={2} />
+                      <span class="sr-only">Included</span>
+                    </>
+                  ) : value === false ? (
+                    <>
+                      <span class="block h-px w-3 bg-muted/60" aria-hidden="true" />
+                      <span class="sr-only">Not included</span>
+                    </>
+                  ) : (
+                    <span>{value}</span>
+                  )}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      ))
+    }
+  </table>
+</div>
+
+<style>
+  .compare-head {
+    position: sticky;
+    top: var(--sticky-top, 0px);
+    z-index: 10;
+    padding: 1.25rem 1.25rem;
+    background: var(--page);
+    box-shadow: inset 0 -1px 0 var(--line);
+    transition: top 0.45s var(--ease-out-expo);
+  }
+
+  .compare-lead {
+    padding-left: 0;
+  }
+
+  .compare-head.is-featured {
+    box-shadow:
+      inset 0 3px 0 var(--accent),
+      inset 0 -1px 0 var(--line);
+    background: var(--surface);
+  }
+
+  .compare-group {
+    padding: 2.5rem 0 0.75rem;
+    font-size: 1.125rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+
+  .compare-group-fill.is-featured {
+    background: var(--surface);
+  }
+
+  .compare-cell {
+    padding: 1rem 1.25rem;
+    vertical-align: middle;
+    box-shadow: inset 0 -1px 0 var(--line);
+  }
+
+  th.compare-cell {
+    padding-left: 0;
+  }
+
+  td.compare-cell {
+    font-size: 0.9375rem;
+  }
+
+  .compare-cell.is-featured {
+    background: var(--surface);
+  }
+
+  .compare-tab {
+    padding: 0.7rem 0.5rem;
+    font-size: 0.9375rem;
+    background: var(--sunken);
+    transition:
+      background-color 0.2s,
+      color 0.2s;
+  }
+
+  .compare-tab[aria-pressed="true"] {
+    background: var(--ink);
+    color: var(--page);
+  }
+
+  .compare-switch {
+    top: var(--sticky-top, 0px);
+    transition: top 0.45s var(--ease-out-expo);
+  }
+
+  /* Phones show one plan beside the feature names; the switcher picks it. */
+  /* Grid rows on phones: a fixed table with hidden columns collapses. */
+  @media (max-width: 47.99rem) {
+    table,
+    tbody {
+      display: block;
+    }
+
+    colgroup,
+    .compare-group-fill {
+      display: none;
+    }
+
+    thead {
+      display: block;
+      position: sticky;
+      top: calc(var(--sticky-top, 0px) + 3.75rem);
+      z-index: 10;
+      background: var(--page);
+      transition: top 0.45s var(--ease-out-expo);
+    }
+
+    tr {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    }
+
+    .compare-head {
+      position: static;
+      grid-column: 1 / -1;
+      padding-inline: 0;
+    }
+
+    .compare-lead {
+      display: none;
+    }
+
+    td.compare-cell:not([data-off]) {
+      display: flex;
+      align-items: center;
+    }
+
+    .compare-group {
+      grid-column: 1 / -1;
+    }
+
+    .compare-head.is-featured,
+    .compare-cell.is-featured {
+      background: none;
+      box-shadow: inset 0 -1px 0 var(--line);
+    }
+
+    [data-off] {
+      display: none;
+    }
+  }
+
+  .compare-feature-col {
+    width: 31%;
+  }
+
+  :global(html:not([data-header-hidden])) .compare {
+    --sticky-top: var(--header-h);
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>("[data-compare]").forEach((compare) => {
+    const tabs = [...compare.querySelectorAll<HTMLButtonElement>("[data-show]")];
+    tabs.forEach((tab) =>
+      tab.addEventListener("click", () => {
+        compare.querySelectorAll<HTMLElement>("[data-col]").forEach((cell) => {
+          cell.toggleAttribute("data-off", cell.dataset.col !== tab.dataset.show);
+        });
+        tabs.forEach((other) => other.setAttribute("aria-pressed", String(other === tab)));
+      }),
+    );
+  });
+</script>

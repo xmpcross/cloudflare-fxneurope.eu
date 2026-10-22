@@ -1,0 +1,43 @@
+---
+import type { SceneName } from "@/lib/dither-scenes";
+
+interface Props {
+  scene?: SceneName;
+  /** `ember` is the orange field, `smoke` dark with orange plumes, `haze` a pale wash. */
+  tone?: "ember" | "smoke" | "haze";
+  /** Grain size in CSS px. */
+  cell?: number;
+  seed?: number;
+  speed?: number;
+  /** Follow the pointer across the nearest `[data-dither-host]`. */
+  interactive?: boolean;
+  class?: string;
+}
+
+const {
+  scene = "silk",
+  tone = "ember",
+  cell = 2,
+  seed = 0,
+  speed = 1,
+  interactive = false,
+  class: className,
+} = Astro.props;
+---
+
+<div class:list={["dither-field", `tone-${tone}`, className]} aria-hidden="true">
+  <canvas
+    class="dither"
+    data-dither
+    data-scene={scene}
+    data-cell={cell}
+    data-seed={seed}
+    data-speed={speed}
+    data-interactive={String(interactive)}></canvas>
+</div>
+
+<script>
+  import { mountDither } from "@/lib/dither";
+
+  mountDither();
+</script>

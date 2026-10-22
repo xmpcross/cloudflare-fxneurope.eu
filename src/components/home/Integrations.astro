@@ -1,0 +1,203 @@
+---
+import Dither from "@/components/ui/Dither.astro";
+import Icon from "@/components/ui/Icon.astro";
+import { integrations } from "@/config/home";
+
+const slowest = Math.max(...integrations.routes.flatMap((route) => route.options.map((option) => option.ms)));
+const count = (n: number) => n.toLocaleString("en-US");
+---
+
+<section id={integrations.id} class="py-20 lg:py-32" data-routing>
+  <div class="shell">
+    <div class="grid gap-6 lg:grid-cols-12 lg:items-end">
+      <h2 class="reveal text-display-lg lg:col-span-7">{integrations.title}</h2>
+      <p class="reveal text-lead text-muted lg:col-span-5">{integrations.lead}</p>
+    </div>
+
+    <div class="mt-14 grid grid-cols-1 gap-2 lg:mt-20 lg:grid-cols-12">
+      <div class="reveal relative overflow-hidden p-4 sm:p-8 lg:col-span-7 lg:p-12">
+        <Dither scene="silk" tone="ember" seed={17} speed={0.5} class="absolute! inset-0" />
+        <div class="relative bg-page/95">
+          <div class="flex items-center justify-between gap-4 px-5 pt-5 pb-3 text-sm">
+            <span class="font-medium">Model routing</span>
+            <span class="mono-meta">median latency</span>
+          </div>
+          <ol class="grid">
+            {
+              integrations.routes.map((route, index) => (
+                <li class="route-row grid items-center gap-x-3 gap-y-2.5 border-t border-line px-5 py-3.5" data-route>
+                  <span class="mono-meta [grid-area:num]">{String(index + 1).padStart(2, "0")}</span>
+                  <span class="flex min-w-0 items-baseline gap-2 [grid-area:step]">
+                    <span class="truncate font-medium">{route.step}</span>
+                    <span class="hidden font-mono text-xs text-muted sm:inline">{route.tier}</span>
+                  </span>
+                  <span
+                    class="route-model relative grid h-9 min-w-36 items-center bg-surface px-3 text-sm [grid-area:model]"
+                    data-route-model
+                  >
+                    {route.options.map((option, i) => (
+                      <span
+                        class="route-option col-start-1 row-start-1 truncate"
+                        data-active={i === 0 ? "" : undefined}
+                        data-ms={option.ms}
+                      >
+                        {option.model}
+                      </span>
+                    ))}
+                  </span>
+                  <span class="h-1 bg-line [grid-area:track]">
+                    <span
+                      class="route-bar block h-full bg-accent"
+                      style={`--w:${(route.options[0].ms / slowest) * 100}%`}
+                      data-route-bar
+                    />
+                  </span>
+                  <span class="mono-meta text-right tabular-nums [grid-area:ms]" data-route-ms>
+                    {route.options[0].ms} ms
+                  </span>
+                </li>
+              ))
+            }
+          </ol>
+          <p class="flex items-center gap-2 border-t border-line px-5 pt-4 pb-5 text-sm text-muted">
+            <Icon name="check" class="size-4 text-accent-ink" stroke={2} />
+            Regression suite passes on every swap
+          </p>
+        </div>
+      </div>
+
+      <div class="reveal flex flex-col bg-surface lg:col-span-5">
+        <div class="flex items-center justify-between gap-4 px-5 pt-5 pb-3 text-sm sm:px-6">
+          <span class="font-medium">Connected systems</span>
+          <span class="mono-meta">calls today</span>
+        </div>
+        <ul class="flex flex-1 flex-col" aria-label="Connected systems">
+          {
+            integrations.systems.map((system) => (
+              <li class="flex flex-1 items-center justify-between gap-4 border-t border-line px-5 py-4 sm:px-6">
+                <span class="min-w-0">
+                  <span class="block text-xl tracking-tight">{system.label}</span>
+                  <span class="mt-0.5 block truncate text-sm text-muted">{system.detail}</span>
+                </span>
+                <span class="system-calls mono-meta shrink-0 tabular-nums" data-calls={system.calls}>
+                  {count(system.calls)}
+                </span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .route-row {
+    grid-template-columns: 1.75rem auto minmax(0, 1fr) auto;
+    grid-template-areas:
+      "num step step ms"
+      ". model track track";
+  }
+
+  @media (min-width: 40rem) {
+    .route-row {
+      grid-template-columns: 1.75rem minmax(0, 1fr) auto;
+      grid-template-areas:
+        "num step model"
+        ". track ms";
+    }
+  }
+
+  .route-option:not([data-active]) {
+    visibility: hidden;
+  }
+
+  /* The name changes at 50%, while the panel is edge-on. */
+  .route-model[data-swapped] {
+    animation: flip 0.36s cubic-bezier(0.45, 0, 0.2, 1);
+  }
+
+  @keyframes flip {
+    0% {
+      transform: perspective(24rem) rotateX(0);
+    }
+    50% {
+      transform: perspective(24rem) rotateX(90deg);
+      background-color: var(--sunken);
+    }
+    50.01% {
+      transform: perspective(24rem) rotateX(-90deg);
+      background-color: var(--sunken);
+    }
+    100% {
+      transform: perspective(24rem) rotateX(0);
+    }
+  }
+
+  .route-bar {
+    width: var(--w);
+    transition: width 0.8s var(--ease-out-expo);
+  }
+
+  .system-calls {
+    transition: color 0.6s;
+  }
+
+  .system-calls[data-ticked] {
+    color: var(--accent-ink);
+    transition: none;
+  }
+</style>
+
+<script>
+  const root = document.querySelector<HTMLElement>("[data-routing]");
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (root && !reduce) {
+    const routes = [...root.querySelectorAll<HTMLElement>("[data-route]")];
+    const counters = [...root.querySelectorAll<HTMLElement>("[data-calls]")];
+    const slowest = Math.max(
+      ...[...root.querySelectorAll<HTMLElement>(".route-option")].map((option) => Number(option.dataset.ms)),
+    );
+    let turn = 0;
+    let timer = 0;
+
+    const swap = () => {
+      const route = routes[turn % routes.length];
+      const model = route.querySelector<HTMLElement>("[data-route-model]")!;
+      const options = [...model.querySelectorAll<HTMLElement>(".route-option")];
+      const current = options.findIndex((option) => option.hasAttribute("data-active"));
+      const next = options[(current + 1) % options.length];
+      model.removeAttribute("data-swapped");
+      void model.offsetWidth;
+      model.setAttribute("data-swapped", "");
+      window.setTimeout(() => options.forEach((option) => option.toggleAttribute("data-active", option === next)), 180);
+
+      const ms = Number(next.dataset.ms);
+      route.querySelector<HTMLElement>("[data-route-bar]")?.style.setProperty("--w", `${(ms / slowest) * 100}%`);
+      route.querySelector<HTMLElement>("[data-route-ms]")!.textContent = `${ms} ms`;
+      turn += 1;
+    };
+
+    const tick = () => {
+      counters.forEach((counter) => counter.removeAttribute("data-ticked"));
+      counters
+        .filter(() => Math.random() < 0.5)
+        .forEach((counter) => {
+          const calls = Number(counter.dataset.calls) + 1 + Math.floor(Math.random() * 6);
+          counter.dataset.calls = String(calls);
+          counter.textContent = calls.toLocaleString("en-US");
+          counter.setAttribute("data-ticked", "");
+        });
+    };
+
+    new IntersectionObserver(([entry]) => {
+      window.clearInterval(timer);
+      if (!entry.isIntersecting) return;
+      timer = window.setInterval(() => {
+        swap();
+        tick();
+      }, 1800);
+    }).observe(root);
+  }
+</script>

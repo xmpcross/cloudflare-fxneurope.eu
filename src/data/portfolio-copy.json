@@ -1,0 +1,658 @@
+{
+  "en": {
+    "nav": ["Home", "Our websites", "Technology", "How we build", "About", "Contact"],
+    "homeTitle": "We build websites. Then we keep building the businesses behind them.",
+    "homeIntro": "FXN Europe OÜ builds and operates its own digital businesses. Explore our websites, the technology they use, and the work that takes each one from an idea to a running business.",
+    "portfolioTitle": "The websites we build and operate.",
+    "portfolioIntro": "Each website has its own audience and purpose. This portfolio brings them together, with a closer look at what each one does and how it is built.",
+    "projectHeading": "Our websites",
+    "projectType": "Ecommerce · Pet supplies",
+    "live": "Live storefront",
+    "projectDescription": "Fur Fun Shop is an online shop for everyday life with pets. It brings together toys, beds, bowls, leads and care products for dogs and cats, with selected products for birds and fish.",
+    "projectPurpose": "The store serves shoppers in the UK. Product categories, detailed listings and a shopping cart help visitors move from finding a suitable item to placing an order.",
+    "visit": "Visit website",
+    "caseStudy": "How it is built",
+    "stack": "Technology used",
+    "implementation": [
+      [
+        "WordPress",
+        "Provides the content foundation for product information, category pages and the shop’s company and customer-service pages."
+      ],
+      [
+        "WooCommerce",
+        "Adds the ecommerce layer: product listings, variations, the cart and the checkout interface."
+      ],
+      [
+        "Elementor",
+        "Supports the storefront’s page layouts and visual presentation within WordPress."
+      ]
+    ],
+    "operationTitle": "A website is only the beginning.",
+    "operationBody": "Building and operating belong together. Beyond the first release, a digital business needs useful content, dependable customer journeys, maintained software and attention to the people using it. Our portfolio shows the work behind the websites as well as the websites themselves.",
+    "technologyTitle": "The technology behind the websites.",
+    "technologyIntro": "We choose tools around the job a website needs to do. A product catalogue and checkout need different foundations from a lightweight company website.",
+    "previewHeading": "This portfolio website",
+    "previewBody": "The FXN Europe website uses Astro with the Synth theme, TypeScript, Tailwind CSS and self-hosted Geist fonts. Astro produces static HTML, while JavaScript powers selected interactions such as the menus and dithered artwork. Cloudflare Pages delivers the site, with a server-side Function handling contact enquiries.",
+    "technologyPrinciple": "The stack is a means to an end: clear pages, usable journeys and a site that can be maintained. We document tools that are actually used on each website instead of presenting every platform as part of one universal stack.",
+    "processTitle": "From an idea to a website we operate.",
+    "processIntro": "Our work connects the business idea, the experience people use and the systems that keep it running. The first release is a starting point for continued improvement.",
+    "steps": [
+      [
+        "Define the purpose",
+        "Start with a specific audience and a task worth making easier. Decide what the website will offer, who it is for and how it can sustain itself."
+      ],
+      [
+        "Plan the experience",
+        "Map the content, navigation and essential journeys. For a store, that includes discovering a product, understanding the offer and completing a purchase."
+      ],
+      [
+        "Choose the foundation",
+        "Select a platform that fits the product and its operating needs. Prefer established tools where they do the job well; add custom work where the experience needs it."
+      ],
+      [
+        "Build and check",
+        "Bring together design, content and functionality. Check responsive layouts, navigation, accessibility and the main journeys before a release."
+      ],
+      [
+        "Launch and operate",
+        "Publish the site, maintain its content and software, and respond to issues. Use feedback and practical operating experience to guide what changes next."
+      ]
+    ],
+    "aboutTitle": "The business behind the websites.",
+    "aboutIntro": "FXN Europe OÜ is an Estonia-based business that builds and operates websites. Our work covers the idea, the build and the ongoing responsibility for the businesses those websites support.",
+    "storyTitle": "Built to own the whole journey.",
+    "story": [
+      "A website is more than a finished design. It is a place where people find information, choose products or complete a task. The business behind it needs just as much attention as the pages people see.",
+      "We bring those responsibilities together: deciding what to build, selecting the technology, shaping the experience and looking after the website as it develops.",
+      "This site is a window into that work. It lists our websites and explains their purpose, the tools they use and how the pieces fit together."
+    ],
+    "facts": [
+      ["Estonia", "Company base"],
+      ["OÜ", "Private limited company"],
+      ["17514051", "Registration number"],
+      ["EE102989757", "VAT number"]
+    ],
+    "locationTitle": "Based in Tallinn. Building for the web.",
+    "locationBody": "FXN Europe OÜ is registered in Estonia. Each website is built for its own audience and market; Fur Fun Shop serves UK shoppers. Company enquiries can be sent to our contact address below.",
+    "contactTitle": "Talk to the business behind the website.",
+    "contactIntro": "Contact FXN Europe about our websites, company information or a potential collaboration. If your message concerns an order, include the website name and order reference.",
+    "want": "I’d like to",
+    "topics": [
+      "ask about a website",
+      "discuss a collaboration",
+      "get help with an order",
+      "report a website issue",
+      "ask a company question"
+    ],
+    "name": "Name",
+    "email": "Email",
+    "organisation": "Company (optional)",
+    "website": "Website or order reference (optional)",
+    "message": "Message",
+    "compose": "Send message",
+    "emailNote": "Your message will be sent to contact@fxneurope.eu. We’ll reply to the email address you provide.",
+    "emailStatus": "Thank you. Your message has been sent to FXN Europe.",
+    "direct": "Other ways to reach us",
+    "general": "Company and website enquiries",
+    "orders": "Orders and customer support",
+    "orderNote": "For the quickest route, use the contact details on the website where you placed your order.",
+    "shopSupport": "Contact Fur Fun Shop",
+    "texts": "Text messages",
+    "office": "Registered office",
+    "companyDetails": "Company details",
+    "footer": "FXN Europe OÜ builds and operates digital businesses. Discover our websites, the technology behind them and how we bring them to life.",
+    "faqTitle": "Questions about FXN Europe.",
+    "faqIntro": "A few details about the company, its websites and the information in this portfolio.",
+    "faq": [
+      [
+        "What does FXN Europe do?",
+        "We build and operate our own websites and digital businesses. This website presents that portfolio and explains the technology and development approach behind it."
+      ],
+      [
+        "Which websites can I explore?",
+        "Fur Fun Shop is listed in the portfolio with its purpose, website link and verified technology stack. We add further project details as they are confirmed."
+      ],
+      [
+        "Do all your websites use the same technology?",
+        "No. Fur Fun Shop uses WordPress, WooCommerce and Elementor. This company-site redesign uses Astro and the Synth theme. The tools follow the needs of each website."
+      ],
+      [
+        "How do I get help with an order?",
+        "Use the support details on the website where you placed the order. Include your order reference and the email address used at checkout, but never send payment-card details."
+      ],
+      [
+        "Is this a web-design agency website?",
+        "The focus here is the businesses FXN Europe builds and operates. For a company enquiry or possible collaboration, use the contact page."
+      ]
+    ],
+    "more": "Explore the portfolio",
+    "legal": "Legal",
+    "sitemap": "Sitemap",
+    "sending": "Sending…",
+    "sendError": "We could not confirm delivery. Please email contact@fxneurope.eu before retrying."
+  },
+  "de": {
+    "nav": [
+      "Startseite",
+      "Unsere Websites",
+      "Technologie",
+      "So entwickeln wir",
+      "Über uns",
+      "Kontakt"
+    ],
+    "homeTitle": "Wir entwickeln Websites und die Unternehmen dahinter.",
+    "homeIntro": "FXN Europe OÜ entwickelt und betreibt eigene digitale Unternehmen. Entdecken Sie unsere Websites, ihre Technologien und den Weg von der Idee zum laufenden Geschäft.",
+    "portfolioTitle": "Die Websites, die wir entwickeln und betreiben.",
+    "portfolioIntro": "Jede Website hat ihre eigene Zielgruppe und Aufgabe. Unser Portfolio zeigt, was sie bietet und wie sie aufgebaut ist.",
+    "projectHeading": "Unsere Websites",
+    "projectType": "E-Commerce · Haustierbedarf",
+    "live": "Shop online",
+    "projectDescription": "Fur Fun Shop ist ein Onlineshop für den Alltag mit Haustieren: Spielzeug, Betten, Näpfe, Leinen und Pflegeprodukte für Hunde und Katzen sowie ausgewählte Artikel für Vögel und Fische.",
+    "projectPurpose": "Der Shop richtet sich an Käufer im Vereinigten Königreich. Kategorien, Produktinformationen und Warenkorb führen von der Suche nach einem passenden Artikel bis zur Bestellung.",
+    "visit": "Website besuchen",
+    "caseStudy": "So ist die Website aufgebaut",
+    "stack": "Verwendete Technologien",
+    "implementation": [
+      [
+        "WordPress",
+        "Die Grundlage für Produktinformationen, Kategorien sowie Unternehmens- und Serviceseiten."
+      ],
+      ["WooCommerce", "Ergänzt Produkte, Varianten, Warenkorb und Bestelloberfläche."],
+      [
+        "Elementor",
+        "Unterstützt das Seitenlayout und die visuelle Gestaltung innerhalb von WordPress."
+      ]
+    ],
+    "operationTitle": "Mit der Website beginnt die Arbeit erst.",
+    "operationBody": "Entwicklung und Betrieb gehören zusammen. Ein digitales Unternehmen braucht aktuelle Inhalte, verständliche Abläufe, gepflegte Software und Aufmerksamkeit für seine Nutzer. Unser Portfolio zeigt auch die Arbeit hinter den Websites.",
+    "technologyTitle": "Die Technologie hinter unseren Websites.",
+    "technologyIntro": "Wir wählen Werkzeuge nach der Aufgabe. Ein Produktkatalog mit Bestellfunktion braucht andere Grundlagen als eine schlanke Unternehmenswebsite.",
+    "previewHeading": "Diese Portfolio-Website",
+    "previewBody": "Die FXN-Europe-Website nutzt Astro mit dem Synth-Theme, TypeScript, Tailwind CSS und lokal bereitgestellte Geist-Schriften. Astro erzeugt statisches HTML; JavaScript ergänzt Menüs und gerasterte Grafiken. Cloudflare Pages liefert die Website aus, eine serverseitige Funktion verarbeitet Kontaktanfragen.",
+    "technologyPrinciple": "Die Technik soll klare Seiten, nutzbare Abläufe und einen wartbaren Betrieb ermöglichen. Wir dokumentieren die tatsächlich eingesetzten Werkzeuge für jede Website.",
+    "processTitle": "Von der Idee zur Website im laufenden Betrieb.",
+    "processIntro": "Wir verbinden Geschäftsidee, Nutzererlebnis und technische Grundlagen. Die erste Veröffentlichung ist der Ausgangspunkt für weitere Verbesserungen.",
+    "steps": [
+      [
+        "Zweck bestimmen",
+        "Zielgruppe, Aufgabe und Angebot festlegen. Prüfen, wie das Vorhaben wirtschaftlich tragfähig werden kann."
+      ],
+      [
+        "Nutzung planen",
+        "Inhalte, Navigation und wichtige Abläufe planen – beim Shop von der Produktsuche bis zum Kauf."
+      ],
+      [
+        "Grundlage wählen",
+        "Eine Plattform wählen, die zum Produkt und seinem Betrieb passt. Bewährte Werkzeuge nutzen und gezielt ergänzen."
+      ],
+      [
+        "Entwickeln und prüfen",
+        "Gestaltung, Inhalte und Funktionen zusammenführen. Mobile Ansichten, Navigation, Zugänglichkeit und Kernabläufe prüfen."
+      ],
+      [
+        "Veröffentlichen und betreiben",
+        "Inhalte und Software pflegen, Probleme bearbeiten und Erfahrungen für die nächsten Verbesserungen nutzen."
+      ]
+    ],
+    "aboutTitle": "Das Unternehmen hinter den Websites.",
+    "aboutIntro": "FXN Europe OÜ ist ein Unternehmen aus Estland, das Websites entwickelt und betreibt. Wir begleiten die Idee, die Umsetzung und die Verantwortung für den laufenden Betrieb.",
+    "storyTitle": "Verantwortung für den gesamten Weg.",
+    "story": [
+      "Eine Website ist mehr als ein fertiges Design. Menschen finden dort Informationen, wählen Produkte aus oder erledigen eine Aufgabe. Das Unternehmen dahinter braucht ebenso viel Aufmerksamkeit.",
+      "Wir verbinden diese Aufgaben: das Angebot bestimmen, Technologien auswählen, die Nutzung gestalten und die Website weiterentwickeln.",
+      "Diese Website gibt Einblick in unsere Arbeit. Sie zeigt unser Portfolio, seine Aufgaben und die verwendeten Werkzeuge."
+    ],
+    "facts": [
+      ["Estland", "Unternehmenssitz"],
+      ["OÜ", "Private Kapitalgesellschaft"],
+      ["17514051", "Registernummer"],
+      ["EE102989757", "USt-IdNr."]
+    ],
+    "locationTitle": "In Tallinn ansässig. Für das Web entwickelt.",
+    "locationBody": "FXN Europe OÜ ist in Estland registriert. Jede Website richtet sich an ihren eigenen Markt; Fur Fun Shop bedient Käufer im Vereinigten Königreich. Unternehmensanfragen erreichen uns über die unten stehenden Kontaktdaten.",
+    "contactTitle": "Kontakt zum Unternehmen hinter der Website.",
+    "contactIntro": "Kontaktieren Sie FXN Europe zu unseren Websites, Unternehmensinformationen oder einer möglichen Zusammenarbeit. Bei Bestellungen bitte Website und Bestellnummer angeben.",
+    "want": "Ich möchte",
+    "topics": [
+      "eine Frage zu einer Website stellen",
+      "eine Zusammenarbeit besprechen",
+      "Hilfe zu einer Bestellung erhalten",
+      "ein Website-Problem melden",
+      "eine Unternehmensfrage stellen"
+    ],
+    "name": "Name",
+    "email": "E-Mail",
+    "organisation": "Unternehmen (optional)",
+    "website": "Website oder Bestellnummer (optional)",
+    "message": "Nachricht",
+    "compose": "Nachricht senden",
+    "emailNote": "Ihre Nachricht wird an contact@fxneurope.eu gesendet. Wir antworten an Ihre angegebene E-Mail-Adresse.",
+    "emailStatus": "Vielen Dank. Ihre Nachricht wurde an FXN Europe gesendet.",
+    "direct": "Weitere Kontaktmöglichkeiten",
+    "general": "Unternehmens- und Website-Anfragen",
+    "orders": "Bestellungen und Kundendienst",
+    "orderNote": "Nutzen Sie die Kontaktdaten der Website, auf der Sie bestellt haben.",
+    "shopSupport": "Fur Fun Shop kontaktieren",
+    "texts": "Textnachrichten",
+    "office": "Eingetragener Sitz",
+    "companyDetails": "Unternehmensdaten",
+    "footer": "FXN Europe OÜ entwickelt und betreibt digitale Unternehmen. Entdecken Sie unsere Websites und die Technologie und Arbeit dahinter.",
+    "faqTitle": "Fragen zu FXN Europe.",
+    "faqIntro": "Informationen zum Unternehmen, seinen Websites und diesem Portfolio.",
+    "faq": [
+      [
+        "Was macht FXN Europe?",
+        "Wir entwickeln und betreiben eigene Websites und digitale Unternehmen. Dieses Portfolio zeigt ihre Aufgaben und technischen Grundlagen."
+      ],
+      [
+        "Welche Websites sind aufgeführt?",
+        "Fur Fun Shop ist mit Beschreibung, Link und verifizierten Technologien aufgeführt. Weitere Projekte ergänzen wir nach Bestätigung."
+      ],
+      [
+        "Nutzen alle Websites dieselbe Technik?",
+        "Nein. Fur Fun Shop nutzt WordPress, WooCommerce und Elementor. Dieser Website-Entwurf nutzt Astro und Synth."
+      ],
+      [
+        "Wo bekomme ich Hilfe zu einer Bestellung?",
+        "Nutzen Sie den Kundendienst der Website, auf der Sie bestellt haben. Senden Sie keine Zahlungskartendaten."
+      ],
+      [
+        "Ist dies eine Agenturwebsite?",
+        "Der Schwerpunkt liegt auf den Unternehmen, die FXN Europe entwickelt und betreibt. Unternehmensanfragen und mögliche Kooperationen können Sie über die Kontaktseite senden."
+      ]
+    ],
+    "more": "Portfolio ansehen",
+    "legal": "Rechtliches",
+    "sitemap": "Sitemap",
+    "sending": "Wird gesendet…",
+    "sendError": "Der Versand konnte nicht bestätigt werden. Bitte schreiben Sie vor einem erneuten Versuch an contact@fxneurope.eu."
+  },
+  "et": {
+    "nav": ["Avaleht", "Meie veebilehed", "Tehnoloogia", "Kuidas ehitame", "Meist", "Kontakt"],
+    "homeTitle": "Loome veebilehti ja arendame nende taga olevaid ettevõtteid.",
+    "homeIntro": "FXN Europe OÜ loob ja haldab oma digitaalseid ettevõtteid. Tutvu meie veebilehtede, nende tehnoloogia ning teekonnaga ideest toimiva ärini.",
+    "portfolioTitle": "Veebilehed, mida loome ja haldame.",
+    "portfolioIntro": "Igal veebilehel on oma sihtrühm ja eesmärk. Portfell näitab, mida iga leht pakub ja kuidas see on üles ehitatud.",
+    "projectHeading": "Meie veebilehed",
+    "projectType": "E-kaubandus · Lemmikloomatarbed",
+    "live": "Avatud e-pood",
+    "projectDescription": "Fur Fun Shop on lemmikloomade igapäevatarvete e-pood: mänguasjad, pesad, kausid, jalutusrihmad ja hooldustooted koertele ning kassidele, lisaks valik tooteid lindudele ja kaladele.",
+    "projectPurpose": "Pood teenindab Ühendkuningriigi ostjaid. Kategooriad, tooteinfo ja ostukorv aitavad jõuda sobiva toote leidmisest tellimuseni.",
+    "visit": "Ava veebileht",
+    "caseStudy": "Kuidas see on ehitatud",
+    "stack": "Kasutatud tehnoloogiad",
+    "implementation": [
+      [
+        "WordPress",
+        "Sisuline alus tooteinfole, kategooriatele ning ettevõtte ja klienditeeninduse lehtedele."
+      ],
+      ["WooCommerce", "Lisab tooted, variatsioonid, ostukorvi ja kassaliidese."],
+      ["Elementor", "Toetab lehtede paigutust ja visuaalset kujundust WordPressis."]
+    ],
+    "operationTitle": "Veebilehe valmimine on alles algus.",
+    "operationBody": "Arendus ja haldus käivad koos. Digitaalne ettevõte vajab kasulikku sisu, arusaadavaid kasutusteekondi, hooldatud tarkvara ja tähelepanu kasutajatele. Portfell näitab ka veebilehtede taga tehtavat tööd.",
+    "technologyTitle": "Tehnoloogia meie veebilehtede taga.",
+    "technologyIntro": "Valime tööriistad vastavalt ülesandele. Tootekataloog ja ostukorv vajavad teistsugust alust kui lihtne ettevõtte veebileht.",
+    "previewHeading": "See portfelli veebileht",
+    "previewBody": "FXN Europe’i veebileht kasutab Astrot, Synthi teemat, TypeScripti, Tailwind CSS-i ja kohapeal majutatud Geisti fonte. Astro loob staatilise HTML-i; JavaScript toetab menüüsid ja rastergraafikat. Cloudflare Pages avaldab veebilehe ning serveripoolne funktsioon töötleb kontaktipäringuid.",
+    "technologyPrinciple": "Tehnoloogia eesmärk on selged lehed, kasutatavad teekonnad ja hooldatav süsteem. Kirjeldame igal veebilehel tegelikult kasutatud tööriistu.",
+    "processTitle": "Ideest veebilehe igapäevase haldamiseni.",
+    "processIntro": "Ühendame äriidee, kasutuskogemuse ja tööks vajalikud süsteemid. Esimene väljalase on edasise arengu algus.",
+    "steps": [
+      [
+        "Määratleme eesmärgi",
+        "Valime sihtrühma, lahendatava ülesande ja pakkumise ning hindame ärimudeli toimivust."
+      ],
+      [
+        "Planeerime kogemuse",
+        "Kaardistame sisu, navigeerimise ja põhiteekonnad – poes toote leidmisest ostuni."
+      ],
+      [
+        "Valime aluse",
+        "Valime toote ja selle halduse jaoks sobiva platvormi ning täiendame toimivaid tööriistu vajaduse järgi."
+      ],
+      [
+        "Ehitame ja kontrollime",
+        "Ühendame kujunduse, sisu ja funktsioonid. Kontrollime mobiilivaateid, navigeerimist, ligipääsetavust ja põhitegevusi."
+      ],
+      [
+        "Avaldame ja haldame",
+        "Hooldame sisu ja tarkvara, lahendame probleeme ning kasutame tagasisidet järgmisteks parandusteks."
+      ]
+    ],
+    "aboutTitle": "Ettevõte veebilehtede taga.",
+    "aboutIntro": "FXN Europe OÜ on Eesti ettevõte, mis loob ja haldab veebilehti. Vastutame idee, teostuse ning nende toetatud äride igapäevase toimimise eest.",
+    "storyTitle": "Vastutus kogu teekonna eest.",
+    "story": [
+      "Veebileht on rohkem kui valmis kujundus. Seal leitakse teavet, valitakse tooteid ja tehakse vajalikke toiminguid. Sama palju tähelepanu vajab ettevõte selle taga.",
+      "Ühendame need ülesanded: otsustame, mida luua, valime tehnoloogia, kujundame kogemuse ja arendame lehte edasi.",
+      "See veebileht tutvustab meie tööd. Siit leiab meie portfelli, selle eesmärgid ja kasutatud tööriistad."
+    ],
+    "facts": [
+      ["Eesti", "Ettevõtte asukoht"],
+      ["OÜ", "Osaühing"],
+      ["17514051", "Registrikood"],
+      ["EE102989757", "KMKR number"]
+    ],
+    "locationTitle": "Asume Tallinnas. Loome veebi jaoks.",
+    "locationBody": "FXN Europe OÜ on registreeritud Eestis. Igal veebilehel on oma sihtrühm ja turg; Fur Fun Shop teenindab Ühendkuningriigi ostjaid. Ettevõttega saab ühendust allolevatel kontaktidel.",
+    "contactTitle": "Võta ühendust veebilehe taga oleva ettevõttega.",
+    "contactIntro": "Kirjuta FXN Europe’ile meie veebilehtede, ettevõtte või võimaliku koostöö kohta. Tellimuse puhul lisa veebilehe nimi ja tellimuse number.",
+    "want": "Soovin",
+    "topics": [
+      "küsida veebilehe kohta",
+      "arutada koostööd",
+      "saada abi tellimusega",
+      "teatada veebilehe probleemist",
+      "küsida ettevõtte kohta"
+    ],
+    "name": "Nimi",
+    "email": "E-post",
+    "organisation": "Ettevõte (valikuline)",
+    "website": "Veebileht või tellimuse number (valikuline)",
+    "message": "Sõnum",
+    "compose": "Saada sõnum",
+    "emailNote": "Sõnum saadetakse aadressile contact@fxneurope.eu. Vastame sinu antud e-posti aadressile.",
+    "emailStatus": "Aitäh! Sinu sõnum on saadetud FXN Europe’ile.",
+    "direct": "Muud kontaktivõimalused",
+    "general": "Ettevõtte ja veebilehtede küsimused",
+    "orders": "Tellimused ja klienditugi",
+    "orderNote": "Kasuta selle veebilehe kontaktandmeid, kust tellimuse tegid.",
+    "shopSupport": "Fur Fun Shopi kontakt",
+    "texts": "Tekstisõnumid",
+    "office": "Registrijärgne aadress",
+    "companyDetails": "Ettevõtte andmed",
+    "footer": "FXN Europe OÜ loob ja haldab digitaalseid ettevõtteid. Tutvu meie veebilehtede ja nende taga oleva tehnoloogia ning arendusega.",
+    "faqTitle": "Küsimused FXN Europe’i kohta.",
+    "faqIntro": "Teave ettevõtte, selle veebilehtede ja portfelli kohta.",
+    "faq": [
+      [
+        "Mida FXN Europe teeb?",
+        "Loome ja haldame oma veebilehti ning digitaalseid ettevõtteid. Portfell tutvustab nende eesmärke ja tehnoloogiat."
+      ],
+      [
+        "Millised veebilehed on portfellis?",
+        "Fur Fun Shop on esitatud kirjelduse, lingi ja kinnitatud tehnoloogiatega. Lisame teisi projekte pärast andmete kinnitamist."
+      ],
+      [
+        "Kas kõik lehed kasutavad sama tehnoloogiat?",
+        "Ei. Fur Fun Shop kasutab WordPressi, WooCommerce’i ja Elementorit. See uus ettevõttelehe kujundus kasutab Astrot ja Synthi."
+      ],
+      [
+        "Kust saan tellimusega abi?",
+        "Kasuta tellimuse veebilehe klienditoe kontakte. Ära saada maksekaardi andmeid."
+      ],
+      [
+        "Kas see on veebiagentuuri leht?",
+        "Keskendume FXN Europe’i loodud ja hallatavatele ettevõtetele. Ettevõtte küsimused ja koostöösoovid saab saata kontaktilehe kaudu."
+      ]
+    ],
+    "more": "Vaata portfelli",
+    "legal": "Õiguslik teave",
+    "sitemap": "Sisukaart",
+    "sending": "Saatmine…",
+    "sendError": "Saatmist ei saanud kinnitada. Enne uuesti proovimist kirjuta aadressile contact@fxneurope.eu."
+  },
+  "es": {
+    "nav": [
+      "Inicio",
+      "Nuestros sitios",
+      "Tecnología",
+      "Cómo construimos",
+      "Quiénes somos",
+      "Contacto"
+    ],
+    "homeTitle": "Creamos sitios web y desarrollamos los negocios que hay detrás.",
+    "homeIntro": "FXN Europe OÜ crea y opera sus propios negocios digitales. Descubre nuestros sitios, la tecnología que utilizan y el trabajo que convierte cada idea en un negocio en marcha.",
+    "portfolioTitle": "Los sitios web que creamos y operamos.",
+    "portfolioIntro": "Cada sitio tiene su público y su propósito. Este portafolio muestra qué ofrece cada uno y cómo está construido.",
+    "projectHeading": "Nuestros sitios web",
+    "projectType": "Comercio electrónico · Mascotas",
+    "live": "Tienda abierta",
+    "projectDescription": "Fur Fun Shop es una tienda para la vida diaria con mascotas: juguetes, camas, comederos, correas y productos de cuidado para perros y gatos, además de una selección para aves y peces.",
+    "projectPurpose": "La tienda atiende a compradores del Reino Unido. Las categorías, la información de producto y el carrito facilitan el recorrido hasta el pedido.",
+    "visit": "Visitar sitio",
+    "caseStudy": "Cómo está construido",
+    "stack": "Tecnología utilizada",
+    "implementation": [
+      [
+        "WordPress",
+        "Proporciona la base de contenido para productos, categorías y páginas de empresa y atención al cliente."
+      ],
+      ["WooCommerce", "Añade productos, variaciones, carrito e interfaz de compra."],
+      [
+        "Elementor",
+        "Permite trabajar la distribución de las páginas y su presentación visual dentro de WordPress."
+      ]
+    ],
+    "operationTitle": "El sitio web es solo el principio.",
+    "operationBody": "Construir y operar van de la mano. Un negocio digital necesita contenido útil, recorridos claros, software mantenido y atención a sus usuarios. Nuestro portafolio también muestra ese trabajo.",
+    "technologyTitle": "La tecnología detrás de nuestros sitios.",
+    "technologyIntro": "Elegimos herramientas según la tarea. Un catálogo con proceso de compra necesita una base distinta de una web corporativa ligera.",
+    "previewHeading": "Este sitio de portafolio",
+    "previewBody": "El sitio de FXN Europe utiliza Astro, el tema Synth, TypeScript, Tailwind CSS y fuentes Geist alojadas localmente. Astro genera HTML estático; JavaScript permite interacciones como los menús y los gráficos tramados. Cloudflare Pages sirve el sitio y una función del servidor procesa las consultas de contacto.",
+    "technologyPrinciple": "La tecnología debe facilitar páginas claras, recorridos útiles y un sistema mantenible. Documentamos las herramientas utilizadas en cada sitio.",
+    "processTitle": "De una idea a un sitio que operamos.",
+    "processIntro": "Conectamos la idea de negocio, la experiencia y los sistemas que la sostienen. El primer lanzamiento es un punto de partida para mejorar.",
+    "steps": [
+      [
+        "Definir el propósito",
+        "Identificar el público, la tarea y la propuesta, y estudiar cómo sostener el negocio."
+      ],
+      [
+        "Planificar la experiencia",
+        "Organizar contenido, navegación y recorridos esenciales: en una tienda, desde encontrar un producto hasta comprarlo."
+      ],
+      [
+        "Elegir la base",
+        "Seleccionar una plataforma adecuada y adaptar herramientas consolidadas cuando sea necesario."
+      ],
+      [
+        "Construir y comprobar",
+        "Unir diseño, contenido y funciones. Revisar móvil, navegación, accesibilidad y tareas principales."
+      ],
+      [
+        "Publicar y operar",
+        "Mantener contenido y software, resolver problemas y usar la experiencia para decidir las siguientes mejoras."
+      ]
+    ],
+    "aboutTitle": "El negocio detrás de los sitios web.",
+    "aboutIntro": "FXN Europe OÜ es una empresa de Estonia que crea y opera sitios web. Nuestro trabajo abarca la idea, la construcción y la responsabilidad de mantener los negocios que apoyan.",
+    "storyTitle": "Responsables de todo el recorrido.",
+    "story": [
+      "Un sitio web es más que un diseño terminado. Las personas encuentran información, eligen productos y realizan tareas. El negocio detrás necesita la misma atención.",
+      "Reunimos esas responsabilidades: decidir qué crear, elegir la tecnología, diseñar la experiencia y cuidar el sitio a medida que evoluciona.",
+      "Este sitio muestra ese trabajo: nuestro portafolio, el propósito de cada proyecto y las herramientas utilizadas."
+    ],
+    "facts": [
+      ["Estonia", "Sede de la empresa"],
+      ["OÜ", "Sociedad de responsabilidad limitada"],
+      ["17514051", "Número de registro"],
+      ["EE102989757", "Número de IVA"]
+    ],
+    "locationTitle": "Desde Tallin. Para la web.",
+    "locationBody": "FXN Europe OÜ está registrada en Estonia. Cada sitio se dirige a su propio mercado; Fur Fun Shop atiende a compradores del Reino Unido. Puedes contactar con la empresa mediante los datos indicados abajo.",
+    "contactTitle": "Habla con la empresa detrás del sitio.",
+    "contactIntro": "Contacta con FXN Europe sobre nuestros sitios, información de empresa o una posible colaboración. Para consultas sobre pedidos, incluye el sitio y la referencia del pedido.",
+    "want": "Me gustaría",
+    "topics": [
+      "preguntar por un sitio",
+      "hablar de una colaboración",
+      "recibir ayuda con un pedido",
+      "informar de un problema",
+      "hacer una consulta sobre la empresa"
+    ],
+    "name": "Nombre",
+    "email": "Correo electrónico",
+    "organisation": "Empresa (opcional)",
+    "website": "Sitio o referencia de pedido (opcional)",
+    "message": "Mensaje",
+    "compose": "Enviar mensaje",
+    "emailNote": "El mensaje se enviará a contact@fxneurope.eu. Responderemos al correo que indiques.",
+    "emailStatus": "Gracias. Tu mensaje se ha enviado a FXN Europe.",
+    "direct": "Otras formas de contacto",
+    "general": "Consultas sobre la empresa y sus sitios",
+    "orders": "Pedidos y atención al cliente",
+    "orderNote": "Utiliza los datos de contacto del sitio donde hiciste el pedido.",
+    "shopSupport": "Contactar con Fur Fun Shop",
+    "texts": "Mensajes de texto",
+    "office": "Domicilio social",
+    "companyDetails": "Datos de la empresa",
+    "footer": "FXN Europe OÜ crea y opera negocios digitales. Descubre nuestros sitios y la tecnología y el trabajo que hay detrás.",
+    "faqTitle": "Preguntas sobre FXN Europe.",
+    "faqIntro": "Información sobre la empresa, sus sitios y este portafolio.",
+    "faq": [
+      [
+        "¿Qué hace FXN Europe?",
+        "Creamos y operamos nuestros propios sitios y negocios digitales. Este portafolio explica su propósito y su tecnología."
+      ],
+      [
+        "¿Qué sitios puedo explorar?",
+        "Fur Fun Shop incluye descripción, enlace y tecnologías verificadas. Añadiremos más proyectos cuando se confirmen sus datos."
+      ],
+      [
+        "¿Todos usan la misma tecnología?",
+        "No. Fur Fun Shop utiliza WordPress, WooCommerce y Elementor. Este rediseño corporativo utiliza Astro y Synth."
+      ],
+      [
+        "¿Dónde pido ayuda con un pedido?",
+        "Contacta con el soporte del sitio donde compraste. No envíes datos de tu tarjeta."
+      ],
+      [
+        "¿Es una agencia de diseño web?",
+        "El foco está en los negocios que FXN Europe crea y opera. Puedes enviar consultas de empresa o colaboración desde Contacto."
+      ]
+    ],
+    "more": "Explorar portafolio",
+    "legal": "Legal",
+    "sitemap": "Mapa del sitio",
+    "sending": "Enviando…",
+    "sendError": "No pudimos confirmar el envío. Escribe a contact@fxneurope.eu antes de volver a intentarlo."
+  },
+  "fr": {
+    "nav": ["Accueil", "Nos sites", "Technologie", "Notre méthode", "À propos", "Contact"],
+    "homeTitle": "Nous créons des sites et développons les entreprises qui les font vivre.",
+    "homeIntro": "FXN Europe OÜ crée et exploite ses propres activités numériques. Découvrez nos sites, leurs technologies et le travail qui transforme une idée en une entreprise en activité.",
+    "portfolioTitle": "Les sites que nous créons et exploitons.",
+    "portfolioIntro": "Chaque site a son public et sa raison d’être. Ce portfolio présente son rôle et la manière dont il est construit.",
+    "projectHeading": "Nos sites web",
+    "projectType": "Commerce en ligne · Animaux",
+    "live": "Boutique en ligne",
+    "projectDescription": "Fur Fun Shop propose des produits pour la vie quotidienne avec les animaux : jouets, couchages, gamelles, laisses et soins pour chiens et chats, ainsi qu’une sélection pour oiseaux et poissons.",
+    "projectPurpose": "La boutique s’adresse aux acheteurs du Royaume-Uni. Catégories, fiches produits et panier accompagnent le visiteur jusqu’à la commande.",
+    "visit": "Visiter le site",
+    "caseStudy": "Comment il est construit",
+    "stack": "Technologies utilisées",
+    "implementation": [
+      [
+        "WordPress",
+        "Fournit la base de contenu des produits, catégories et pages d’entreprise et de service client."
+      ],
+      ["WooCommerce", "Ajoute les produits, variantes, le panier et l’interface de commande."],
+      ["Elementor", "Permet la mise en page et la présentation visuelle au sein de WordPress."]
+    ],
+    "operationTitle": "Le site n’est que le début.",
+    "operationBody": "Création et exploitation vont ensemble. Une activité numérique demande du contenu utile, des parcours clairs, des logiciels entretenus et de l’attention aux utilisateurs. Notre portfolio montre aussi ce travail.",
+    "technologyTitle": "La technologie derrière nos sites.",
+    "technologyIntro": "Nous choisissons les outils selon le besoin. Un catalogue avec commande demande d’autres fondations qu’un site d’entreprise léger.",
+    "previewHeading": "Ce site de portfolio",
+    "previewBody": "Le site FXN Europe utilise Astro, le thème Synth, TypeScript, Tailwind CSS et les polices Geist hébergées localement. Astro génère du HTML statique ; JavaScript anime les menus et les illustrations tramées. Cloudflare Pages diffuse le site, avec une fonction serveur pour les demandes de contact.",
+    "technologyPrinciple": "La technologie doit permettre des pages claires, des parcours utiles et un site facile à entretenir. Nous documentons les outils réellement utilisés sur chaque site.",
+    "processTitle": "De l’idée au site que nous exploitons.",
+    "processIntro": "Nous relions l’idée d’entreprise, l’expérience utilisateur et les systèmes nécessaires à son fonctionnement. Le premier lancement est le début des améliorations.",
+    "steps": [
+      [
+        "Définir le rôle",
+        "Identifier le public, la tâche et la proposition, puis examiner la viabilité de l’activité."
+      ],
+      [
+        "Préparer l’expérience",
+        "Organiser les contenus, la navigation et les parcours essentiels, de la recherche d’un produit à l’achat."
+      ],
+      [
+        "Choisir les fondations",
+        "Choisir une plateforme adaptée au produit et à son exploitation, puis compléter les outils éprouvés si nécessaire."
+      ],
+      [
+        "Construire et vérifier",
+        "Réunir design, contenu et fonctionnalités. Vérifier les vues mobiles, la navigation, l’accessibilité et les parcours principaux."
+      ],
+      [
+        "Lancer et exploiter",
+        "Entretenir contenus et logiciels, résoudre les problèmes et utiliser les retours pour guider les améliorations."
+      ]
+    ],
+    "aboutTitle": "L’entreprise derrière les sites.",
+    "aboutIntro": "FXN Europe OÜ est une entreprise estonienne qui crée et exploite des sites web. Nous prenons en charge l’idée, la réalisation et la responsabilité des activités qu’ils soutiennent.",
+    "storyTitle": "Responsables de tout le parcours.",
+    "story": [
+      "Un site est plus qu’un design terminé. On y trouve des informations, choisit des produits ou accomplit une tâche. L’entreprise derrière mérite autant d’attention.",
+      "Nous réunissons ces responsabilités : décider quoi créer, choisir les technologies, concevoir l’expérience et faire évoluer le site.",
+      "Ce site présente notre travail : le portfolio, le rôle de chaque projet et les outils utilisés."
+    ],
+    "facts": [
+      ["Estonie", "Siège de l’entreprise"],
+      ["OÜ", "Société à responsabilité limitée"],
+      ["17514051", "Numéro d’immatriculation"],
+      ["EE102989757", "Numéro de TVA"]
+    ],
+    "locationTitle": "À Tallinn. Pour le web.",
+    "locationBody": "FXN Europe OÜ est immatriculée en Estonie. Chaque site vise son propre marché ; Fur Fun Shop s’adresse aux acheteurs du Royaume-Uni. Les coordonnées ci-dessous permettent de contacter l’entreprise.",
+    "contactTitle": "Parlons de l’entreprise derrière le site.",
+    "contactIntro": "Contactez FXN Europe pour nos sites, des informations sur l’entreprise ou une collaboration. Pour une commande, précisez le site et la référence.",
+    "want": "Je souhaite",
+    "topics": [
+      "poser une question sur un site",
+      "parler d’une collaboration",
+      "obtenir de l’aide pour une commande",
+      "signaler un problème",
+      "poser une question sur l’entreprise"
+    ],
+    "name": "Nom",
+    "email": "E-mail",
+    "organisation": "Entreprise (facultatif)",
+    "website": "Site ou référence de commande (facultatif)",
+    "message": "Message",
+    "compose": "Envoyer le message",
+    "emailNote": "Votre message sera envoyé à contact@fxneurope.eu. Nous répondrons à l’adresse indiquée.",
+    "emailStatus": "Merci. Votre message a été envoyé à FXN Europe.",
+    "direct": "Autres moyens de nous joindre",
+    "general": "Questions sur l’entreprise et les sites",
+    "orders": "Commandes et service client",
+    "orderNote": "Utilisez les coordonnées du site où vous avez passé commande.",
+    "shopSupport": "Contacter Fur Fun Shop",
+    "texts": "Messages texte",
+    "office": "Siège social",
+    "companyDetails": "Informations sur l’entreprise",
+    "footer": "FXN Europe OÜ crée et exploite des activités numériques. Découvrez nos sites et la technologie et le travail qui les font vivre.",
+    "faqTitle": "Questions sur FXN Europe.",
+    "faqIntro": "Quelques précisions sur l’entreprise, ses sites et ce portfolio.",
+    "faq": [
+      [
+        "Que fait FXN Europe ?",
+        "Nous créons et exploitons nos propres sites et activités numériques. Ce portfolio présente leur rôle et leurs technologies."
+      ],
+      [
+        "Quels sites peut-on découvrir ?",
+        "Fur Fun Shop est présenté avec une description, un lien et ses technologies vérifiées. D’autres projets seront ajoutés après confirmation de leurs informations."
+      ],
+      [
+        "Tous les sites utilisent-ils les mêmes outils ?",
+        "Non. Fur Fun Shop utilise WordPress, WooCommerce et Elementor. Cette nouvelle version du site d’entreprise utilise Astro et Synth."
+      ],
+      [
+        "Comment obtenir de l’aide pour une commande ?",
+        "Contactez le service client du site où vous avez commandé. N’envoyez jamais les données de votre carte bancaire."
+      ],
+      [
+        "Est-ce un site d’agence web ?",
+        "Ce site présente les activités créées et exploitées par FXN Europe. La page Contact permet les demandes d’entreprise et de collaboration."
+      ]
+    ],
+    "more": "Explorer le portfolio",
+    "legal": "Informations légales",
+    "sitemap": "Plan du site",
+    "sending": "Envoi…",
+    "sendError": "L’envoi n’a pas pu être confirmé. Écrivez à contact@fxneurope.eu avant de réessayer."
+  }
+}

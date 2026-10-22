@@ -1,0 +1,252 @@
+---
+import Dither from "@/components/ui/Dither.astro";
+import Icon from "@/components/ui/Icon.astro";
+import TourGrade from "@/components/home/TourGrade.astro";
+import TourRun from "@/components/home/TourRun.astro";
+import { tour } from "@/config/home";
+---
+
+<section id={tour.id} class="py-20 lg:py-32" data-tour>
+  <div class="shell">
+    <div class="grid gap-6 lg:grid-cols-12 lg:items-end">
+      <h2 class="reveal text-display-lg lg:col-span-7">{tour.title}</h2>
+      <p class="reveal text-lead text-muted lg:col-span-5">{tour.lead}</p>
+    </div>
+
+    <div class="mt-14 grid grid-cols-3 gap-2 lg:mt-20" role="tablist" aria-label="Product tour" data-tablist hidden>
+      {
+        tour.tabs.map((tab, index) => (
+          <button
+            type="button"
+            role="tab"
+            id={`tab-${tab.id}`}
+            aria-controls={tab.id}
+            aria-selected={index === 0 ? "true" : "false"}
+            tabindex={index === 0 ? 0 : -1}
+            class="tour-tab relative flex items-center gap-3 bg-sunken px-4 pt-4 pb-5 text-left text-lg tracking-tight sm:px-6 sm:text-2xl"
+            data-tab={tab.id}
+          >
+            <span class="tour-num hidden size-7 place-items-center font-mono text-xs sm:grid">{index + 1}</span>
+            {tab.label}
+            <span class="tour-progress absolute inset-x-0 bottom-0 h-0.5 origin-left bg-accent" aria-hidden="true" />
+          </button>
+        ))
+      }
+    </div>
+
+    <div class="mt-2">
+      {
+        tour.tabs.map((tab, index) => (
+          <div
+            id={tab.id}
+            role="tabpanel"
+            aria-labelledby={`tab-${tab.id}`}
+            tabindex="0"
+            class="tour-panel grid grid-cols-1 lg:grid-cols-12"
+            data-panel={tab.id}
+          >
+            <div class="flex flex-col bg-surface p-6 sm:p-10 lg:col-span-5 lg:p-12">
+              <h3 class="text-title lg:mt-auto">{tab.title}</h3>
+              <p class="mt-4 text-muted">{tab.body}</p>
+              <ul class="mt-8 grid gap-3">
+                {tab.points.map((point) => (
+                  <li class="flex gap-3">
+                    <Icon name="check" class="mt-1 size-4 text-accent-ink" stroke={2} />
+                    <span>{point}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div class="relative flex min-h-[26rem] items-center justify-center overflow-hidden p-6 sm:p-10 lg:col-span-7 lg:p-14">
+              <Dither scene="smoke" tone="smoke" seed={index * 5 + 1} speed={0.7} class="absolute! inset-0" />
+              {tab.call && tab.channels && <TourRun call={tab.call} channels={tab.channels} />}
+              {tab.trend && tab.threshold && tab.conversations && tab.rubric && (
+                <TourGrade
+                  trend={tab.trend}
+                  threshold={tab.threshold}
+                  conversations={tab.conversations}
+                  rubric={tab.rubric}
+                />
+              )}
+              {tab.cards && (
+              <ul class="relative grid w-full min-w-0 max-w-lg grid-cols-1 gap-3">
+                {tab.cards.map((card, i) => (
+                  <li class="tour-card flex items-center gap-4 bg-page/95 p-4 sm:p-5" style={`--i:${i}`}>
+                    <span class="grid size-10 shrink-0 place-items-center bg-ink text-page">
+                      <Icon name={card.icon} class="size-[1.15rem]" />
+                    </span>
+                    <span class="min-w-0 flex-1 leading-tight">
+                      <span class="block text-[0.95rem] font-medium">{card.title}</span>
+                      <span class="mt-1 block truncate text-sm text-muted">{card.detail}</span>
+                    </span>
+                    {card.status === "done" && (
+                      <span class="grid size-6 place-items-center bg-accent/15 text-accent-ink" title="Done">
+                        <Icon name="check" class="size-3.5" stroke={2.25} />
+                      </span>
+                    )}
+                    {card.status === "pending" && <span class="size-4 border-2 border-accent" title="In progress" />}
+                  </li>
+                ))}
+              </ul>
+              )}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .tour-tab {
+    color: var(--muted);
+    transition:
+      color 0.3s,
+      background-color 0.3s;
+  }
+
+  .tour-num {
+    box-shadow: inset 0 0 0 1px var(--line);
+  }
+
+  .tour-tab:hover,
+  .tour-tab[aria-selected="true"] {
+    color: var(--ink);
+  }
+
+  .tour-tab[aria-selected="true"] {
+    background: var(--surface);
+  }
+
+  .tour-tab[aria-selected="true"] .tour-num {
+    background: var(--ink);
+    color: var(--page);
+    box-shadow: none;
+  }
+
+  .tour-progress {
+    transform: scaleX(0);
+  }
+
+  .tour-tab[aria-selected="true"] .tour-progress {
+    transform: scaleX(1);
+  }
+
+  [data-auto] .tour-tab[aria-selected="true"] .tour-progress {
+    animation: tour-progress var(--tour-ms, 9000ms) linear both;
+  }
+
+  [data-paused] .tour-tab[aria-selected="true"] .tour-progress {
+    animation-play-state: paused;
+  }
+
+  @keyframes tour-progress {
+    from {
+      transform: scaleX(0);
+    }
+  }
+
+  .tour-panel + .tour-panel {
+    margin-top: 0.5rem;
+  }
+
+  [data-enhanced] .tour-panel {
+    margin-top: 0;
+  }
+
+  /* Global so the Run and Grade panels, which are child components, share it. */
+  :global(.tour-card) {
+    animation: card-in 0.7s var(--ease-out-expo) both;
+    animation-delay: calc(var(--i) * 110ms + 100ms);
+  }
+
+  @keyframes card-in {
+    from {
+      opacity: 0;
+      transform: translateY(0.75rem);
+    }
+  }
+</style>
+
+<script>
+  const root = document.querySelector<HTMLElement>("[data-tour]");
+
+  if (root) {
+    const tablist = root.querySelector<HTMLElement>("[data-tablist]");
+    const tabs = [...root.querySelectorAll<HTMLButtonElement>("[data-tab]")];
+    const panels = [...root.querySelectorAll<HTMLElement>("[data-panel]")];
+    const DURATION = 9000;
+    let index = 0;
+    let timer = 0;
+    let auto = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let visible = false;
+
+    tablist?.removeAttribute("hidden");
+    root.setAttribute("data-enhanced", "");
+
+    const schedule = () => {
+      window.clearTimeout(timer);
+      root.toggleAttribute("data-auto", auto);
+      if (!auto || !visible) return;
+      root.style.setProperty("--tour-ms", `${DURATION}ms`);
+      timer = window.setTimeout(() => select(index + 1), DURATION);
+    };
+
+    const select = (next: number, focus = false) => {
+      index = (next + tabs.length) % tabs.length;
+      tabs.forEach((tab, i) => {
+        tab.setAttribute("aria-selected", String(i === index));
+        tab.tabIndex = i === index ? 0 : -1;
+      });
+      panels.forEach((panel, i) => panel.toggleAttribute("hidden", i !== index));
+      if (focus) tabs[index].focus();
+      schedule();
+    };
+
+    const stopAuto = () => {
+      auto = false;
+      schedule();
+    };
+
+    tabs.forEach((tab, i) => {
+      tab.addEventListener("click", () => {
+        stopAuto();
+        select(i);
+      });
+      tab.addEventListener("keydown", (event) => {
+        const moves: Record<string, number> = { ArrowRight: i + 1, ArrowLeft: i - 1, Home: 0, End: tabs.length - 1 };
+        if (event.key in moves) {
+          event.preventDefault();
+          stopAuto();
+          select(moves[event.key], true);
+        }
+      });
+    });
+
+    root.addEventListener("focusin", (event) => {
+      if (panels.some((panel) => panel.contains(event.target as Node))) stopAuto();
+    });
+
+    new IntersectionObserver(
+      ([entry]) => {
+        visible = entry.isIntersecting;
+        root.toggleAttribute("data-paused", !visible);
+        if (visible) schedule();
+        else window.clearTimeout(timer);
+      },
+      { threshold: 0.35 },
+    ).observe(root);
+
+    const fromHash = () => {
+      const target = tabs.findIndex((tab) => `#${tab.dataset.tab}` === window.location.hash);
+      if (target === -1) return;
+      stopAuto();
+      select(target);
+      requestAnimationFrame(() => (tablist ?? root).scrollIntoView({ block: "start" }));
+    };
+
+    select(0);
+    fromHash();
+    window.addEventListener("hashchange", fromHash);
+  }
+</script>

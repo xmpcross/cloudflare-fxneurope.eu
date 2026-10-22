@@ -1,0 +1,15 @@
+---
+import { projects } from '@/config/portfolio';
+import translations from '@/data/portfolio-copy.json';
+interface Props { lang: string; detailed?: boolean; }
+const {lang, detailed=false}=Astro.props;
+const c=translations[lang as keyof typeof translations] ?? translations.en;
+---
+<section class="shell portfolio-section" aria-labelledby="portfolio-heading">
+  <div class="portfolio-heading"><h2 id="portfolio-heading">{c.projectHeading}</h2><span>FXN Europe OÜ</span></div>
+  {projects.map(project => <article class="portfolio-project" id={project.id}>
+    <a class="portfolio-picture" href={project.url} aria-label={`${c.visit}: ${project.name}`}><img src={project.image} width="1440" height="1000" alt={`${project.name} — ${c.projectType}`} loading="eager" /><span class="project-visit">furfunshop.com ↗</span></a>
+    <div class="portfolio-description"><span class="project-category">{c.projectType}</span><h3>{project.name}</h3><span class="project-live"><span aria-hidden="true"></span>{c.live}</span><p>{c.projectDescription}</p><p>{c.projectPurpose}</p><h4>{c.stack}</h4><ul class="technology-tags">{project.technologies.map(t=><li>{t}</li>)}</ul><div class="hero-actions"><a href={project.url} class="button">{c.visit} ↗</a>{!detailed && <a href={`/${lang}/portfolio/#${project.id}`} class="text-link">{c.caseStudy} ↗</a>}</div></div>
+    {detailed && <div class="project-build"><h3>{c.caseStudy}</h3><div class="technology-grid">{c.implementation.map(([name,body])=><div><h4>{name}</h4><p>{body}</p></div>)}</div></div>}
+  </article>)}
+</section>

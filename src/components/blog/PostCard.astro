@@ -1,0 +1,79 @@
+---
+import { Image } from "astro:assets";
+import Icon from "@/components/ui/Icon.astro";
+import { formatDate, postHref, type Post } from "@/lib/posts";
+
+interface Props {
+  post: Post;
+  variant?: "card" | "lead";
+  headingLevel?: "h2" | "h3";
+  eager?: boolean;
+}
+
+const { post, variant = "card", headingLevel = "h3", eager = false } = Astro.props;
+const { title, description, cover, coverAlt, topic, date, author } = post.data;
+const Heading = headingLevel;
+const lead = variant === "lead";
+---
+
+<article
+  class:list={[
+    "post-card group relative flex flex-col",
+    lead && "gap-6 lg:grid lg:grid-cols-12 lg:items-center lg:gap-10",
+  ]}
+>
+  <div class:list={["overflow-hidden bg-sunken", lead ? "aspect-[16/10] lg:col-span-7" : "aspect-[16/10]"]}>
+    <Image
+      src={cover}
+      alt={coverAlt}
+      widths={lead ? [640, 960, 1400] : [480, 720, 960]}
+      sizes={lead ? "(min-width: 1024px) 58vw, 100vw" : "(min-width: 1024px) 30vw, (min-width: 640px) 50vw, 100vw"}
+      loading={eager ? "eager" : "lazy"}
+      fetchpriority={eager ? "high" : undefined}
+      class="post-cover size-full object-cover"
+    />
+  </div>
+  <div class:list={[lead ? "lg:col-span-5" : "pt-5"]}>
+    <p class="mono-meta flex flex-wrap items-center gap-x-3">
+      <span class="text-accent-ink">{topic}</span>
+      <span class="size-1.5 bg-accent" aria-hidden="true" />
+      <time datetime={date.toISOString()}>{formatDate(date)}</time>
+    </p>
+    <Heading
+      class:list={[
+        "mt-3 tracking-tight transition-colors group-hover:text-accent-ink",
+        lead ? "text-display-md" : "text-xl leading-snug font-medium",
+      ]}
+    >
+      <a href={postHref(post)} class="after:absolute after:inset-0">{title}</a>
+    </Heading>
+    <p class:list={["mt-3 text-muted", lead ? "text-lead" : "line-clamp-3"]}>{description}</p>
+    {
+      lead && (
+        <p class="mt-6 flex items-center gap-2 text-sm">
+          By {author}
+          <Icon name="arrow-up-right" class="pixel-arrow text-accent-ink" />
+        </p>
+      )
+    }
+  </div>
+</article>
+
+<style>
+  .post-cover {
+    transition: transform 0.9s var(--ease-out-expo);
+  }
+
+  .post-card:hover .post-cover {
+    transform: scale(1.04);
+  }
+
+  .post-card:has(a:focus-visible) {
+    outline: 2px solid var(--accent);
+    outline-offset: 6px;
+  }
+
+  .post-card a:focus-visible {
+    outline: none;
+  }
+</style>

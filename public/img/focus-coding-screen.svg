@@ -23,7 +23,7 @@
     </style>
   </defs>
   <rect x="26" y="26" width="668" height="508" rx="42" fill="url(#stage)"/>
-    
+
   <g filter="url(#shadow)">
     <rect x="58" y="62" width="604" height="390" rx="30" fill="#11192f"/>
     <path d="M58 92c0-16.6 13.4-30 30-30h544c16.6 0 30 13.4 30 30v48H58V92z" fill="#0a0e1a"/>

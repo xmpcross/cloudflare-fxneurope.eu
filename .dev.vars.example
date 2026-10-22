@@ -1,6 +1,4 @@
 SMTP_HOST=smtp.gmail.com
 SMTP_PORT=465
-SMTP_USER=
+SMTP_USER=kritin@fxnholdings.com
 SMTP_PASS=
-CONTACT_TO=contact@fxneurope.eu
-MAIL_FROM=
