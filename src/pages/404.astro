@@ -1,0 +1,21 @@
+---
+import Dither from "@/components/ui/Dither.astro";
+import Icon from "@/components/ui/Icon.astro";
+import PixelWord from "@/components/ui/PixelWord.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Page not found" description="The page you were looking for does not exist or has moved." noindex>
+  <section class="relative overflow-hidden" data-dither-host>
+    <Dither scene="glow" tone="haze" seed={1} speed={0.6} interactive class="absolute! inset-0" />
+    <div class="shell relative grid min-h-[calc(100svh-var(--header-h))] content-center py-20">
+      <PixelWord text="404" label="404" class="max-w-md text-ink" />
+      <h1 class="mt-12 text-display-md">This page took a wrong turn</h1>
+      <p class="mt-4 max-w-md text-lead text-muted">It may have moved, or the link was mistyped. Try the homepage or the blog.</p>
+      <div class="mt-10 flex flex-wrap gap-3">
+        <a href="/" class="btn btn-primary"><span>Back home</span><Icon name="arrow-up-right" class="pixel-arrow" /></a>
+        <a href="/blog/" class="btn btn-ghost bg-page"><span>Read the blog</span></a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

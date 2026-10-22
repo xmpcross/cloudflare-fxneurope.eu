@@ -1,0 +1,78 @@
+---
+import type { BrandName } from "@/config/home";
+
+const files = import.meta.glob<string>("/src/assets/logos/*.svg", {
+  query: "?raw",
+  import: "default",
+  eager: true,
+});
+
+interface Props {
+  name: BrandName;
+  /** Visual size. Wide wordmarks are drawn shorter so every logo carries similar weight. */
+  area?: number;
+}
+
+const { name, area = 2700 } = Astro.props;
+const raw = files[`/src/assets/logos/${name}.svg`];
+
+const luminance = (hex: string) => {
+  const full = hex.length === 4 ? hex.replace(/[0-9a-f]/gi, "$&$&").slice(1) : hex.slice(1);
+  const [r, g, b] = [0, 2, 4].map((i) => parseInt(full.slice(i, i + 2), 16) / 255);
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+};
+
+/* One colour for every mark: dark and coloured fills become the ink, near-white
+   fills become the wall's background so knockouts (Shopify's S) stay cut out.
+   Class names and ids are namespaced, since several SVGs share names like .st0. */
+const svg = raw
+  .replace(/<\?xml[\s\S]*?\?>|<!--[\s\S]*?-->|<metadata[\s\S]*?<\/metadata>|<title[\s\S]*?<\/title>/g, "")
+  .replace(/#[0-9a-f]{6}\b|#[0-9a-f]{3}\b|\bwhite\b|\bblack\b/gi, (color) => {
+    const hex = color.toLowerCase() === "white" ? "#fff" : color.toLowerCase() === "black" ? "#000" : color;
+    return luminance(hex) > 0.85 ? "var(--brand-knockout)" : "currentColor";
+  })
+  .replace(/class="([^"]*)"/g, (_, names: string) => `class="${names.split(/\s+/).map((n) => `${name}-${n}`).join(" ")}"`)
+  .replace(/\.([a-zA-Z][\w-]*)(?=\s*[{,])/g, `.${name}-$1`)
+  .replace(/id="([^"]*)"/g, `id="${name}-$1"`)
+  .replace(/url\(#([^)]*)\)/g, `url(#${name}-$1)`)
+  .replace(/href="#([^"]*)"/g, `href="#${name}-$1"`);
+
+/* Some files carry only width and height; derive the viewBox from them. */
+const rootTag = svg.match(/<svg\b[^>]*>/)?.[0] ?? "";
+const attr = (key: string) => Number(rootTag.match(new RegExp(`\\s${key}="([\\d.]+)`))?.[1]);
+const viewBox = rootTag
+  .match(/viewBox="([^"]*)"/)?.[1]
+  ?.split(/[\s,]+/)
+  .map(Number) ?? [0, 0, attr("width") || 100, attr("height") || 30];
+const ratio = viewBox[2] / viewBox[3];
+const height = Math.round(Math.min(34, Math.sqrt(area / ratio)));
+const width = Math.round(height * ratio);
+const label = name.charAt(0).toUpperCase() + name.slice(1);
+const sized = svg.replace(/<svg\b[^>]*>/, (tag) =>
+  tag
+    .replace(/\s(width|height|class|style)="[^"]*"/g, "")
+    .replace(/\sviewBox="[^"]*"/, "")
+    .replace(
+      "<svg",
+      `<svg viewBox="${viewBox.join(" ")}" width="${width}" height="${height}" fill="currentColor" role="img" aria-label="${label}"`,
+    ),
+);
+---
+
+<span class="brand-logo block" set:html={sized} />
+
+<style>
+  .brand-logo {
+    --brand-knockout: var(--sunken);
+    color: color-mix(in srgb, var(--ink) 72%, transparent);
+    transition: color 0.3s;
+  }
+
+  .brand-logo:hover {
+    color: var(--ink);
+  }
+
+  .brand-logo :global(svg) {
+    display: block;
+  }
+</style>

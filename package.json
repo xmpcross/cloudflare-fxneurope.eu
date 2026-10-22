@@ -1,0 +1,62 @@
+{
+  "name": "synth-astro-theme",
+  "description": "An Astro theme for AI products: live dithered motion, a full-width mega menu, a product tour, and a blog.",
+  "type": "module",
+  "version": "1.0.1",
+  "author": "Andrei Alba",
+  "license": "SEE LICENSE IN LICENSE",
+  "private": true,
+  "keywords": [
+    "astro-theme",
+    "astro",
+    "ai",
+    "saas",
+    "startup",
+    "landing-page",
+    "marketing",
+    "blog",
+    "dithering",
+    "mega-menu",
+    "tailwindcss"
+  ],
+  "homepage": "https://synth.xocoweb.workers.dev/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xocothemes/synth.git"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "check": "astro check",
+    "covers": "node scripts/covers.mjs",
+    "og": "node scripts/og-image.mjs",
+    "release:check": "npm run check && npm run build && npm run format:check",
+    "preview": "astro preview",
+    "astro": "astro",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "overrides": {
+    "yaml": "^2.8.3"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^8.1.0",
+    "@astrojs/rss": "^4.0.19",
+    "@astrojs/sitemap": "^3.7.4",
+    "@tailwindcss/vite": "^4.3.3",
+    "astro": "^7.4.1",
+    "cobe": "^2.0.1",
+    "sharp": "^0.35.5",
+    "tailwindcss": "^4.3.3"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.11",
+    "@types/node": "^24.19.2",
+    "prettier": "^3.9.10",
+    "typescript": "^5.9.3",
+    "vite": "^8.3.5"
+  }
+}

@@ -1,0 +1,48 @@
+---
+import { Image } from "astro:assets";
+import Logomark from "@/components/ui/Logomark.astro";
+import { authorOf } from "@/lib/posts";
+
+interface Props {
+  names: string[];
+}
+
+const { names } = Astro.props;
+---
+
+<section
+  class="mt-6 grid gap-2 sm:grid-cols-2"
+  aria-label={names.length > 1 ? "About the authors" : "About the author"}
+>
+  {
+    names.map((name, i) => {
+      const author = authorOf(name);
+      return (
+        <div class="flex items-center gap-4 bg-surface p-4">
+          {author?.photo ? (
+            <Image
+              src={author.photo}
+              alt={`Portrait of ${name}`}
+              widths={[136, 204]}
+              sizes="4.25rem"
+              class="author-photo size-17 shrink-0 object-cover object-top"
+            />
+          ) : (
+            <Logomark class="size-17" />
+          )}
+          <div class="min-w-0 leading-tight">
+            <p class="mono-meta">{i === 0 ? "Written by" : "Co-author"}</p>
+            <p class="mt-1.5 truncate text-lg font-medium tracking-tight">{name}</p>
+            {author?.role && <p class="mt-1 truncate text-sm text-accent-ink">{author.role}</p>}
+          </div>
+        </div>
+      );
+    })
+  }
+</section>
+
+<style>
+  .author-photo {
+    filter: grayscale(1) contrast(1.08);
+  }
+</style>

@@ -1,0 +1,21 @@
+---
+import Icon from "@/components/ui/Icon.astro";
+import { compliance } from "@/config/home";
+---
+
+<section class="py-16 lg:py-24" aria-label={compliance.label}>
+  <div class="shell">
+    <ul class="grid grid-cols-2 gap-2 lg:grid-cols-4">
+      {
+        compliance.items.map((item, i) => (
+          <li class="reveal flex flex-col bg-surface p-5 sm:p-6 lg:p-7" style={`--i:${i}`}>
+            <Icon name={item.icon} class="size-6 text-accent" stroke={1.5} />
+            <span class="mt-10 text-base font-medium tracking-tight whitespace-nowrap sm:mt-14 sm:text-lg">{item.name}</span>
+            <span class="mono-meta mt-1">{item.note}</span>
+          </li>
+        ))
+      }
+    </ul>
+    <p class="reveal mt-8 text-center text-sm text-balance text-muted">{compliance.note}</p>
+  </div>
+</section>

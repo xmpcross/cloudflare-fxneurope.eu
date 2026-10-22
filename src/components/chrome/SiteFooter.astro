@@ -1,0 +1,88 @@
+---
+import Icon from "@/components/ui/Icon.astro";
+import Wordmark from "@/components/ui/Wordmark.astro";
+import { footerNavigation, siteConfig } from "@/config/site";
+import { socialIcon } from "@/lib/socials";
+
+const { newsletter } = siteConfig;
+const live = newsletter.enabled && newsletter.action !== "";
+const year = new Date().getFullYear();
+---
+
+<footer class="on-night overflow-hidden">
+  <div class="shell grid gap-14 pt-20 pb-12 lg:grid-cols-12">
+    <div class="lg:col-span-5">
+      <a href="/" class="inline-flex" aria-label={`${siteConfig.name} home`} data-logo-menu-trigger>
+        <Wordmark />
+      </a>
+      <p class="mt-8 max-w-sm text-2xl leading-tight tracking-tight">{newsletter.title}</p>
+      <p class="mt-3 max-w-sm text-night-muted">{newsletter.description}</p>
+      <form
+        class="mt-7 flex max-w-md"
+        action={live ? newsletter.action : undefined}
+        method={newsletter.method}
+        aria-describedby={live ? undefined : "newsletter-note"}
+      >
+        <label for="footer-email" class="sr-only">Email address</label>
+        <input
+          id="footer-email"
+          name={newsletter.emailFieldName}
+          type="email"
+          required
+          autocomplete="email"
+          placeholder="you@company.com"
+          disabled={!live}
+          class="h-12 min-w-0 flex-1 bg-night-raised px-4 text-night-ink outline-none placeholder:text-night-muted focus-visible:outline-2 focus-visible:outline-accent disabled:cursor-not-allowed"
+        />
+        <button type="submit" class="btn btn-accent h-12" disabled={!live}>
+          <span>Subscribe</span>
+        </button>
+      </form>
+      {
+        !live && (
+          <p id="newsletter-note" class="mt-3 text-sm text-night-muted">
+            Sign-up is off in this preview. Connect a form endpoint in the site config to turn it on.
+          </p>
+        )
+      }
+    </div>
+
+    <nav class="grid grid-cols-2 gap-10 sm:grid-cols-4 lg:col-span-7" aria-label="Footer">
+      {
+        footerNavigation.map((column) => (
+          <div>
+            <p class="text-sm text-night-muted">{column.title}</p>
+            <ul class="mt-5 grid gap-3">
+              {column.links.map((link) => (
+                <li>
+                  <a href={link.href} class="text-[0.9375rem] transition-colors hover:text-accent">
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </nav>
+  </div>
+
+  <div class="shell flex flex-col gap-5 py-8 text-sm text-night-muted sm:flex-row sm:items-center sm:justify-between">
+    <p>© {year} {siteConfig.name}. All rights reserved.</p>
+    <ul class="flex items-center gap-1">
+      {
+        siteConfig.socials.map((social) => (
+          <li>
+            <a
+              href={social.href}
+              class="grid size-10 place-items-center transition-colors hover:text-accent"
+              aria-label={social.label}
+            >
+              <Icon name={socialIcon(social.label)} class="size-4" />
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</footer>

@@ -1,0 +1,70 @@
+---
+import BrandLogo from "@/components/ui/BrandLogo.astro";
+import { hero, logoWall } from "@/config/home";
+
+const half = Math.ceil(logoWall.length / 2);
+const rows = [logoWall.slice(0, half), logoWall.slice(half)];
+---
+
+<section class="bg-sunken py-14 lg:py-16" aria-labelledby="logos-title">
+  <div class="shell grid items-center gap-8 lg:grid-cols-12">
+    <h2 id="logos-title" class="max-w-56 text-xl leading-snug tracking-tight lg:col-span-3">{hero.logosLine}</h2>
+    <div class="marquee grid gap-8 lg:col-span-9">
+      {
+        rows.map((row, index) => (
+          <div class="marquee-row overflow-hidden" data-reverse={index === 1 ? "" : undefined}>
+            <ul class="marquee-track flex w-max">
+              {[...row, ...row].map((name, i) => (
+                <li class="flex h-10 items-center px-7 sm:px-10" aria-hidden={i >= row.length ? "true" : undefined}>
+                  <BrandLogo name={name} />
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .marquee-row {
+    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  }
+
+  .marquee-track {
+    animation: marquee 48s linear infinite;
+  }
+
+  [data-reverse] .marquee-track {
+    animation-direction: reverse;
+    animation-duration: 56s;
+  }
+
+  .marquee:hover .marquee-track {
+    animation-play-state: paused;
+  }
+
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track {
+      animation: none;
+      flex-wrap: wrap;
+      width: auto;
+      row-gap: 1.5rem;
+    }
+
+    .marquee-track [aria-hidden="true"] {
+      display: none;
+    }
+
+    .marquee-row {
+      mask-image: none;
+    }
+  }
+</style>

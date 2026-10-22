@@ -1,0 +1,75 @@
+---
+interface Props {
+  call: { line: string; transcript: { from: string; text: string }[] };
+  channels: { label: string; live: number }[];
+}
+
+const { call, channels } = Astro.props;
+---
+
+<div class="relative grid w-full min-w-0 max-w-lg grid-cols-1 gap-3">
+  <div class="tour-card bg-page/95 p-4 sm:p-5" style="--i:0">
+    <div class="flex items-center justify-between gap-4 text-sm">
+      <span class="font-medium">Live call</span>
+      <span class="mono-meta truncate">
+        {call.line} · <span class="tabular-nums" data-call-timer>00:38</span>
+      </span>
+    </div>
+    <ol class="mt-3 grid gap-2 border-t border-line pt-4 text-[0.9rem]">
+      {
+        call.transcript.map((line, i) => (
+          <li class="call-line grid grid-cols-[3.5rem_minmax(0,1fr)] gap-3" style={`--i:${i}`}>
+            <span class:list={["mono-meta pt-px", line.from === "agent" && "text-accent-ink!"]}>
+              {line.from === "agent" ? "Agent" : "Caller"}
+            </span>
+            <span>{line.text}</span>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+  <dl class="tour-card grid grid-cols-2 gap-2 sm:grid-cols-4" style="--i:1" aria-label="Live now, by channel">
+    {
+      channels.map((channel) => (
+        <div class="flex min-w-0 flex-col bg-page/95 px-3 py-3 sm:px-4 sm:py-3.5">
+          <dt class="order-2 truncate text-sm text-muted">{channel.label}</dt>
+          <dd class="order-1 text-xl tracking-[-0.04em] sm:text-2xl">{channel.live}</dd>
+        </div>
+      ))
+    }
+  </dl>
+</div>
+
+<style>
+  .call-line {
+    animation: line-in 0.6s var(--ease-out-expo) both;
+    animation-delay: calc(var(--i) * 450ms + 300ms);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .call-line {
+      animation: none;
+    }
+  }
+
+  @keyframes line-in {
+    from {
+      opacity: 0;
+      transform: translateY(0.4rem);
+    }
+  }
+</style>
+
+<script>
+  const timers = document.querySelectorAll<HTMLElement>("[data-call-timer]");
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (!reduce) {
+    let seconds = 38;
+    window.setInterval(() => {
+      seconds += 1;
+      const text = `${String(Math.floor(seconds / 60)).padStart(2, "0")}:${String(seconds % 60).padStart(2, "0")}`;
+      timers.forEach((timer) => (timer.textContent = text));
+    }, 1000);
+  }
+</script>

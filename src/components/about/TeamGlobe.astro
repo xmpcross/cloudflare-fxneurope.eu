@@ -1,0 +1,293 @@
+---
+import { about } from "@/config/about";
+
+const { team } = about;
+const total = team.places.reduce((sum, place) => sum + place.people, 0);
+const countries = new Set(team.places.map((place) => place.country)).size;
+const hubs = team.places.filter((place) => place.hub).length;
+---
+
+<section class="overflow-hidden pt-20 lg:pt-32" aria-labelledby="team-title" data-globe>
+  <div class="shell text-center">
+    <h2 id="team-title" class="reveal text-display-lg">{team.title}</h2>
+    <p class="reveal mx-auto mt-5 max-w-xl text-lead text-muted">{team.lead}</p>
+    <p class="reveal mt-6 font-mono text-sm text-muted">
+      {total} people · {countries} countries · {hubs} hubs
+    </p>
+  </div>
+
+  <div class="globe-stage relative mx-auto mt-4 max-w-360 lg:mt-6">
+    <div class="globe-box absolute top-0 left-1/2 aspect-square -translate-x-1/2" data-globe-box>
+      <canvas class="globe size-full cursor-grab touch-pan-y active:cursor-grabbing" aria-hidden="true"></canvas>
+      {
+        team.places.map((place, i) => (
+          <div class="globe-pin pointer-events-none absolute top-0 left-0" data-pin={i} aria-hidden="true" hidden>
+            <span class:list={["pin-mark", place.hub && "is-hub"]} />
+            <span class="pin-tag">
+              <span class="block font-medium" data-type={place.city} />
+              <span class="block font-mono text-xs" data-type={`${place.people} ${place.people === 1 ? "person" : "people"}`} />
+            </span>
+          </div>
+        ))
+      }
+    </div>
+    <ul class="sr-only">
+      {
+        team.places.map((place) => (
+          <li>
+            {place.city}, {place.country}: {place.people} {place.people === 1 ? "person" : "people"}
+          </li>
+        ))
+      }
+    </ul>
+    <script is:inline type="application/json" data-globe-places set:html={JSON.stringify(team.places)} />
+  </div>
+</section>
+
+<style>
+  /* The globe is wider than the stage on phones and cropped to its top half. */
+  .globe-stage {
+    --size: 160%;
+    padding-bottom: calc(var(--size) * 0.38);
+    mask-image: linear-gradient(to bottom, #000 72%, transparent);
+  }
+
+  .globe-box {
+    width: var(--size);
+    margin-top: calc(var(--size) * -0.07);
+  }
+
+  @media (min-width: 48rem) {
+    .globe-stage {
+      --size: 100%;
+    }
+  }
+
+  .globe {
+    opacity: 0;
+    transition: opacity 1.4s ease;
+  }
+
+  [data-ready] .globe {
+    opacity: 0.4;
+  }
+
+  .globe-pin {
+    transition: opacity 0.4s;
+  }
+
+  .globe-pin[data-dim] {
+    opacity: 0;
+  }
+
+  .pin-mark {
+    position: absolute;
+    width: 0.375rem;
+    height: 0.375rem;
+    background: var(--accent);
+    transform: translate(-50%, -50%);
+  }
+
+  .pin-mark.is-hub,
+  .globe-pin[data-tagged] .pin-mark {
+    width: 0.5rem;
+    height: 0.5rem;
+    box-shadow:
+      0 0 0 0.3rem color-mix(in oklab, var(--accent) 14%, transparent),
+      0 0 0 calc(0.3rem + 1px) color-mix(in oklab, var(--accent) 45%, transparent);
+  }
+
+  .pin-tag {
+    position: absolute;
+    left: 0;
+    bottom: 2.1rem;
+    min-width: 7rem;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+    line-height: 1.35;
+    text-align: left;
+    white-space: nowrap;
+    color: var(--accent-ink);
+    background: color-mix(in oklab, var(--page) 88%, transparent);
+    box-shadow: inset 0 0 0 1px var(--accent);
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.35s;
+  }
+
+  .pin-tag::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    width: 1px;
+    height: 1.45rem;
+    background: var(--accent);
+  }
+
+  .globe-pin[data-tagged] .pin-tag {
+    opacity: 1;
+  }
+
+  .pin-tag [data-typing]::after {
+    content: "";
+    display: inline-block;
+    width: 1px;
+    height: 0.95em;
+    margin-left: 1px;
+    vertical-align: -0.1em;
+    background: currentColor;
+  }
+</style>
+
+<script>
+  import createGlobe from "cobe";
+
+  type Place = { city: string; people: number; location: [number, number] };
+
+  const root = document.querySelector<HTMLElement>("[data-globe]");
+  const box = root?.querySelector<HTMLElement>("[data-globe-box]");
+  const canvas = box?.querySelector("canvas");
+
+  if (root && box && canvas) {
+    const places: Place[] = JSON.parse(root.querySelector("[data-globe-places]")?.textContent ?? "[]");
+    const pins = [...box.querySelectorAll<HTMLElement>("[data-pin]")];
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const THETA = 0.3;
+    const SPIN = 0.0018;
+
+    let phi = 4.4;
+    let drag: { x: number; phi: number } | null = null;
+    let frame = 0;
+    let globe: ReturnType<typeof createGlobe> | null = null;
+    const timers = new Map<number, number>();
+    let tagged = -1;
+    let taggedAt = 0;
+    const HOLD = 2200;
+
+    // How directly a point faces the viewer: 1 at the centre, 0 on the rim.
+    const facing = ([latDeg, lonDeg]: [number, number]) => {
+      const lat = (latDeg * Math.PI) / 180;
+      const lon = (lonDeg * Math.PI) / 180;
+      const centre = (3 * Math.PI) / 2 - phi;
+      return Math.sin(lat) * Math.sin(THETA) + Math.cos(lat) * Math.cos(THETA) * Math.cos(lon - centre);
+    };
+
+    const type = (i: number) => {
+      const lines = [...pins[i].querySelectorAll<HTMLElement>("[data-type]")];
+      if (reduce) {
+        lines.forEach((line) => (line.textContent = line.dataset.type!));
+        return;
+      }
+      let step = 0;
+      const tick = () => {
+        let left = step;
+        lines.forEach((line) => {
+          const text = line.dataset.type!;
+          const count = Math.max(0, Math.min(text.length, left));
+          left -= text.length;
+          line.textContent = text.slice(0, count);
+          line.toggleAttribute("data-typing", count > 0 && count < text.length);
+        });
+        step += 1;
+        if (left < 0) timers.set(i, window.setTimeout(tick, 45));
+      };
+      tick();
+    };
+
+    const untag = (i: number) => {
+      pins[i].removeAttribute("data-tagged");
+      window.clearTimeout(timers.get(i));
+    };
+
+    const render = () => {
+      if (!globe) return;
+      if (!drag && !reduce) phi += SPIN;
+      globe.update({ phi, theta: THETA });
+
+      places.forEach((place, i) => {
+        const pin = pins[i];
+        const f = facing(place.location);
+        const anchor = box.querySelector<HTMLElement>(`[style*="--cobe-p${i}x"]`);
+        pin.hidden = f < 0.15 || !anchor;
+        if (pin.hidden || !anchor) return;
+        pin.style.left = anchor.style.left;
+        pin.style.top = anchor.style.top;
+        pin.toggleAttribute("data-dim", f < 0.3);
+      });
+
+      // One label at a time: the place nearest the front, held for a moment so it can be read.
+      let best = -1;
+      let bestF = 0.55;
+      places.forEach((place, i) => {
+        const f = facing(place.location);
+        if (!pins[i].hidden && f > bestF) [best, bestF] = [i, f];
+      });
+      const now = performance.now();
+      const lost = tagged !== -1 && (pins[tagged].hidden || facing(places[tagged].location) < 0.45);
+      if (best !== tagged && (lost || tagged === -1 || now - taggedAt > HOLD)) {
+        if (tagged !== -1) untag(tagged);
+        tagged = best;
+        taggedAt = now;
+        if (best !== -1) {
+          pins[best].setAttribute("data-tagged", "");
+          type(best);
+        }
+      }
+
+      frame = requestAnimationFrame(render);
+    };
+
+    const start = () => {
+      const size = box.offsetWidth;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      globe = createGlobe(canvas, {
+        devicePixelRatio: dpr,
+        width: size * dpr,
+        height: size * dpr,
+        phi,
+        theta: THETA,
+        dark: 0,
+        diffuse: 1.4,
+        mapSamples: 40000,
+        mapBrightness: 1.4,
+        mapBaseBrightness: 0,
+        baseColor: [1, 1, 1],
+        markerColor: [1, 1, 1],
+        glowColor: [0.98, 0.98, 0.97],
+        markerElevation: 0,
+        // Zero-size markers: cobe only supplies anchor positions for the DOM pins.
+        markers: places.map((place, i) => ({ location: place.location, size: 0, id: `p${i}x` })),
+      });
+      root.setAttribute("data-ready", "");
+      frame = requestAnimationFrame(render);
+    };
+
+    canvas.addEventListener("pointerdown", (event) => {
+      drag = { x: event.clientX, phi };
+      canvas.setPointerCapture(event.pointerId);
+    });
+    canvas.addEventListener("pointermove", (event) => {
+      if (drag) phi = drag.phi + (event.clientX - drag.x) / 300;
+    });
+    const release = () => (drag = null);
+    canvas.addEventListener("pointerup", release);
+    canvas.addEventListener("pointercancel", release);
+
+    new ResizeObserver(() => {
+      if (!globe) return;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      globe.update({ width: box.offsetWidth * dpr, height: box.offsetWidth * dpr });
+    }).observe(box);
+
+    new IntersectionObserver(
+      ([entry]) => {
+        cancelAnimationFrame(frame);
+        if (!entry.isIntersecting) return;
+        if (globe) frame = requestAnimationFrame(render);
+        else start();
+      },
+      { rootMargin: "200px" },
+    ).observe(root);
+  }
+</script>
