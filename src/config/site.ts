@@ -1,15 +1,15 @@
 export const siteConfig = {
-  name: "Synth",
-  tagline: "AI agents for every customer conversation",
-  title: "Synth - An Astro theme for AI products",
+  name: "FXN Europe",
+  tagline: "Websites and the businesses behind them",
+  title: "FXN Europe — Our websites and technology",
   description:
-    "Synth builds, runs and grades AI agents across chat, voice and email, with every decision traced and every answer yours to change.",
-  siteUrl: "http://51.161.208.188:8790",
+    "FXN Europe OÜ builds and operates digital businesses. Explore our websites, the technology they use and how we build them.",
+  siteUrl: "https://fxneurope.eu",
   language: "en",
   locale: "en_US",
   dateLocale: "en-US",
   socialImage: "/og-image.png",
-  email: "hello@example.com",
+  email: "contact@fxneurope.eu",
   /** The two calls to action in the header, the hero and the closing band. */
   actions: {
     primary: { label: "Book a demo", href: "/contact/" },

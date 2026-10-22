@@ -4,6 +4,12 @@ import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
 import { siteConfig } from "./src/config/site.ts";
+import pages from "./src/data/pages.json" with { type: "json" };
+const indexable = new Set(
+  pages
+    .filter((p) => !p.redirect && ["en", "et", "de", "es", "fr"].includes(p.path.split("/")[0]))
+    .map((p) => `/${p.path}/`),
+);
 
 export default defineConfig({
   site: siteConfig.siteUrl,
@@ -13,10 +19,7 @@ export default defineConfig({
   integrations: [
     mdx(),
     sitemap({
-      filter: (page) =>
-        !page.includes("/blog/search/") &&
-        !page.endsWith("rss.xml") &&
-        !page.endsWith("search-index.json"),
+      filter: (page) => indexable.has(new URL(page).pathname),
     }),
   ],
   markdown: {

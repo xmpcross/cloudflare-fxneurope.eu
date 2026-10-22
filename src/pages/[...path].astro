@@ -2,7 +2,7 @@
 import pages from '@/data/pages.json';
 import EuropeLayout from '@/layouts/EuropeLayout.astro';
 export function getStaticPaths() {
-  return pages.map(page => ({params: {path: page.path}, props: {page}}));
+  return pages.filter(page => !["404","404.html","_not-found"].includes(page.path)).map(page => ({params: {path: page.path}, props: {page}}));
 }
 const {page} = Astro.props;
 if(page.redirect) return Astro.redirect(page.redirect, 302);

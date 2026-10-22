@@ -5,11 +5,15 @@ import Contact from '@/components/europe/Contact.astro';
 import Sitemap from '@/components/europe/Sitemap.astro';
 import sitemapCopy from '@/data/sitemap-copy.json';
 import pages from '@/data/pages.json';
+import {siteConfig} from '@/config/site';
 import { stageCopy } from '@/config/europe';
 import '@/styles/global.css';
 import '@/styles/europe.css';
 interface Props { page: (typeof pages)[number]; }
 const {page} = Astro.props;
+const production=process.env.SITE_DEPLOYMENT === "production" || process.env.CF_PAGES_BRANCH === "migrate/cloudflare-pages";
+const canonical=new URL(Astro.url.pathname,siteConfig.siteUrl).href;
+const alternatePages=pages.filter(p=>!p.redirect && p.path.replace(/^[^/]+/, "")===page.path.replace(/^[^/]+/, "") && ["en","et","de","es","fr"].includes(p.path.split("/")[0]));
 const topNav = [page.nav.find(link => link.href.endsWith("/about/")), ...page.nav.filter(link => !link.href.endsWith("/about/") && link.href !== `/${page.lang}/`)].filter((link): link is (typeof page.nav)[number] => Boolean(link));
 const isSitemap=page.path.endsWith("/sitemap");
 const sitemapText=sitemapCopy[page.lang as keyof typeof sitemapCopy]??sitemapCopy.en;
@@ -22,7 +26,14 @@ const copy = stageCopy[page.lang as keyof typeof stageCopy] ?? stageCopy.en;
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>{page.metaTitle}</title>
   <meta name="description" content={page.description} />
-  <meta name="robots" content="noindex, nofollow" />
+  {(!production || page.path.endsWith("/thanks") || page.path==="404") && <meta name="robots" content="noindex, nofollow" />}
+  <link rel="canonical" href={canonical} />
+  {alternatePages.map(p=><link rel="alternate" hreflang={p.lang} href={new URL(`/${p.path}/`,siteConfig.siteUrl).href} />)}
+  <meta property="og:title" content={page.metaTitle} />
+  <meta property="og:description" content={page.description} />
+  <meta property="og:site_name" content="FXN Europe" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={canonical} />
   <meta name="theme-color" content="#fafaf8" />
   <link rel="icon" href="/fxn-europe-icon.svg" />
   <link rel="preload" href="/fonts/geist/Geist-Variable.woff2" as="font" type="font/woff2" crossorigin />

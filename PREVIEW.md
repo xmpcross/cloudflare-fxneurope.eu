@@ -1,6 +1,6 @@
 # FXN Europe — Synth preview
 
-Preview only. Production source remains in `../static/`; its Cloudflare deployment and nginx origin are unchanged. Do not run a production deployment from this directory.
+Production source for the FXN Europe Synth redesign. Cloudflare Pages project: `fxneurope-eu`; production branch: `migrate/cloudflare-pages`. The `preview/synth-redesign` branch and local port 8790 are used for preview work.
 
 - Theme source: https://github.com/xmpcross/xoco-synth
 - Preview: http://51.161.208.188:8790/en/
@@ -8,7 +8,8 @@ Preview only. Production source remains in `../static/`; its Cloudflare deployme
 - Theme adaptation: `src/styles/europe.css`
 - Public content snapshot: `src/data/pages.json` (existing documents, portfolio routes and legacy redirects)
 - Synth's original fonts, tokens and dither engine remain in use.
-- All preview pages carry `noindex, nofollow`; robots.txt blocks crawling.
+- Preview builds carry `noindex, nofollow`; production builds enable indexing and canonical URLs on fxneurope.eu. The local preview server always adds a noindex header.
+- Use `npm run build:production` for a manual release. Cloudflare builds automatically select production settings on `migrate/cloudflare-pages`.
 
 Run `npm ci`, `npm run check`, and `npm run build`. Run `npm run preview:server` to serve `dist/` and the contact endpoint on port 8790. The systemd service `fxneurope-synth-preview` maintains the preview independently of the terminal session.
 
@@ -18,15 +19,15 @@ Fur Fun Shop is the confirmed portfolio entry. Its public storefront, footer and
 
 To refresh retained public source documents, run `python3 scripts/import-site.py`, then `python3 scripts/rewrite-portfolio.py` to reapply the portfolio editorial layer. Both require BeautifulSoup and write only to this preview directory. The source import alone would restore old marketing copy. Legal pages are retained, former service routes redirect to Portfolio or Technology, and each locale has a refreshed HTML sitemap.
 
-No Git push or Cloudflare deployment has been made for this preview. The inherited theme demo components remain available as reference but their demo page routes are removed.
+The inherited theme demo components remain available as reference but their demo page routes are removed.
 
 ## Contact mail configuration
 
 Set `SMTP_PASS` to a Google app password for `kritin@fxnholdings.com` in the ignored `.dev.vars` file (mode 600). Defaults are shown in `.dev.vars.example`. Never commit credentials. The preview server reads this file for each submission, so a credential update does not require a rebuild or restart. Cloudflare secrets from FXN Holdings are not readable by this preview.
 
-`server/contact.mjs` shares the handler between the local Node server and the future Pages Function in `functions/api/contact.js`. The sender and recipient are restricted in server code. The website/reference field accepts order references as well as URLs. Required fields, body size, same-origin submissions, honeypot and per-instance rate limiting are checked server-side. Errors keep entered values and include a diagnostic reference; logs contain allowlisted protocol codes only.
+`server/contact.mjs` shares the handler between the local Node server and the Pages Function in `functions/api/contact.js`. The sender and recipient are restricted in server code. The website/reference field accepts order references as well as URLs. Required fields, body size, same-origin submissions, honeypot and per-instance rate limiting are checked server-side. Errors keep entered values and include a diagnostic reference; logs contain allowlisted protocol codes only.
 
-Run `npm run test:contact`, `npm run release:check` and `npm run check:pages`. Tests mock delivery and send no emails. For any future Cloudflare deployment, configure SMTP_USER and SMTP_PASS separately as secrets on that project, with nodejs_compat enabled. No live deployment has been made.
+Run `npm run test:contact`, `npm run release:check` and `npm run check:pages`. Tests mock delivery and send no emails. Production requires SMTP_USER and SMTP_PASS as Cloudflare Pages secrets, with nodejs_compat enabled. These are configured separately from the local preview.
 
 ## Technology logos
 

@@ -29,7 +29,7 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro build && node scripts/hosting-output.mjs",
     "check": "astro check",
     "covers": "node scripts/covers.mjs",
     "og": "node scripts/og-image.mjs",
@@ -40,7 +40,8 @@
     "format:check": "prettier --check .",
     "test:contact": "node --test tests/contact.test.mjs",
     "check:pages": "wrangler pages functions build functions --outdir=.pages-check --compatibility-date=2026-10-01 --compatibility-flags=nodejs_compat",
-    "preview:server": "node scripts/preview-server.mjs"
+    "preview:server": "node scripts/preview-server.mjs",
+    "build:production": "SITE_DEPLOYMENT=production npm run build"
   },
   "overrides": {
     "yaml": "^2.8.3"
