@@ -5,9 +5,11 @@ import Faq from './Faq.astro';
 import TechnologyStack from './TechnologyStack.astro';
 import Dither from '@/components/ui/Dither.astro';
 import translations from '@/data/portfolio-copy.json';
+import additions from '@/data/home-sections.json';
 interface Props { lang: string; kind: string; }
 const {lang,kind}=Astro.props;
 const c=translations[lang as keyof typeof translations] ?? translations.en;
+const h=additions[lang as keyof typeof additions] ?? additions.en;
 ---
 {(kind==='home'||kind==='portfolio') && <Portfolio lang={lang} detailed={kind==='portfolio'} />}
 {kind==='home' && <>
@@ -17,6 +19,22 @@ const c=translations[lang as keyof typeof translations] ?? translations.en;
   <HomeMore lang={lang} />
 </>}
 {kind==='technology' && <TechnologyStack lang={lang} />}
-{kind==='technology' && <div class="shell technology-page"><section><h2>Fur Fun Shop</h2><p>{c.projectPurpose}</p><div class="technology-grid">{c.implementation.map(([name,body])=><div><h3>{name}</h3><p>{body}</p></div>)}</div><a href={`/${lang}/portfolio/#furfunshop`} class="text-link">{c.caseStudy} ↗</a></section><section><h2>{c.previewHeading}</h2><p>{c.previewBody}</p><ul class="technology-tags">{['Astro','Synth','TypeScript','Tailwind CSS','Geist'].map(t=><li>{t}</li>)}</ul></section><p class="technology-principle">{c.technologyPrinciple}</p></div>}
-{kind==='process' && <section class="shell process-detail"><ol>{c.steps.map(([title,body],i)=><li><span>{String(i+1).padStart(2,'0')}</span><h2>{title}</h2><p>{body}</p></li>)}</ol><a href={`/${lang}/portfolio/`} class="button">{c.more} ↗</a></section>}
+{kind==='technology' && <>
+  <div class="shell tech-projects">
+    <section class="tech-project" aria-labelledby="tech-fur-title">
+      <div class="tech-project-head"><span class="tech-index" aria-hidden="true">01</span><h2 id="tech-fur-title">Fur Fun Shop</h2><p>{c.projectPurpose}</p><a href={`/${lang}/portfolio/#furfunshop`} class="text-link">{c.caseStudy} ↗</a></div>
+      <div class="technology-grid">{c.implementation.map(([name,body],i)=><div><span aria-hidden="true">{String(i+1).padStart(2,'0')}</span><h3>{name}</h3><p>{body}</p></div>)}</div>
+    </section>
+  </div>
+  <section class="tech-own" data-dither-host aria-labelledby="tech-own-title">
+    <Dither scene="bands" tone="smoke" seed={11} speed={0.35} class="portfolio-dither" />
+    <div class="shell tech-own-inner"><div><span class="tech-index" aria-hidden="true">02</span><h2 id="tech-own-title">{c.previewHeading}</h2></div><div><p>{c.previewBody}</p><ul class="technology-tags">{['Astro','Synth','TypeScript','Tailwind CSS','Geist'].map(t=><li>{t}</li>)}</ul></div></div>
+  </section>
+  <div class="shell"><p class="technology-principle">{c.technologyPrinciple}</p></div>
+  <section class="home-contact-band" data-dither-host aria-labelledby="tech-contact-title"><Dither scene="silk" tone="ember" seed={27} speed={0.4} interactive class="portfolio-dither" /><div class="shell"><div class="home-contact-panel"><div><h2 id="tech-contact-title">{h.closing}</h2><p>{h.closingBody}</p></div><a class="button" href={`/${lang}/contact/`}>{h.contact} ↗</a></div></div></section>
+</>}
+{kind==='process' && <>
+  <section class="shell process-flow"><ol>{c.steps.map(([title,body],i)=><li class={i===c.steps.length-1?'is-last':undefined}><span class="step-no">{String(i+1).padStart(2,'0')}</span><div class="step-card"><h2>{title}</h2><p>{body}</p></div></li>)}</ol><a href={`/${lang}/portfolio/`} class="text-link">{c.more} ↗</a></section>
+  <section class="home-contact-band" data-dither-host aria-labelledby="process-contact-title"><Dither scene="silk" tone="ember" seed={27} speed={0.4} interactive class="portfolio-dither" /><div class="shell"><div class="home-contact-panel"><div><h2 id="process-contact-title">{h.closing}</h2><p>{h.closingBody}</p></div><a class="button" href={`/${lang}/contact/`}>{h.contact} ↗</a></div></div></section>
+</>}
 {kind==='faq' && <Faq lang={lang} />}
