@@ -1,74 +1,79 @@
-# fxneurope.eu — static site
+# fxneurope.eu — Cloudflare Pages
 
-Standalone HTML/CSS/JavaScript replacement for Payload, prepared and verified
-locally. **Not deployed; the public domain still uses the original server.**
+Live at **https://fxneurope.eu**. Both apex and www custom domains are active.
+Cloudflare Pages serves 89 exported HTML documents and local assets without
+Payload, Next.js or a database. The original server also serves the static build
+as a fallback. Production Payload is stopped and disabled.
 
-## Edit and build
+## Edit, verify and publish
 
-- `content/`: 89 published HTML documents, exported from the public Payload API
-  and rendered with the current title/description overrides.
-- `public/`: images, fonts, CSS and browser JavaScript.
-- `routes.json`: public route inventory and expected statuses.
-- `scripts/build.py`: copies sources to `dist/` and generates sitemap and hosting rules.
+- `content/`: editable HTML documents, including metadata.
+- `public/`: CSS, browser JavaScript, images and fonts.
+- `routes.json`: public routes and expected HTTP statuses.
+- `scripts/build.py`: builds `dist/`, sitemap and hosting rules.
 
-Requirements: Python 3. Node/npm is needed only for Cloudflare development and
-deployment. A plain build requires no database, CMS, running Node service or
-credentials. Each project is independent of the original `app/` and backups.
+Requirements: Python 3; Node 22+ and npm for development tooling.
 
 ```sh
-python3 scripts/build.py
 npm ci
+npm run build
 npm test
 npm run dev
+python3 scripts/check-deployment.py https://fxneurope.eu
 ```
 
-Edit HTML directly and rebuild. Add the HTML file and an entry in `routes.json`
-for a new page; include its canonical URL for sitemap inclusion. Generated
-`dist/` is disposable; never edit it as your source. Drafts and CMS users are
-not exported. Keep root `404.html` so unknown URLs do not become an SPA fallback.
+Edit sources, commit and push **`migrate/cloudflare-pages`** to
+https://github.com/xmpcross/fxneurope.eu. Cloudflare automatically builds and deploys
+that branch. Project: `fxneurope-eu`; build command: `npm run build`; output: `dist`;
+repository root: `/`. Other branches produce previews. The `main` branch remains
+the historical source. Generated `dist/` and credentials must not be committed.
+`deploy.sh` is available for manual Wrangler uploads; prefer Git deployments.
 
-## Cloudflare Pages setup
+Preview URL: https://fxneurope-eu.pages.dev
 
-Match Holdings with a Git-connected Pages project named `fxneurope-eu`.
-Use build command `npm run build`, output directory `dist`, framework None,
-and this `static/` directory as the repository root (or configure its path as
-Pages root if retaining a parent repository). Choose the desired production
-branch. Do not create a Direct Upload project if Git integration is wanted.
-No Cloudflare project, Git repository, DNS record or custom domain has been
-created or changed by this migration yet.
+## Redirects and hosting
 
-For a deliberately chosen Direct Upload setup instead, `npm run deploy` wraps
-Wrangler. `wrangler.jsonc` includes the correct project name and output directory.
-Validate the preview before adding apex and www custom domains. Preserve MX,
-SPF, DKIM and DMARC records; configure www to redirect to apex.
+HTTP redirects to HTTPS. The shared `fxn-sites-www-redirect` Cloudflare Worker
+redirects only `www.fxneurope.eu/*` and `www.fxnstudio.com/*` to their respective
+apex domains, preserving path and query string. Certificate-validation requests
+pass through. Apex content is served as static Pages assets. Its tracked source
+and deployment config are in `ops/`; update the Worker explicitly with:
 
-## Contacts and dynamic behavior
+```sh
+npx wrangler deploy --config ops/wrangler.jsonc
+```
 
-The published contact pages contain contact details and mailto links, with no
-form. For compatibility, the old `/netlify-forms.html` and `/__forms.html` POST
-endpoints are implemented as Pages Functions. Configure SMTP_USER/SMTP_PASS
-and an authorized MAIL_FROM before relying on those endpoints on Cloudflare;
-copy `.dev.vars.example` to `.dev.vars` for local use. The old IP-authenticated
-SMTP relay cannot be used by Cloudflare. Missing configuration returns 503,
-not a false success. No live email was sent during validation.
+That Worker is shared by both sites; keep the source copies synchronized.
+Europe also preserves the `/` to `/en/` redirect and explicit 404 routes.
+Unknown pages, `/admin` and CMS API URLs return 404.
 
-If hosted on this server, the prepared nginx configuration keeps the existing
-`fxneurope-forms.service` endpoint. It requires neither Payload nor PostgreSQL.
+## Contact behavior and retained services
 
-## Validation and rollback
+The published contact pages use contact details and mailto links. The legacy
+`/netlify-forms.html` and `/__forms.html` POST endpoints have a Pages Function,
+but authenticated SMTP secrets are not configured on Pages. It returns 503
+instead of pretending delivery succeeded. Configure settings from
+`.dev.vars.example` before adding a form that uses it. The origin fallback
+continues to use `fxneurope-forms.service` for these legacy endpoints.
 
-`npm test` checks every source page against the build, all local HTML/CSS links,
-fonts and images, sitemap and 404. All 89 routes were also checked through the
-local Cloudflare Pages runtime. Mobile and desktop browser evidence is under
-`../output/playwright/` (Studio screenshots are in Europe's output directory).
+Europe's Payload app, PostgreSQL service and backup timer are stopped and
+disabled. A final database dump is in the cutover backup directory.
 
-Original database, public content export and nginx configuration are backed up
-outside this directory in `/kspellman/sites/fxneurope.eu/backups/static-migration-20261022T175418Z`. Existing app, services, databases
-and preview deployments are retained. No DNS or live nginx settings changed.
+## Verification and rollback
 
-For local nginx hosting, `../config/nginx-static.conf` is the prepared complete
-replacement for `/etc/nginx/sites-available/fxneurope.eu`. Build and test first,
-install it, run `nginx -t`, then reload nginx. Restore the backed-up nginx
-configuration to roll back. For Cloudflare rollback, retain DNS values before
-cutover and restore them to the original host if necessary. Do not disable the
-old app/database services until the chosen deployment is verified.
+All 89 published routes passed status/title checks on the Pages URL and
+public domain, along with 404s, headers, sitemap and robots. Source/build fidelity
+and local asset/link checks pass. HTTPS and www redirects are verified. Mail and
+all unrelated DNS records were preserved.
+
+Local operational records: `../migration/cloudflare-cutover.json` and
+`../migration/static-status.json`. Cutover backups (DNS, nginx, service states)
+are in `../backups/cloudflare-cutover/`. Original exported content and database
+backups are in the earlier `../backups/static-migration-*/` directory.
+
+To move hosting back to the server, restore only the apex/www DNS records from
+`dns-before.json`, leaving email records untouched. The origin already serves
+`static/dist/` via `../config/nginx-static.conf`. To restore Payload specifically,
+start its database and app services, restore `origin-nginx-before.conf`, run
+`nginx -t`, and reload nginx. Europe additionally needs its backup timer enabled.
+Keep backups and the old app directories until rollback is no longer needed.
