@@ -1,0 +1,122 @@
+{
+  "en": {
+    "title": "What makes a website worth building?",
+    "intro": "A clear purpose comes first. These are the principles we use to shape a useful digital business.",
+    "principles": [
+      [
+        "A specific audience",
+        "Start with people and their needs. A focused offer makes it easier to decide which products, information and features belong on the website."
+      ],
+      [
+        "A straightforward experience",
+        "Help visitors understand the offer and take the next step. Clear navigation, useful product information and readable pages matter more than unnecessary complexity."
+      ],
+      [
+        "A business we can maintain",
+        "Think beyond launch day. Content, software, customer enquiries and operating costs all need attention as the website develops."
+      ]
+    ],
+    "company": "Meet the company",
+    "questions": "Before you explore further",
+    "allQuestions": "More questions",
+    "closing": "A question about one of our websites?",
+    "closingBody": "Get in touch about the portfolio, company information or a possible collaboration. For help with a purchase, use the support details on the website where you placed your order.",
+    "contact": "Contact FXN Europe"
+  },
+  "de": {
+    "title": "Was macht eine Website sinnvoll?",
+    "intro": "Ein klarer Zweck steht am Anfang. Diese Grundsätze helfen uns, ein nützliches digitales Unternehmen zu gestalten.",
+    "principles": [
+      [
+        "Eine konkrete Zielgruppe",
+        "Mit Menschen und ihren Bedürfnissen beginnen. Ein klares Angebot hilft bei der Auswahl passender Produkte, Informationen und Funktionen."
+      ],
+      [
+        "Eine einfache Nutzung",
+        "Das Angebot verständlich machen und den nächsten Schritt erleichtern. Klare Navigation, hilfreiche Produktinformationen und lesbare Seiten sind wichtiger als unnötige Komplexität."
+      ],
+      [
+        "Ein betreibbares Unternehmen",
+        "Über den Start hinausdenken. Inhalte, Software, Kundenanfragen und Betriebskosten brauchen auch später Aufmerksamkeit."
+      ]
+    ],
+    "company": "Das Unternehmen kennenlernen",
+    "questions": "Gut zu wissen",
+    "allQuestions": "Weitere Fragen",
+    "closing": "Eine Frage zu einer unserer Websites?",
+    "closingBody": "Kontaktieren Sie uns zum Portfolio, zum Unternehmen oder zu einer möglichen Zusammenarbeit. Bei einem Kauf nutzen Sie bitte den Kundendienst der jeweiligen Website.",
+    "contact": "FXN Europe kontaktieren"
+  },
+  "et": {
+    "title": "Millist veebilehte tasub luua?",
+    "intro": "Kõigepealt selge eesmärk. Need põhimõtted aitavad meil kujundada kasulikku digitaalset ettevõtet.",
+    "principles": [
+      [
+        "Kindel sihtrühm",
+        "Alustame inimestest ja nende vajadustest. Selge pakkumine aitab otsustada, millised tooted, teave ja funktsioonid veebilehele kuuluvad."
+      ],
+      [
+        "Arusaadav kasutuskogemus",
+        "Aitame külastajal pakkumisest aru saada ja järgmise sammu teha. Selge navigeerimine, kasulik tooteinfo ja loetavad lehed on olulisemad kui tarbetu keerukus."
+      ],
+      [
+        "Hallatav ettevõte",
+        "Mõtleme avaldamisest kaugemale. Sisu, tarkvara, kliendiküsimused ja tegevuskulud vajavad tähelepanu ka edaspidi."
+      ]
+    ],
+    "company": "Tutvu ettevõttega",
+    "questions": "Hea teada",
+    "allQuestions": "Veel küsimusi",
+    "closing": "Kas sul on küsimus mõne meie veebilehe kohta?",
+    "closingBody": "Kirjuta portfelli, ettevõtte või võimaliku koostöö kohta. Ostu puhul kasuta selle veebilehe klienditoe kontakte, kus tellimuse tegid.",
+    "contact": "Võta FXN Europe’iga ühendust"
+  },
+  "es": {
+    "title": "¿Qué hace que merezca la pena crear un sitio?",
+    "intro": "Primero, un propósito claro. Estos principios nos ayudan a dar forma a un negocio digital útil.",
+    "principles": [
+      [
+        "Un público concreto",
+        "Empezar por las personas y sus necesidades. Una propuesta enfocada ayuda a elegir los productos, la información y las funciones del sitio."
+      ],
+      [
+        "Una experiencia sencilla",
+        "Ayudar a entender la propuesta y dar el siguiente paso. La navegación clara, la información útil y las páginas legibles importan más que la complejidad innecesaria."
+      ],
+      [
+        "Un negocio que podamos mantener",
+        "Pensar más allá del lanzamiento. El contenido, el software, las consultas y los costes necesitan atención mientras el sitio evoluciona."
+      ]
+    ],
+    "company": "Conoce la empresa",
+    "questions": "Antes de seguir explorando",
+    "allQuestions": "Más preguntas",
+    "closing": "¿Tienes una pregunta sobre uno de nuestros sitios?",
+    "closingBody": "Contacta sobre el portafolio, la empresa o una posible colaboración. Para una compra, utiliza el soporte del sitio donde hiciste el pedido.",
+    "contact": "Contactar con FXN Europe"
+  },
+  "fr": {
+    "title": "Qu’est-ce qui rend un site utile ?",
+    "intro": "Un objectif clair avant tout. Ces principes nous aident à construire une activité numérique utile.",
+    "principles": [
+      [
+        "Un public précis",
+        "Partir des personnes et de leurs besoins. Une offre ciblée aide à choisir les produits, les informations et les fonctionnalités du site."
+      ],
+      [
+        "Une expérience simple",
+        "Permettre de comprendre l’offre et de passer à l’étape suivante. Une navigation claire, des informations utiles et des pages lisibles comptent davantage qu’une complexité inutile."
+      ],
+      [
+        "Une activité durable à exploiter",
+        "Penser au-delà du lancement. Contenus, logiciels, demandes clients et coûts d’exploitation demandent une attention continue."
+      ]
+    ],
+    "company": "Découvrir l’entreprise",
+    "questions": "Avant de poursuivre",
+    "allQuestions": "D’autres questions",
+    "closing": "Une question sur l’un de nos sites ?",
+    "closingBody": "Contactez-nous au sujet du portfolio, de l’entreprise ou d’une collaboration. Pour un achat, utilisez le service client du site où vous avez commandé.",
+    "contact": "Contacter FXN Europe"
+  }
+}

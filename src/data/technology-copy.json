@@ -1,0 +1,109 @@
+{
+  "en": {
+    "label": "Technologies we use",
+    "title": "Web technologies and open-source platforms.",
+    "intro": "Modern web frameworks, content systems and established commerce platforms provide the foundations for our work. The combination depends on what each website needs to do.",
+    "note": "From Next.js and React to WordPress and WooCommerce, the stack follows the website. Automation and cloud infrastructure connect the work around it.",
+    "groups": [
+      [
+        "Web experiences",
+        "Frameworks for websites, responsive interfaces and browser-based tools."
+      ],
+      [
+        "Content and commerce",
+        "Systems for publishing content, managing products and running online stores."
+      ],
+      [
+        "Automation and delivery",
+        "Tools for connecting workflows, packaging applications and delivering websites."
+      ]
+    ],
+    "projects": "How the tools come together",
+    "projectsIntro": "A closer look at the technologies confirmed for the websites in this portfolio."
+  },
+  "de": {
+    "label": "Unsere Technologien",
+    "title": "Webtechnologien und Open-Source-Plattformen.",
+    "intro": "Moderne Webframeworks, Inhaltssysteme und bewährte Handelsplattformen bilden die Grundlage unserer Arbeit. Die Kombination richtet sich nach der Aufgabe der Website.",
+    "note": "Von Next.js und React bis WordPress und WooCommerce folgt die Technik den Anforderungen der Website. Automatisierung und Cloud-Infrastruktur verbinden die Arbeit dahinter.",
+    "groups": [
+      [
+        "Web-Erlebnisse",
+        "Frameworks für Websites, responsive Oberflächen und browserbasierte Werkzeuge."
+      ],
+      ["Inhalte und Handel", "Systeme für Inhalte, Produktverwaltung und Onlineshops."],
+      [
+        "Automatisierung und Bereitstellung",
+        "Werkzeuge für Arbeitsabläufe, Anwendungspakete und die Auslieferung von Websites."
+      ]
+    ],
+    "projects": "So wirken die Werkzeuge zusammen",
+    "projectsIntro": "Die bestätigten Technologien der Websites in diesem Portfolio im Überblick."
+  },
+  "et": {
+    "label": "Meie tehnoloogiad",
+    "title": "Veebitehnoloogiad ja avatud lähtekoodiga platvormid.",
+    "intro": "Meie töö aluseks on kaasaegsed veebiraamistikud, sisuhaldussüsteemid ja tuntud kaubandusplatvormid. Kombinatsioon sõltub iga veebilehe ülesandest.",
+    "note": "Next.js-ist ja Reactist WordPressi ning WooCommerce’ini lähtuvad tööriistad veebilehe vajadustest. Automaatika ja pilvetaristu ühendavad taustal tehtava töö.",
+    "groups": [
+      [
+        "Veebikogemused",
+        "Raamistikud veebilehtede, kohanduvate liideste ja brauseritööriistade jaoks."
+      ],
+      [
+        "Sisu ja kaubandus",
+        "Süsteemid sisu avaldamiseks, toodete haldamiseks ja e-poodide käitamiseks."
+      ],
+      [
+        "Automaatika ja juurutus",
+        "Tööriistad töövoogude ühendamiseks, rakenduste pakendamiseks ja veebilehtede avaldamiseks."
+      ]
+    ],
+    "projects": "Kuidas tööriistad kokku sobivad",
+    "projectsIntro": "Lähem pilk portfelli veebilehtedel kinnitatud tehnoloogiatele."
+  },
+  "es": {
+    "label": "Tecnologías que utilizamos",
+    "title": "Tecnologías web y plataformas de código abierto.",
+    "intro": "Los frameworks web modernos, sistemas de contenido y plataformas de comercio consolidadas forman la base de nuestro trabajo. La combinación depende de lo que necesita cada sitio.",
+    "note": "Desde Next.js y React hasta WordPress y WooCommerce, elegimos las herramientas según el sitio. La automatización y la infraestructura en la nube conectan el trabajo que lo rodea.",
+    "groups": [
+      [
+        "Experiencias web",
+        "Frameworks para sitios, interfaces adaptables y herramientas de navegador."
+      ],
+      [
+        "Contenido y comercio",
+        "Sistemas para publicar contenido, gestionar productos y operar tiendas."
+      ],
+      [
+        "Automatización y despliegue",
+        "Herramientas para conectar procesos, empaquetar aplicaciones y servir sitios web."
+      ]
+    ],
+    "projects": "Cómo se combinan las herramientas",
+    "projectsIntro": "Una mirada a las tecnologías confirmadas para los sitios de este portafolio."
+  },
+  "fr": {
+    "label": "Nos technologies",
+    "title": "Technologies web et plateformes open source.",
+    "intro": "Frameworks web modernes, systèmes de contenu et plateformes de commerce éprouvées constituent nos fondations. Leur combinaison dépend du rôle de chaque site.",
+    "note": "De Next.js et React à WordPress et WooCommerce, les outils suivent les besoins du site. L’automatisation et l’infrastructure cloud relient le travail qui l’entoure.",
+    "groups": [
+      [
+        "Expériences web",
+        "Frameworks pour les sites, interfaces adaptatives et outils de navigateur."
+      ],
+      [
+        "Contenu et commerce",
+        "Systèmes de publication, de gestion des produits et de commerce en ligne."
+      ],
+      [
+        "Automatisation et diffusion",
+        "Outils pour relier les processus, préparer les applications et diffuser les sites."
+      ]
+    ],
+    "projects": "Comment les outils s’assemblent",
+    "projectsIntro": "Un aperçu des technologies confirmées pour les sites de ce portfolio."
+  }
+}

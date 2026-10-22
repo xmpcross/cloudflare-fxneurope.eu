@@ -1,0 +1,63 @@
+---
+import Content from '@/components/europe/Content.astro';
+import About from '@/components/europe/About.astro';
+import Contact from '@/components/europe/Contact.astro';
+import Sitemap from '@/components/europe/Sitemap.astro';
+import sitemapCopy from '@/data/sitemap-copy.json';
+import pages from '@/data/pages.json';
+import { stageCopy } from '@/config/europe';
+import '@/styles/global.css';
+import '@/styles/europe.css';
+interface Props { page: (typeof pages)[number]; }
+const {page} = Astro.props;
+const topNav = [page.nav.find(link => link.href.endsWith("/about/")), ...page.nav.filter(link => !link.href.endsWith("/about/") && link.href !== `/${page.lang}/`)].filter((link): link is (typeof page.nav)[number] => Boolean(link));
+const isSitemap=page.path.endsWith("/sitemap");
+const sitemapText=sitemapCopy[page.lang as keyof typeof sitemapCopy]??sitemapCopy.en;
+const copy = stageCopy[page.lang as keyof typeof stageCopy] ?? stageCopy.en;
+---
+<!doctype html>
+<html lang={page.lang}>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{page.metaTitle}</title>
+  <meta name="description" content={page.description} />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#fafaf8" />
+  <link rel="icon" href="/fxn-europe-icon.svg" />
+  <link rel="preload" href="/fonts/geist/Geist-Variable.woff2" as="font" type="font/woff2" crossorigin />
+</head>
+<body>
+  <a class="skip-link" href="#main">{copy.skip}</a>
+  <header class="europe-header">
+    <div class="shell europe-header-inner">
+      <a class="europe-brand" href={`/${page.lang}/`} aria-label="FXN Europe home"><img src="/img/fxn-europe-synth.svg" alt="FXN Europe" width="104" height="43" /></a>
+      <nav class="desktop-nav" aria-label="Main navigation">{topNav.map(link => <a href={link.href} aria-current={link.href.replace(/\/$/, '') === Astro.url.pathname.replace(/\/$/, '') ? 'page' : undefined}>{link.label}</a>)}</nav>
+      <div class="header-controls">
+        <details class="locale-menu"><summary aria-label="Choose language">{page.lang.toUpperCase()} <span aria-hidden="true">⌄</span></summary><nav aria-label="Languages">{page.languages.map(link => <a href={link.href} lang={link.lang}>{link.label}</a>)}</nav></details>
+        <details class="mobile-menu"><summary>{copy.menu} <span aria-hidden="true">+</span></summary><nav aria-label="Mobile navigation">{topNav.map(link => <a href={link.href}>{link.label}</a>)}</nav></details>
+      </div>
+    </div>
+  </header>
+  <main id="main">
+    <section class:list={['europe-hero', 'shell', { 'is-home': page.home }]}>
+      <h1>{page.title}</h1>
+      <div class="hero-summary">{isSitemap ? <p class="page-intro">{sitemapText.intro}</p> : <Fragment set:html={page.intro} />}<Fragment set:html={page.actions} /></div>
+    </section>
+    {page.kind==='about' ? <About lang={page.lang} /> : page.kind==='contact' ? <Contact lang={page.lang} /> : page.kind ? <Content lang={page.lang} kind={page.kind} /> : null}
+    {isSitemap ? <Sitemap lang={page.lang} /> : <div class="site-content"><Fragment set:html={page.body} /></div>}
+  </main>
+  <Fragment set:html={page.footer} />
+  <script>
+    document.querySelectorAll<HTMLDetailsElement>('.header-controls details').forEach(menu => {
+      menu.addEventListener('toggle', () => {
+        if (menu.open) document.querySelectorAll<HTMLDetailsElement>('.header-controls details').forEach(other => { if(other !== menu) other.open = false; });
+      });
+      menu.addEventListener('keydown', event => { if (event.key === 'Escape') { menu.open=false; menu.querySelector('summary')?.focus(); } });
+    });
+    document.addEventListener('click', event => {
+      if (event.target instanceof Node && !document.querySelector('.header-controls')?.contains(event.target)) document.querySelectorAll<HTMLDetailsElement>('.header-controls details').forEach(menu => menu.open=false);
+    });
+  </script>
+</body>
+</html>

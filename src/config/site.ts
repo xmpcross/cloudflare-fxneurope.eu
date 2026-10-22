@@ -4,7 +4,7 @@ export const siteConfig = {
   title: "Synth - An Astro theme for AI products",
   description:
     "Synth builds, runs and grades AI agents across chat, voice and email, with every decision traced and every answer yours to change.",
-  siteUrl: "https://synth.xocoweb.workers.dev",
+  siteUrl: "http://51.161.208.188:8790",
   language: "en",
   locale: "en_US",
   dateLocale: "en-US",

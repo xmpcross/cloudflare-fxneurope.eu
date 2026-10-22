@@ -39,3 +39,7 @@ test-results
 # Local AI assistant instructions
 CLAUDE.md
 .claude/
+
+.playwright-cli/
+
+.pages-check/

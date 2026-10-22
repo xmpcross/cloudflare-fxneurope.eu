@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img" aria-label="Tallinn skyline at blue hour">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="675" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1b2350"/>
+      <stop offset="0.55" stop-color="#141a2e"/>
+      <stop offset="1" stop-color="#0a0e1a"/>
+    </linearGradient>
+    <radialGradient id="moon" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#29e0c4" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#29e0c4" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="675" rx="24" fill="url(#sky)"/>
+
+  <!-- moon glow -->
+  <circle cx="930" cy="160" r="140" fill="url(#moon)"/>
+  <circle cx="930" cy="160" r="44" fill="#bfeee6"/>
+
+  <!-- stars -->
+  <g fill="#ffffff" fill-opacity="0.7">
+    <circle cx="180" cy="120" r="2"/><circle cx="320" cy="80" r="1.6"/>
+    <circle cx="520" cy="140" r="1.8"/><circle cx="680" cy="90" r="1.5"/>
+    <circle cx="1080" cy="240" r="2"/><circle cx="420" cy="200" r="1.4"/>
+  </g>
+
+  <!-- far skyline -->
+  <g fill="#222b52">
+    <rect x="60" y="420" width="90" height="180"/>
+    <rect x="170" y="380" width="70" height="220"/>
+    <rect x="1000" y="400" width="110" height="200"/>
+    <rect x="1110" y="440" width="60" height="160"/>
+  </g>
+
+  <!-- Tallinn old-town spires (mid layer) -->
+  <g fill="#2c3566">
+    <!-- tower with conical spire -->
+    <rect x="300" y="330" width="60" height="270"/>
+    <polygon points="300,330 330,250 360,330"/>
+    <!-- St Olaf-like tall spire -->
+    <rect x="470" y="250" width="40" height="350"/>
+    <polygon points="470,250 490,150 510,250"/>
+    <!-- church tower -->
+    <rect x="640" y="300" width="70" height="300"/>
+    <polygon points="640,300 675,225 710,300"/>
+    <rect x="820" y="360" width="80" height="240"/>
+    <polygon points="820,360 860,300 900,360"/>
+  </g>
+
+  <!-- nearest buildings -->
+  <g fill="#0d1326">
+    <rect x="120" y="470" width="160" height="180"/>
+    <rect x="380" y="450" width="180" height="200"/>
+    <rect x="700" y="480" width="170" height="170"/>
+    <rect x="930" y="440" width="200" height="210"/>
+  </g>
+
+  <!-- lit windows -->
+  <g fill="#ffd27a" fill-opacity="0.85">
+    <rect x="150" y="500" width="10" height="14"/><rect x="180" y="500" width="10" height="14"/>
+    <rect x="150" y="540" width="10" height="14"/><rect x="210" y="540" width="10" height="14"/>
+    <rect x="410" y="486" width="11" height="15"/><rect x="450" y="486" width="11" height="15"/>
+    <rect x="410" y="530" width="11" height="15"/><rect x="490" y="530" width="11" height="15"/>
+    <rect x="735" y="512" width="10" height="14"/><rect x="775" y="512" width="10" height="14"/>
+    <rect x="970" y="480" width="11" height="15"/><rect x="1015" y="480" width="11" height="15"/>
+    <rect x="970" y="525" width="11" height="15"/><rect x="1060" y="525" width="11" height="15"/>
+  </g>
+  <g fill="#6ea8ff" fill-opacity="0.7">
+    <rect x="480" y="290" width="9" height="13"/><rect x="660" y="340" width="9" height="13"/>
+    <rect x="320" y="370" width="9" height="13"/><rect x="850" y="400" width="9" height="13"/>
+  </g>
+</svg>

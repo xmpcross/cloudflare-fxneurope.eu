@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 720" role="img" aria-labelledby="title desc">
+  <title id="title">FXN Europe commerce operating system</title>
+  <desc id="desc">Layered dashboard cards for commerce, fulfilment and European market operations.</desc>
+  <defs>
+    <linearGradient id="stage" x1="116" x2="832" y1="104" y2="616" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#dff8c1"/>
+      <stop offset=".46" stop-color="#9eeddf"/>
+      <stop offset="1" stop-color="#c7ceff"/>
+    </linearGradient>
+    <linearGradient id="screen" x1="260" x2="780" y1="218" y2="548" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#101527"/>
+      <stop offset="1" stop-color="#17233a"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="230" x2="780" y1="504" y2="214" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#29e0c4"/>
+      <stop offset=".55" stop-color="#b8f05a"/>
+      <stop offset="1" stop-color="#ffffff"/>
+    </linearGradient>
+    <filter id="shadowLarge" x="40" y="42" width="880" height="650" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="32" flood-color="#07101f" flood-opacity=".24" stdDeviation="30"/>
+    </filter>
+    <filter id="shadowCard" x="0" y="0" width="960" height="720" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="18" flood-color="#07101f" flood-opacity=".18" stdDeviation="18"/>
+    </filter>
+    <clipPath id="browserClip">
+      <rect x="236" y="228" width="578" height="312" rx="22"/>
+    </clipPath>
+  </defs>
+
+  <rect x="104" y="92" width="720" height="520" rx="54" fill="url(#stage)" filter="url(#shadowLarge)"/>
+  <g opacity=".33" stroke="#fff" stroke-width="1.6">
+    <path d="M104 210h720M104 320h720M104 430h720M104 540h720"/>
+    <path d="M198 92v520M310 92v520M422 92v520M534 92v520M646 92v520M758 92v520"/>
+  </g>
+  <circle cx="742" cy="174" r="126" fill="#fff" opacity=".22"/>
+  <circle cx="190" cy="532" r="152" fill="#b8f05a" opacity=".22"/>
+
+  <g filter="url(#shadowCard)">
+    <rect x="236" y="184" width="578" height="356" rx="26" fill="url(#screen)"/>
+    <g class="browser-bar">
+      <circle cx="268" cy="214" r="8" fill="#ff7a59"/>
+      <circle cx="294" cy="214" r="8" fill="#f4d35e"/>
+      <circle cx="320" cy="214" r="8" fill="#b8f05a"/>
+      <rect x="350" y="204" width="158" height="20" rx="10" fill="#fff" opacity=".13"/>
+      <text x="372" y="219" fill="#fff" font-family="Outfit, Arial, sans-serif" font-size="13" font-weight="700" opacity=".72">fxneurope.eu</text>
+    </g>
+    <g clip-path="url(#browserClip)">
+      <rect x="236" y="228" width="578" height="312" fill="#f8fff9"/>
+      <rect x="270" y="266" width="210" height="34" rx="17" fill="#101527"/>
+      <rect x="290" y="279" width="88" height="8" rx="4" fill="#29e0c4"/>
+      <rect x="270" y="328" width="126" height="126" rx="24" fill="#eaf8f3"/>
+      <rect x="418" y="328" width="126" height="126" rx="24" fill="#eef1ff"/>
+      <rect x="566" y="328" width="190" height="126" rx="24" fill="#effaf0"/>
+      <path d="M292 482c66-92 137-114 215-68 76 45 132-55 218-129" fill="none" stroke="url(#accent)" stroke-width="12" stroke-linecap="round"/>
+      <path d="M292 482c66-92 137-114 215-68 76 45 132-55 218-129" fill="none" stroke="#101527" stroke-width="2.5" stroke-linecap="round" opacity=".18"/>
+      <circle cx="292" cy="482" r="24" fill="#101527"/>
+      <circle cx="292" cy="482" r="10" fill="#29e0c4"/>
+      <circle cx="508" cy="414" r="23" fill="#101527"/>
+      <circle cx="508" cy="414" r="9" fill="#fff"/>
+      <circle cx="725" cy="285" r="28" fill="#101527"/>
+      <path d="M714 285l9 9 18-24" fill="none" stroke="#29e0c4" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+      <rect x="584" y="362" width="132" height="52" rx="16" fill="#101527"/>
+      <rect x="606" y="381" width="66" height="8" rx="4" fill="#fff" opacity=".88"/>
+      <rect x="606" y="398" width="42" height="7" rx="3.5" fill="#29e0c4"/>
+    </g>
+  </g>
+
+  <g filter="url(#shadowCard)">
+    <rect x="90" y="128" width="270" height="152" rx="24" fill="#fff" opacity=".94"/>
+    <rect x="116" y="154" width="82" height="56" rx="15" fill="#101527"/>
+    <path d="M134 194h46M134 177h28" stroke="#29e0c4" stroke-width="7" stroke-linecap="round"/>
+    <text x="220" y="170" fill="#6c7284" font-family="Outfit, Arial, sans-serif" font-size="13" font-weight="700" letter-spacing="1.2">CATALOGUE</text>
+    <text x="220" y="199" fill="#101527" font-family="Outfit, Arial, sans-serif" font-size="28" font-weight="800">300k+</text>
+    <text x="220" y="227" fill="#101527" font-family="Outfit, Arial, sans-serif" font-size="18" font-weight="700">Products synced</text>
+  </g>
+
+  <g filter="url(#shadowCard)">
+    <rect x="620" y="86" width="230" height="130" rx="24" fill="#fff" opacity=".94"/>
+    <text x="646" y="126" fill="#6c7284" font-family="Outfit, Arial, sans-serif" font-size="13" font-weight="700" letter-spacing="1.2">MARKET ROUTES</text>
+    <text x="646" y="159" fill="#101527" font-family="Outfit, Arial, sans-serif" font-size="30" font-weight="800">EU-wide</text>
+    <path d="M650 182h142" stroke="#29e0c4" stroke-width="8" stroke-linecap="round"/>
+  </g>
+
+  <g filter="url(#shadowCard)">
+    <rect x="102" y="462" width="286" height="140" rx="24" fill="#101527" opacity=".96"/>
+    <text x="130" y="499" fill="#fff" font-family="Outfit, Arial, sans-serif" font-size="13" font-weight="700" letter-spacing="1.2" opacity=".68">OPERATING MODEL</text>
+    <text x="130" y="532" fill="#fff" font-family="Outfit, Arial, sans-serif" font-size="25" font-weight="800">Build + launch + scale</text>
+    <text x="130" y="562" fill="#fff" font-family="Outfit, Arial, sans-serif" font-size="15" opacity=".68">Shared commerce systems for every new venture.</text>
+  </g>
+
+  <g filter="url(#shadowCard)">
+    <rect x="716" y="416" width="178" height="150" rx="22" fill="#fff" opacity=".9"/>
+    <text x="740" y="454" fill="#101527" font-family="Outfit, Arial, sans-serif" font-size="28" font-weight="800">24/7</text>
+    <text x="740" y="480" fill="#6c7284" font-family="Outfit, Arial, sans-serif" font-size="12" font-weight="700" letter-spacing="1.1">AUTOMATION</text>
+    <rect x="740" y="505" width="100" height="8" rx="4" fill="#dfe5ff"/>
+    <rect x="740" y="526" width="126" height="8" rx="4" fill="#dff7ee"/>
+  </g>
+</svg>

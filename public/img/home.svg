@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img" aria-label="Abstract European commerce network">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="675" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0a0e1a"/>
+      <stop offset="1" stop-color="#141a2e"/>
+    </linearGradient>
+    <radialGradient id="gi" cx="0.78" cy="0.2" r="0.5">
+      <stop offset="0" stop-color="#4f5bff" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#4f5bff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="gt" cx="0.18" cy="0.85" r="0.5">
+      <stop offset="0" stop-color="#29e0c4" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#29e0c4" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="675" rx="24" fill="url(#bg)"/>
+  <rect width="1200" height="675" rx="24" fill="url(#gi)"/>
+  <rect width="1200" height="675" rx="24" fill="url(#gt)"/>
+
+  <!-- network links -->
+  <g stroke="#4f5bff" stroke-opacity="0.35" stroke-width="1.5" fill="none">
+    <path d="M250 470 L470 250 L720 360 L930 200"/>
+    <path d="M250 470 L520 520 L720 360"/>
+    <path d="M520 520 L780 540 L930 200"/>
+    <path d="M470 250 L640 150"/>
+    <path d="M780 540 L1000 430"/>
+    <path d="M720 360 L1000 430"/>
+  </g>
+
+  <!-- flow accents -->
+  <g fill="#29e0c4">
+    <circle cx="585" cy="305" r="3.5"/>
+    <circle cx="855" cy="280" r="3.5"/>
+    <circle cx="650" cy="530" r="3.5"/>
+  </g>
+
+  <!-- nodes -->
+  <g>
+    <circle cx="470" cy="250" r="14" fill="#4f5bff"/>
+    <circle cx="720" cy="360" r="20" fill="#5a66ff"/>
+    <circle cx="930" cy="200" r="12" fill="#4f5bff"/>
+    <circle cx="250" cy="470" r="11" fill="#3a45e6"/>
+    <circle cx="520" cy="520" r="13" fill="#4f5bff"/>
+    <circle cx="780" cy="540" r="10" fill="#3a45e6"/>
+    <circle cx="640" cy="150" r="9" fill="#3a45e6"/>
+    <circle cx="1000" cy="430" r="11" fill="#4f5bff"/>
+  </g>
+  <g fill="#ffffff" fill-opacity="0.9">
+    <circle cx="470" cy="250" r="4"/>
+    <circle cx="720" cy="360" r="5"/>
+    <circle cx="930" cy="200" r="3.5"/>
+    <circle cx="520" cy="520" r="4"/>
+  </g>
+
+  <!-- parcels -->
+  <g fill="none" stroke="#ffffff" stroke-opacity="0.5" stroke-width="2">
+    <rect x="120" y="250" width="64" height="64" rx="10"/>
+    <rect x="1010" y="120" width="54" height="54" rx="9"/>
+    <rect x="940" y="560" width="58" height="58" rx="9"/>
+  </g>
+  <g stroke="#29e0c4" stroke-opacity="0.7" stroke-width="2">
+    <line x1="120" y1="282" x2="184" y2="282"/>
+    <line x1="1010" y1="147" x2="1064" y2="147"/>
+    <line x1="940" y1="589" x2="998" y2="589"/>
+  </g>
+</svg>

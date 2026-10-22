@@ -1,0 +1,62 @@
+[
+  {
+    "name": "Next.js",
+    "src": "/img/technologies/nextdotjs.svg",
+    "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/nextdotjs.svg"
+  },
+  {
+    "name": "React",
+    "src": "/img/technologies/react.svg",
+    "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/react.svg"
+  },
+  {
+    "name": "Astro",
+    "src": "/img/technologies/astro.svg",
+    "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/astro.svg"
+  },
+  {
+    "name": "Tailwind CSS",
+    "src": "/img/technologies/tailwindcss.svg",
+    "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/tailwindcss.svg"
+  },
+  {
+    "name": "Payload CMS",
+    "src": "/img/technologies/payloadcms.svg",
+    "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/payloadcms.svg"
+  },
+  {
+    "name": "Strapi",
+    "src": "/img/technologies/strapi.svg",
+    "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/strapi.svg"
+  },
+  {
+    "name": "WordPress",
+    "src": "/img/technologies/wordpress.svg",
+    "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/wordpress.svg"
+  },
+  {
+    "name": "WooCommerce",
+    "src": "/img/technologies/woocommerce.svg",
+    "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/woocommerce.svg"
+  },
+  {
+    "name": "n8n",
+    "src": "/img/technologies/n8n.svg",
+    "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/n8n.svg"
+  },
+  {
+    "name": "Docker",
+    "src": "/img/technologies/docker.svg",
+    "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/docker.svg"
+  },
+  {
+    "name": "Cloudflare",
+    "src": "/img/technologies/cloudflare.svg",
+    "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/cloudflare.svg"
+  },
+  {
+    "name": "Vercel",
+    "src": "/img/technologies/vercel.svg",
+    "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/vercel.svg"
+  }
+]

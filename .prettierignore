@@ -9,3 +9,11 @@ pnpm-lock.yaml
 package-lock.json
 bun.lock
 routeTree.gen.ts
+
+# Existing public assets, copied unchanged for the isolated preview.
+public/vendor/
+public/lottie/
+
+.playwright-cli/
+
+.pages-check/

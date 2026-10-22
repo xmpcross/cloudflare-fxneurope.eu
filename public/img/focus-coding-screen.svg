@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 560" role="img" aria-labelledby="title desc">
+  <title id="title">AI ecommerce coding and deployment screen</title>
+  <desc id="desc">A large code editor displaying ecommerce framework code and running deployment output.</desc>
+  <defs>
+    <linearGradient id="stage" x1="36" y1="40" x2="684" y2="520" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#ecfff9"/>
+      <stop offset=".55" stop-color="#eef4ff"/>
+      <stop offset="1" stop-color="#f8fbff"/>
+    </linearGradient>
+    <filter id="shadow" x="0" y="0" width="720" height="560" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#07101f" flood-opacity=".14"/>
+    </filter>
+    <style>
+      .cursor{animation:blink .9s steps(2,end) infinite;}
+      .deploy-card{animation:float 6s ease-in-out infinite;transform-box:fill-box;transform-origin:center;}
+      .pulse{animation:pulse 2.8s ease-in-out infinite;transform-box:fill-box;transform-origin:center;}
+      .code-text{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14px;letter-spacing:0;dominant-baseline:middle;}
+      .muted{opacity:.64}.keyword{fill:#7aa2ff}.string{fill:#72f2d0}.fn{fill:#b8f05a}.plain{fill:#f8fbff}.comment{fill:#7d8cab}.accent{fill:#29e0c4}
+      @keyframes blink{0%,48%{opacity:1}50%,100%{opacity:.15}}
+      @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+      @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+      @media (prefers-reduced-motion:reduce){.cursor,.deploy-card,.pulse{animation:none!important}}
+    </style>
+  </defs>
+  <rect x="26" y="26" width="668" height="508" rx="42" fill="url(#stage)"/>
+
+  <g filter="url(#shadow)">
+    <rect x="58" y="62" width="604" height="390" rx="30" fill="#11192f"/>
+    <path d="M58 92c0-16.6 13.4-30 30-30h544c16.6 0 30 13.4 30 30v48H58V92z" fill="#0a0e1a"/>
+    <circle cx="94" cy="105" r="7" fill="#ff6b59"/>
+    <circle cx="120" cy="105" r="7" fill="#ffba40"/>
+    <circle cx="146" cy="105" r="7" fill="#b8f05a"/>
+    <rect x="190" y="95" width="230" height="18" rx="9" fill="#fff" opacity=".1"/>
+    <text x="206" y="104" class="code-text muted" font-size="11" fill="#fff">framework/deploy.ts</text>
+
+    <rect x="82" y="162" width="404" height="258" rx="18" fill="#19243d"/>
+    <rect x="506" y="162" width="132" height="258" rx="18" fill="#0d1426"/>
+
+    <g class="code-text">
+      <text x="108" y="190"><tspan class="keyword">const</tspan><tspan class="plain"> source </tspan><tspan class="accent">=</tspan><tspan class="string"> await connectFeeds()</tspan></text>
+      <text x="108" y="222"><tspan class="keyword">const</tspan><tspan class="plain"> catalog </tspan><tspan class="accent">=</tspan><tspan class="fn"> ai.enrich</tspan><tspan class="plain">(source)</tspan></text>
+      <text x="108" y="254"><tspan class="keyword">const</tspan><tspan class="plain"> stores </tspan><tspan class="accent">=</tspan><tspan class="plain"> [</tspan><tspan class="string">'shopify'</tspan><tspan class="plain">, </tspan><tspan class="string">'woo'</tspan><tspan class="plain">]</tspan></text>
+      <text x="108" y="286"><tspan class="keyword">for</tspan><tspan class="plain"> (platform </tspan><tspan class="keyword">of</tspan><tspan class="plain"> stores) {'</tspan></text>
+      <text x="132" y="318"><tspan class="fn">deployStorefront</tspan><tspan class="plain">({ catalog, platform })</tspan></text>
+      <text x="108" y="350"><tspan class="plain">}</tspan><tspan class="comment"> // reusable commerce engine</tspan></text>
+      <text x="108" y="382"><tspan class="fn">runChecks</tspan><tspan class="plain">({ pricing, content, sync })</tspan></text>
+    </g>
+    <rect class="cursor" x="442" y="368" width="9" height="27" rx="3" fill="#29e0c4"/>
+
+    <g class="code-text" font-size="12">
+      <text x="530" y="194" class="accent">$ npm run deploy</text>
+      <text x="530" y="228" class="plain muted">feeds synced</text>
+      <text x="530" y="260" class="plain muted">catalog enriched</text>
+      <text x="530" y="292" class="fn">storefront live</text>
+      <text x="530" y="336" class="plain muted">checks passed</text>
+      <text x="530" y="368" class="accent">ready</text>
+    </g>
+  </g>
+
+  <g class="deploy-card" filter="url(#shadow)">
+    <rect x="468" y="386" width="220" height="82" rx="18" fill="#fff"/>
+    <circle cx="504" cy="427" r="12" fill="#29e0c4"/>
+    <text x="532" y="418" font-family="ui-monospace,Menlo,monospace" font-size="12" fill="#0a0e1a" font-weight="700">deploy: success</text>
+    <rect x="532" y="438" width="138" height="8" rx="4" fill="#b8f05a"/>
+  </g>
+  <rect x="272" y="500" width="176" height="42" rx="21" fill="#3a45e6"/>
+  <text x="314" y="522" font-family="ui-monospace,Menlo,monospace" font-size="13" fill="#fff" font-weight="700">running</text>
+  <circle class="pulse" cx="420" cy="520" r="8" fill="#29e0c4"/>
+</svg>
